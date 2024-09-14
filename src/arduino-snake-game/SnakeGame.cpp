@@ -2,15 +2,15 @@
 
 void SnakeGame::drawSnake()
 {
-    snakeSegment.setX(10);
-    snakeSegment.setY(70);
+    snakeSegment.setX(3);
+    snakeSegment.setY(5);
     scene.draw(&snakeSegment);
 }
 
 void SnakeGame::drawApple()
 {
-    apple.setX(100);
-    apple.setY(0);
+    apple.setX(12);
+    apple.setY(2);
 
     scene.draw(&apple);
 }
