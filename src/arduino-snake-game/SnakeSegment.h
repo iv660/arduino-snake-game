@@ -1,15 +1,16 @@
-#if !defined(APPLE_H)
-#define APPLE_H
+#if !defined(SNAKE_SEGMENT_H)
+#define SNAKE_SEGMENT_H
 
 #include "DrawableInterface.h"
 
-class Apple: public DrawableInterface
+class SnakeSegment: public DrawableInterface
 {
 private:
     int x = 0;
     int y = 0;
 public:
-    Apple(/* args */);
+    SnakeSegment(/* args */);
+
     int getX();
     int getY();
     char* getText();
@@ -18,4 +19,4 @@ public:
 };
 
 
-#endif // APPLE_H
+#endif // SNAKE_SEGMENT_H

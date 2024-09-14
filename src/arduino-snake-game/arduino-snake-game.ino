@@ -2,6 +2,7 @@
 // #include "SPI.h"
 #include "Apple.h"
 #include "Scene.h"
+#include "SnakeSegment.h"
 
 // #define cs 10 // пин для подключения CS
 // #define dc 8  // пин для подключения A0
@@ -31,10 +32,14 @@ void setup()
 void loop()
 {
     Apple apple;
-    apple.setX(40);
-    apple.setY(100);
+    SnakeSegment snakeSegment;
+    apple.setX(140);
+    apple.setY(0);
+    snakeSegment.setX(20);
+    snakeSegment.setY(60);
 
-    scene.draw(apple);
+    scene.draw(&apple);
+    scene.draw(&snakeSegment);
     delay(1000);
 
 

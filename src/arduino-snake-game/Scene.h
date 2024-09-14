@@ -5,7 +5,7 @@
 #define dc 8  // пин для подключения A0
 #define rst 9 // пин для подключения reset
 
-#include "Apple.h"
+#include "DrawableInterface.h"
 #include "TFT.h"
 #include "SPI.h"
 
@@ -15,7 +15,7 @@ private:
     TFT screen = TFT(cs, dc, rst);
 public:
     Scene(/* args */);
-    void draw(Apple apple);
+    void draw(DrawableInterface* drawable);
     void begin();
 };
 

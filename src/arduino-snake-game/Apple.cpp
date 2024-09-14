@@ -14,6 +14,11 @@ int Apple::getY()
     return y;
 }
 
+char *Apple::getText()
+{
+    return "@";
+}
+
 void Apple::setX(int x)
 {
     this->x = x;
