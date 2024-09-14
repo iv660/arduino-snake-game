@@ -1,22 +1,32 @@
 #if !defined(SNAKE_GAME_H)
 #define SNAKE_GAME_H
 
+#include "Scene.h"
+#include "Apple.h"
+#include "SnakeSegment.h"
+
 class SnakeGame
 {
 private:
-    
+    Scene scene;
+    Apple apple;
+    SnakeSegment snakeSegment;
+
+    void drawSnake();
+    void drawApple();
+    void stretchHead();
+    void retractTail();
 public:
-    SnakeGame(/* args */);
-    ~SnakeGame();
+    bool isOver();
+    bool reachedAnApple();
+    SnakeGame* startUp();
+    SnakeGame* moveSnake();
+    SnakeGame* growSnake();
+    SnakeGame* deductScore();
+    SnakeGame* placeNewApple();
+    SnakeGame* removeApple();
+    SnakeGame* increaseScore();
+    void end();
 };
-
-SnakeGame::SnakeGame(/* args */)
-{
-}
-
-SnakeGame::~SnakeGame()
-{
-}
-
 
 #endif // SNAKE_GAME_H
