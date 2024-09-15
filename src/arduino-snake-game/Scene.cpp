@@ -15,8 +15,17 @@ Scene::Scene()
 {
 }
 
-void Scene::draw(DrawableInterface* drawable)
+void Scene::draw(DrawableInterface *drawable)
 {
+    screen.stroke(0, 255, 0);
+    screen.text(drawable->getText(), 
+        xPositionToCoordinate(drawable->getX()), 
+        yPositionToCoordinate(drawable->getY()));
+}
+
+void Scene::erase(DrawableInterface *drawable)
+{
+    screen.stroke(0, 0, 0);
     screen.text(drawable->getText(), 
         xPositionToCoordinate(drawable->getX()), 
         yPositionToCoordinate(drawable->getY()));
@@ -28,5 +37,4 @@ void Scene::begin()
 
     screen.setTextSize(2);
     screen.background(0, 0, 0);
-    screen.stroke(0, 255, 0);
 }

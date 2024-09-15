@@ -8,6 +8,8 @@ class SnakeSegment: public DrawableInterface
 private:
     int x = 0;
     int y = 0;
+    SnakeSegment * nextSegment;
+
 public:
     SnakeSegment(/* args */);
 
@@ -16,6 +18,9 @@ public:
     char* getText();
     void setX(int x);
     void setY(int y);
+    void setNextSegment(SnakeSegment * segment);
+    SnakeSegment* getNextSegment();
+    void removeNextSegment();
 };
 
 

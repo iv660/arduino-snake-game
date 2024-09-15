@@ -12,7 +12,7 @@
 class Scene
 {
 private:
-    const int gridSizeX = 8;
+    const int gridSizeX = 10;
     const int gridSizeY = 12;
     TFT screen = TFT(cs, dc, rst);
     int xPositionToCoordinate(int xPosition);
@@ -20,6 +20,7 @@ private:
 public:
     Scene(/* args */);
     void draw(DrawableInterface* drawable);
+    void erase(DrawableInterface* drawable);
     void begin();
 };
 

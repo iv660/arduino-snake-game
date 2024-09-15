@@ -1,6 +1,11 @@
 #include "SnakeSegment.h"
 
-SnakeSegment::SnakeSegment(): DrawableInterface(/* args */)
+void SnakeSegment::removeNextSegment()
+{
+    nextSegment = nullptr;
+}
+
+SnakeSegment::SnakeSegment() : DrawableInterface(/* args */)
 {
 }
 
@@ -27,4 +32,14 @@ void SnakeSegment::setX(int x)
 void SnakeSegment::setY(int y)
 {
     this->y = y;
+}
+
+void SnakeSegment::setNextSegment(SnakeSegment *segment)
+{
+    this->nextSegment = segment;
+}
+
+SnakeSegment *SnakeSegment::getNextSegment()
+{
+    return nextSegment;
 }

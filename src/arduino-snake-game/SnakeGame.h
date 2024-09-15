@@ -10,9 +10,9 @@ class SnakeGame
 private:
     Scene scene;
     Apple apple;
-    SnakeSegment snakeSegment;
+    SnakeSegment *snakeSegment = nullptr;
 
-    void drawSnake();
+    void drawSnake(SnakeSegment *snakeSegment);
     void drawApple();
     void stretchHead();
     void retractTail();

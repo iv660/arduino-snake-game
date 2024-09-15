@@ -1,10 +1,8 @@
 #include "SnakeGame.h"
 
-void SnakeGame::drawSnake()
+void SnakeGame::drawSnake(SnakeSegment* snakeSegment)
 {
-    snakeSegment.setX(3);
-    snakeSegment.setY(5);
-    scene.draw(&snakeSegment);
+    scene.draw(snakeSegment);
 }
 
 void SnakeGame::drawApple()
@@ -17,10 +15,26 @@ void SnakeGame::drawApple()
 
 void SnakeGame::stretchHead()
 {
+    SnakeSegment *oldSegment = snakeSegment;
+    
+    int newXPosition = snakeSegment->getX() + 1;
+    int newYPosition = snakeSegment->getY();
+    SnakeSegment *newHead = new SnakeSegment();
+    newHead->setX(newXPosition);
+    newHead->setY(newYPosition);
+    newHead->setNextSegment(oldSegment);
+
+    scene.draw(newHead);
+
+    snakeSegment = newHead;
 }
 
 void SnakeGame::retractTail()
 {
+    SnakeSegment* tailSegment = snakeSegment->getNextSegment();
+    snakeSegment->removeNextSegment();
+    scene.erase(tailSegment);
+    delete tailSegment;
 }
 
 bool SnakeGame::isOver()
@@ -37,7 +51,11 @@ SnakeGame *SnakeGame::startUp()
 {
     scene.begin();
 
-    drawSnake();
+    snakeSegment = new SnakeSegment();
+    snakeSegment->setX(3);
+    snakeSegment->setY(5);
+    scene.draw(snakeSegment);
+
     drawApple();
 
     return this;
@@ -45,6 +63,10 @@ SnakeGame *SnakeGame::startUp()
 
 SnakeGame *SnakeGame::moveSnake()
 {
+    if (snakeSegment->getX() > 14) {
+        return;
+    }
+    
     stretchHead();
     retractTail();
 

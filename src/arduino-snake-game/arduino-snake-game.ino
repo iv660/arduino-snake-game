@@ -21,6 +21,8 @@ void loop()
             game.moveSnake()
                 ->deductScore();
         }
+
+        delay(300);
     }
 
     game.end();
