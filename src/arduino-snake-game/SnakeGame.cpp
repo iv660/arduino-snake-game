@@ -36,8 +36,32 @@ GridLocation SnakeGame::getNextLocation(SnakeSegment *snakeSegment)
 {
     GridLocation nextLocation;
 
-    nextLocation.column = snakeSegment->getColumn() + 1;
-    nextLocation.row = snakeSegment->getRow();
+    switch (getDirection()) {
+        case Direction::RIGHT:
+            nextLocation.column = snakeSegment->getColumn() + 1;
+            nextLocation.row = snakeSegment->getRow();
+            break;
+
+        case Direction::LEFT:   
+            nextLocation.column = snakeSegment->getColumn() - 1;
+            nextLocation.row = snakeSegment->getRow();
+            break;
+
+        case Direction::UP:
+            nextLocation.column = snakeSegment->getColumn();
+            nextLocation.row = snakeSegment->getRow() - 1;
+            break;
+
+        case Direction::DOWN:
+            nextLocation.column = snakeSegment->getColumn();
+            nextLocation.row = snakeSegment->getRow() + 1;
+            break;
+
+        default:
+            nextLocation.column = snakeSegment->getColumn();
+            nextLocation.row = snakeSegment->getRow();
+            break;
+    }
 
     return nextLocation;
 }
@@ -67,6 +91,32 @@ void SnakeGame::removeTail()
     snake.removeTail();
 }
 
+Direction SnakeGame::getDirection()
+{
+    return Direction::RIGHT;
+}
+
+bool SnakeGame::locationIsOutOfBounds(GridLocation location)
+{
+    if (location.column < 0 ) {
+        return true;
+    }
+
+    if (location.row < 0) {
+        return true;
+    }
+
+    if (location.column > scene.getColumns() - 1) {
+        return true;
+    }
+
+    if (location.row > scene.getRows() - 1) {
+        return true;
+    }
+
+    return false;
+}
+
 bool SnakeGame::isOver()
 {
     return false;
@@ -85,7 +135,6 @@ SnakeGame *SnakeGame::startUp()
 {
     scene.begin();
 
-    Snake snake;
     getHead()->setColumn(0);
     getHead()->setRow(5);
     scene.draw(getHead());
@@ -97,7 +146,8 @@ SnakeGame *SnakeGame::startUp()
 
 SnakeGame *SnakeGame::moveSnake()
 {
-    if (getHead()->getColumn() > 14) {
+    GridLocation nextLocation = getNextLocation(getHead());
+    if (locationIsOutOfBounds(nextLocation)) {
         return;
     }
     

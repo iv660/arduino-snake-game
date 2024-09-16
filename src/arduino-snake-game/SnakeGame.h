@@ -6,13 +6,13 @@
 #include "SnakeSegment.h"
 #include "GridLocation.h"
 #include "Snake.h"
+#include "Direction.h"
 
 class SnakeGame
 {
 private:
     Scene scene;
     Apple apple;
-    // SnakeSegment *snakeSegment = nullptr;
     Snake snake;
 
     void drawSnake(SnakeSegment *snakeSegment);
@@ -24,6 +24,9 @@ private:
     SnakeSegment *getTail();
     SnakeSegment *getHead();
     void removeTail();
+    Direction getDirection();
+    bool locationIsOutOfBounds(GridLocation location);
+
 public:
     bool isOver();
     bool reachedAnApple();

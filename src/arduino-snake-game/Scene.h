@@ -14,6 +14,8 @@ class Scene
 private:
     const int gridSizeX = 10;
     const int gridSizeY = 12;
+    const long width = 160;
+    const long height = 128;
     TFT screen = TFT(cs, dc, rst);
     int locationColumnToScreenX(int xPosition);
     int locationRowToScreenY(int yPosition);
@@ -22,6 +24,10 @@ public:
     void draw(DrawableInterface* drawable);
     void erase(DrawableInterface* drawable);
     void begin();
+    long getWidth();
+    long getHeight();
+    int getColumns();
+    int getRows();
 };
 
 

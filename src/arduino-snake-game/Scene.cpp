@@ -1,5 +1,4 @@
 #include "Scene.h"
-// #include "Apple.h"
 
 int Scene::locationColumnToScreenX(int xPosition)
 {
@@ -37,4 +36,24 @@ void Scene::begin()
 
     screen.setTextSize(2);
     screen.background(0, 0, 0);
+}
+
+long Scene::getWidth()
+{
+    return width;
+}
+
+long Scene::getHeight()
+{
+    return height;
+}
+
+int Scene::getColumns()
+{
+    return getWidth() / gridSizeX;
+}
+
+int Scene::getRows()
+{
+    return getHeight() / gridSizeY;
 }
