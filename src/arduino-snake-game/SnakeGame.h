@@ -5,13 +5,15 @@
 #include "Apple.h"
 #include "SnakeSegment.h"
 #include "GridLocation.h"
+#include "Snake.h"
 
 class SnakeGame
 {
 private:
     Scene scene;
     Apple apple;
-    SnakeSegment *snakeSegment = nullptr;
+    // SnakeSegment *snakeSegment = nullptr;
+    Snake snake;
 
     void drawSnake(SnakeSegment *snakeSegment);
     void drawApple();

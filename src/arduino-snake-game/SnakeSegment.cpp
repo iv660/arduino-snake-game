@@ -5,6 +5,15 @@ void SnakeSegment::removeNextSegment()
     nextSegment = nullptr;
 }
 
+bool SnakeSegment::isTail()
+{
+    if (nextSegment == nullptr) {
+        return true;
+    }
+
+    return false;
+}
+
 SnakeSegment::SnakeSegment() : DrawableInterface(/* args */)
 {
 }

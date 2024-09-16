@@ -21,6 +21,7 @@ public:
     void setNextSegment(SnakeSegment * segment);
     SnakeSegment* getNextSegment();
     void removeNextSegment();
+    bool isTail();
 };
 
 

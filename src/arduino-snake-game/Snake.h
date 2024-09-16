@@ -1,16 +1,18 @@
 #if !defined(SNAKE_H)
 #define SNAKE_H)
 
+#include "SnakeSegment.h"
+#include "GridLocation.h"
+
 class Snake
 {
 private:
+    SnakeSegment *head = new SnakeSegment();
 public:
-    Snake(/* args */);
+    SnakeSegment *getHead();
+    SnakeSegment *getTail();
+    Snake *stretchHeadTo(GridLocation location);
+    Snake *removeTail();
 };
-
-Snake::Snake(/* args */)
-{
-}
-
 
 #endif // SNAKE_H)

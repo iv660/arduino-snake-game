@@ -2,7 +2,11 @@
 
 void SnakeGame::drawSnake(SnakeSegment* snakeSegment)
 {
-    scene.draw(snakeSegment);
+    SnakeSegment *currentSegment = snakeSegment;
+    do {
+        scene.draw(currentSegment);
+    } while ((currentSegment = currentSegment->getNextSegment()) != nullptr);
+
 }
 
 void SnakeGame::drawApple()
@@ -16,17 +20,9 @@ void SnakeGame::drawApple()
 void SnakeGame::stretchHead()
 {
     SnakeSegment *oldHead = getHead();
-
     GridLocation nextLocation = getNextLocation(oldHead);
-    
-    SnakeSegment *newHead = new SnakeSegment();
-    newHead->setColumn(nextLocation.column);
-    newHead->setRow(nextLocation.row);
-    newHead->setNextSegment(oldHead);
-
-    scene.draw(newHead);
-
-    snakeSegment = newHead;
+    snake.stretchHeadTo(nextLocation);
+    scene.draw(snake.getHead());
 }
 
 void SnakeGame::retractTail()
@@ -58,19 +54,17 @@ GridLocation SnakeGame::getAppleLocation()
 
 SnakeSegment *SnakeGame::getTail()
 {
-    return snakeSegment->getNextSegment();
+    return snake.getTail();
 }
 
 SnakeSegment *SnakeGame::getHead()
 {
-    return snakeSegment;
+    return snake.getHead();
 }
 
 void SnakeGame::removeTail()
 {
-    SnakeSegment* tailSegment = getTail();
-    snakeSegment->removeNextSegment();
-    delete tailSegment;
+    snake.removeTail();
 }
 
 bool SnakeGame::isOver()
@@ -80,7 +74,7 @@ bool SnakeGame::isOver()
 
 bool SnakeGame::reachedAnApple()
 {
-    if (getNextLocation(snakeSegment) == getAppleLocation()) {
+    if (getNextLocation(getHead()) == getAppleLocation()) {
         return true;
     }
 
@@ -91,10 +85,10 @@ SnakeGame *SnakeGame::startUp()
 {
     scene.begin();
 
-    snakeSegment = new SnakeSegment();
-    snakeSegment->setColumn(0);
-    snakeSegment->setRow(5);
-    scene.draw(snakeSegment);
+    Snake snake;
+    getHead()->setColumn(0);
+    getHead()->setRow(5);
+    scene.draw(getHead());
 
     drawApple();
 
@@ -103,7 +97,7 @@ SnakeGame *SnakeGame::startUp()
 
 SnakeGame *SnakeGame::moveSnake()
 {
-    if (snakeSegment->getColumn() > 14) {
+    if (getHead()->getColumn() > 14) {
         return;
     }
     
