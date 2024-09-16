@@ -7,8 +7,8 @@ void SnakeGame::drawSnake(SnakeSegment* snakeSegment)
 
 void SnakeGame::drawApple()
 {
-    apple.setColumn(12);
-    apple.setRow(2);
+    apple.setColumn(10);
+    apple.setRow(5);
 
     scene.draw(&apple);
 }
@@ -16,12 +16,12 @@ void SnakeGame::drawApple()
 void SnakeGame::stretchHead()
 {
     SnakeSegment *oldSegment = snakeSegment;
+
+    GridLocation nextLocation = getNextLocation(oldSegment);
     
-    int newXPosition = snakeSegment->getColumn() + 1;
-    int newYPosition = snakeSegment->getRow();
     SnakeSegment *newHead = new SnakeSegment();
-    newHead->setColumn(newXPosition);
-    newHead->setRow(newYPosition);
+    newHead->setColumn(nextLocation.column);
+    newHead->setRow(nextLocation.row);
     newHead->setNextSegment(oldSegment);
 
     scene.draw(newHead);
@@ -37,6 +37,26 @@ void SnakeGame::retractTail()
     delete tailSegment;
 }
 
+GridLocation SnakeGame::getNextLocation(SnakeSegment *snakeSegment)
+{
+    GridLocation nextLocation;
+
+    nextLocation.column = snakeSegment->getColumn() + 1;
+    nextLocation.row = snakeSegment->getRow();
+
+    return nextLocation;
+}
+
+GridLocation SnakeGame::getAppleLocation()
+{
+    GridLocation appleLocation;
+
+    appleLocation.column = apple.getColumn();
+    appleLocation.row = apple.getRow();
+
+    return appleLocation;
+}
+
 bool SnakeGame::isOver()
 {
     return false;
@@ -44,6 +64,10 @@ bool SnakeGame::isOver()
 
 bool SnakeGame::reachedAnApple()
 {
+    if (getNextLocation(snakeSegment) == getAppleLocation()) {
+        return true;
+    }
+
     return false;
 }
 
@@ -52,7 +76,7 @@ SnakeGame *SnakeGame::startUp()
     scene.begin();
 
     snakeSegment = new SnakeSegment();
-    snakeSegment->setColumn(3);
+    snakeSegment->setColumn(0);
     snakeSegment->setRow(5);
     scene.draw(snakeSegment);
 

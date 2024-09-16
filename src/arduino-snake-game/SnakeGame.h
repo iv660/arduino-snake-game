@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Apple.h"
 #include "SnakeSegment.h"
+#include "GridLocation.h"
 
 class SnakeGame
 {
@@ -16,6 +17,8 @@ private:
     void drawApple();
     void stretchHead();
     void retractTail();
+    GridLocation getNextLocation(SnakeSegment *snakeSegment);
+    GridLocation getAppleLocation();
 public:
     bool isOver();
     bool reachedAnApple();
