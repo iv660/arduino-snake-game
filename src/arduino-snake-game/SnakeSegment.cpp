@@ -9,14 +9,14 @@ SnakeSegment::SnakeSegment() : DrawableInterface(/* args */)
 {
 }
 
-int SnakeSegment::getX()
+int SnakeSegment::getColumn()
 {
-    return x;
+    return column;
 }
 
-int SnakeSegment::getY()
+int SnakeSegment::getRow()
 {
-    return y;
+    return row;
 }
 
 char *SnakeSegment::getText()
@@ -24,14 +24,14 @@ char *SnakeSegment::getText()
     return "#";
 }
 
-void SnakeSegment::setX(int x)
+void SnakeSegment::setColumn(int column)
 {
-    this->x = x;
+    this->column = column;
 }
 
-void SnakeSegment::setY(int y)
+void SnakeSegment::setRow(int row)
 {
-    this->y = y;
+    this->row = row;
 }
 
 void SnakeSegment::setNextSegment(SnakeSegment *segment)

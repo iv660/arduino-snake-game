@@ -7,8 +7,8 @@ void SnakeGame::drawSnake(SnakeSegment* snakeSegment)
 
 void SnakeGame::drawApple()
 {
-    apple.setX(12);
-    apple.setY(2);
+    apple.setColumn(12);
+    apple.setRow(2);
 
     scene.draw(&apple);
 }
@@ -17,11 +17,11 @@ void SnakeGame::stretchHead()
 {
     SnakeSegment *oldSegment = snakeSegment;
     
-    int newXPosition = snakeSegment->getX() + 1;
-    int newYPosition = snakeSegment->getY();
+    int newXPosition = snakeSegment->getColumn() + 1;
+    int newYPosition = snakeSegment->getRow();
     SnakeSegment *newHead = new SnakeSegment();
-    newHead->setX(newXPosition);
-    newHead->setY(newYPosition);
+    newHead->setColumn(newXPosition);
+    newHead->setRow(newYPosition);
     newHead->setNextSegment(oldSegment);
 
     scene.draw(newHead);
@@ -52,8 +52,8 @@ SnakeGame *SnakeGame::startUp()
     scene.begin();
 
     snakeSegment = new SnakeSegment();
-    snakeSegment->setX(3);
-    snakeSegment->setY(5);
+    snakeSegment->setColumn(3);
+    snakeSegment->setRow(5);
     scene.draw(snakeSegment);
 
     drawApple();
@@ -63,7 +63,7 @@ SnakeGame *SnakeGame::startUp()
 
 SnakeGame *SnakeGame::moveSnake()
 {
-    if (snakeSegment->getX() > 14) {
+    if (snakeSegment->getColumn() > 14) {
         return;
     }
     

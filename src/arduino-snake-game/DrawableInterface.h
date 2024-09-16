@@ -6,8 +6,8 @@ class DrawableInterface
 private:
     
 public:
-    virtual int getX() = 0;
-    virtual int getY() = 0;
+    virtual int getColumn() = 0;
+    virtual int getRow() = 0;
     virtual char* getText() = 0; 
 };
 

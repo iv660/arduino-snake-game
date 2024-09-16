@@ -1,12 +1,12 @@
 #include "Scene.h"
 // #include "Apple.h"
 
-int Scene::xPositionToCoordinate(int xPosition)
+int Scene::locationColumnToScreenX(int xPosition)
 {
     return xPosition * gridSizeX;
 }
 
-int Scene::yPositionToCoordinate(int yPosition)
+int Scene::locationRowToScreenY(int yPosition)
 {
     return yPosition * gridSizeY;
 }
@@ -19,16 +19,16 @@ void Scene::draw(DrawableInterface *drawable)
 {
     screen.stroke(0, 255, 0);
     screen.text(drawable->getText(), 
-        xPositionToCoordinate(drawable->getX()), 
-        yPositionToCoordinate(drawable->getY()));
+        locationColumnToScreenX(drawable->getColumn()), 
+        locationRowToScreenY(drawable->getRow()));
 }
 
 void Scene::erase(DrawableInterface *drawable)
 {
     screen.stroke(0, 0, 0);
     screen.text(drawable->getText(), 
-        xPositionToCoordinate(drawable->getX()), 
-        yPositionToCoordinate(drawable->getY()));
+        locationColumnToScreenX(drawable->getColumn()), 
+        locationRowToScreenY(drawable->getRow()));
 }
 
 void Scene::begin()

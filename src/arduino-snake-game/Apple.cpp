@@ -4,14 +4,14 @@ Apple::Apple()
 {
 }
 
-int Apple::getX()
+int Apple::getColumn()
 {
-    return x;
+    return column;
 }
 
-int Apple::getY()
+int Apple::getRow()
 {
-    return y;
+    return row;
 }
 
 char *Apple::getText()
@@ -19,12 +19,12 @@ char *Apple::getText()
     return "@";
 }
 
-void Apple::setX(int x)
+void Apple::setColumn(int column)
 {
-    this->x = x;
+    this->column = column;
 }
 
-void Apple::setY(int y)
+void Apple::setRow(int row)
 {
-    this->y = y;
+    this->row = row;
 }

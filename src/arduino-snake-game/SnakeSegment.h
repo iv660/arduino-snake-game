@@ -6,18 +6,18 @@
 class SnakeSegment: public DrawableInterface
 {
 private:
-    int x = 0;
-    int y = 0;
+    int column = 0;
+    int row = 0;
     SnakeSegment * nextSegment;
 
 public:
     SnakeSegment(/* args */);
 
-    int getX();
-    int getY();
+    int getColumn();
+    int getRow();
     char* getText();
-    void setX(int x);
-    void setY(int y);
+    void setColumn(int column);
+    void setRow(int row);
     void setNextSegment(SnakeSegment * segment);
     SnakeSegment* getNextSegment();
     void removeNextSegment();
