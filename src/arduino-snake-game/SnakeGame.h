@@ -19,6 +19,9 @@ private:
     void retractTail();
     GridLocation getNextLocation(SnakeSegment *snakeSegment);
     GridLocation getAppleLocation();
+    SnakeSegment *getTail();
+    SnakeSegment *getHead();
+    void removeTail();
 public:
     bool isOver();
     bool reachedAnApple();
