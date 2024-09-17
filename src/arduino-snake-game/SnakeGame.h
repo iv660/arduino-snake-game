@@ -15,6 +15,7 @@ private:
     Apple apple;
     Snake snake;
 
+    Direction direction = Direction::NONE;
     void drawSnake(SnakeSegment *snakeSegment);
     void drawApple();
     void stretchHead();
@@ -26,6 +27,7 @@ private:
     void removeTail();
     Direction getDirection();
     bool locationIsOutOfBounds(GridLocation location);
+    void updateDirection();
 
 public:
     bool isOver();
@@ -37,6 +39,7 @@ public:
     SnakeGame* placeNewApple();
     SnakeGame* removeApple();
     SnakeGame* increaseScore();
+    void delay();
     void end();
 };
 

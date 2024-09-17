@@ -22,7 +22,7 @@ void loop()
                 ->deductScore();
         }
 
-        delay(300);
+        game.delay();
     }
 
     game.end();

@@ -1,5 +1,8 @@
 #include "SnakeGame.h"
 
+#define VRX_PIN A0
+#define VRY_PIN A1
+
 void SnakeGame::drawSnake(SnakeSegment* snakeSegment)
 {
     SnakeSegment *currentSegment = snakeSegment;
@@ -93,7 +96,7 @@ void SnakeGame::removeTail()
 
 Direction SnakeGame::getDirection()
 {
-    return Direction::RIGHT;
+    return direction;
 }
 
 bool SnakeGame::locationIsOutOfBounds(GridLocation location)
@@ -117,6 +120,24 @@ bool SnakeGame::locationIsOutOfBounds(GridLocation location)
     return false;
 }
 
+
+
+void SnakeGame::updateDirection()
+{
+    long xValue = analogRead(VRX_PIN);
+    long yValue = analogRead(VRY_PIN);
+
+    if (xValue > 1000) {
+        direction = Direction::RIGHT;
+    } else if (xValue < 23) {
+        direction = Direction::LEFT;
+    } else if (yValue > 1000) {
+        direction = Direction::DOWN;
+    } else if (yValue < 23) {
+        direction = Direction::UP;
+    }
+}
+
 bool SnakeGame::isOver()
 {
     return false;
@@ -134,6 +155,9 @@ bool SnakeGame::reachedAnApple()
 SnakeGame *SnakeGame::startUp()
 {
     scene.begin();
+
+    pinMode(VRX_PIN, INPUT);
+    pinMode(VRY_PIN, INPUT);
 
     getHead()->setColumn(0);
     getHead()->setRow(5);
@@ -182,6 +206,15 @@ SnakeGame *SnakeGame::removeApple()
 SnakeGame *SnakeGame::increaseScore()
 {
     return this;
+}
+
+void SnakeGame::delay()
+{
+    unsigned long startTime = millis();
+
+    while ((millis() - startTime) < 300) {
+        updateDirection();
+    }
 }
 
 void SnakeGame::end()
