@@ -8,7 +8,7 @@ class SnakeSegment: public DrawableInterface
 private:
     int column = 0;
     int row = 0;
-    SnakeSegment * nextSegment;
+    SnakeSegment * nextSegment = nullptr;
 
 public:
     SnakeSegment(/* args */);
