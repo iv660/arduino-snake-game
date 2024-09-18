@@ -18,13 +18,13 @@ void SnakeGame::drawSnake(SnakeSegment *snakeSegment)
 
 }
 
-void SnakeGame::drawApple()
+void SnakeGame::drawApple(Apple *apple)
 {
     GridLocation location = getNewAppleLocation();
-    apple.setColumn(location.column);
-    apple.setRow(location.row);
+    apple->setColumn(location.column);
+    apple->setRow(location.row);
 
-    scene.draw(&apple);
+    scene.draw(apple);
 }
 
 void SnakeGame::stretchHead()
@@ -40,6 +40,16 @@ void SnakeGame::retractTail()
     SnakeSegment *tailSegment = getTail();
     scene.erase(tailSegment);
     removeTail();
+}
+
+Apple SnakeGame::getNewApple()
+{
+    GridLocation location = getNewAppleLocation();
+    Apple newApple;
+    newApple.setColumn(location.column);
+    newApple.setRow(location.row);
+
+    return newApple;
 }
 
 GridLocation SnakeGame::getNextLocation(SnakeSegment *snakeSegment)
@@ -183,7 +193,7 @@ SnakeGame *SnakeGame::startUp()
     getHead()->setRow(5);
     scene.draw(getHead());
 
-    drawApple();
+    placeNewApple();
 
     return this;
 }
@@ -215,11 +225,15 @@ SnakeGame *SnakeGame::deductScore()
 
 SnakeGame *SnakeGame::placeNewApple()
 {
+    apple = getNewApple();
+    drawApple(&apple);
+
     return this;
 }
 
 SnakeGame *SnakeGame::removeApple()
 {
+    scene.erase(&apple);
     return this;
 }
 

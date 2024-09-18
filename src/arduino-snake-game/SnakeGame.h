@@ -18,9 +18,10 @@ private:
     Direction direction = Direction::NONE;
     void shuffle();
     void drawSnake(SnakeSegment *snakeSegment);
-    void drawApple();
+    void drawApple(Apple *apple);
     void stretchHead();
     void retractTail();
+    Apple getNewApple();
     GridLocation getNextLocation(SnakeSegment *snakeSegment);
     GridLocation getAppleLocation();
     GridLocation getNewAppleLocation();
