@@ -2,8 +2,14 @@
 
 #define VRX_PIN A0
 #define VRY_PIN A1
+#define RANDOM_SEED_PIN A2
 
-void SnakeGame::drawSnake(SnakeSegment* snakeSegment)
+void SnakeGame::shuffle()
+{
+    randomSeed(analogRead(RANDOM_SEED_PIN));
+}
+
+void SnakeGame::drawSnake(SnakeSegment *snakeSegment)
 {
     SnakeSegment *currentSegment = snakeSegment;
     do {
@@ -14,8 +20,9 @@ void SnakeGame::drawSnake(SnakeSegment* snakeSegment)
 
 void SnakeGame::drawApple()
 {
-    apple.setColumn(10);
-    apple.setRow(5);
+    GridLocation location = getNewAppleLocation();
+    apple.setColumn(location.column);
+    apple.setRow(location.row);
 
     scene.draw(&apple);
 }
@@ -77,6 +84,17 @@ GridLocation SnakeGame::getAppleLocation()
     appleLocation.row = apple.getRow();
 
     return appleLocation;
+}
+
+GridLocation SnakeGame::getNewAppleLocation()
+{
+    long newColumn = random(0, scene.getColumns() - 1);
+    long newRow = random(0, scene.getRows() - 1);
+    GridLocation newLocation;
+    newLocation.column = newColumn;
+    newLocation.row = newRow;
+
+    return newLocation;
 }
 
 SnakeSegment *SnakeGame::getTail()
@@ -155,6 +173,8 @@ bool SnakeGame::reachedAnApple()
 SnakeGame *SnakeGame::startUp()
 {
     scene.begin();
+
+    shuffle();
 
     pinMode(VRX_PIN, INPUT);
     pinMode(VRY_PIN, INPUT);

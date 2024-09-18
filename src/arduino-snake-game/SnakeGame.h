@@ -16,12 +16,14 @@ private:
     Snake snake;
 
     Direction direction = Direction::NONE;
+    void shuffle();
     void drawSnake(SnakeSegment *snakeSegment);
     void drawApple();
     void stretchHead();
     void retractTail();
     GridLocation getNextLocation(SnakeSegment *snakeSegment);
     GridLocation getAppleLocation();
+    GridLocation getNewAppleLocation();
     SnakeSegment *getTail();
     SnakeSegment *getHead();
     void removeTail();
