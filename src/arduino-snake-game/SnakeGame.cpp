@@ -98,11 +98,15 @@ GridLocation SnakeGame::getAppleLocation()
 
 GridLocation SnakeGame::getNewAppleLocation()
 {
-    long newColumn = random(0, scene.getColumns() - 1);
-    long newRow = random(0, scene.getRows() - 1);
     GridLocation newLocation;
-    newLocation.column = newColumn;
-    newLocation.row = newRow;
+
+    do {
+        long newColumn = random(0, scene.getColumns() - 1);
+        long newRow = random(0, scene.getRows() - 1);
+        
+        newLocation.column = newColumn;
+        newLocation.row = newRow;
+    } while (locationIsOccupied(newLocation));
 
     return newLocation;
 }
@@ -148,7 +152,43 @@ bool SnakeGame::locationIsOutOfBounds(GridLocation location)
     return false;
 }
 
+bool SnakeGame::locationIsOccupied(GridLocation location)
+{
+    if (hitsSnake(location)) {
+        return true;
+    }
 
+    if (hitsApple(location)) {
+        return true;
+    }
+
+    return false;
+}
+
+bool SnakeGame::hitsApple(GridLocation location)
+{
+    if (getAppleLocation().column == location.column
+        && getAppleLocation().row == location.row) {
+        return true;
+    }   
+
+    return false;
+}
+
+bool SnakeGame::hitsSnake(GridLocation location)
+{
+    SnakeSegment *snakeSegment = snake.getHead();
+    
+    do {
+        if (snakeSegment->getColumn() == location.column 
+            && snakeSegment->getRow() == location.row) {
+            return true;
+        }
+        snakeSegment = snakeSegment->getNextSegment();
+    } while (snakeSegment->getNextSegment() != nullptr);
+
+    return false;
+}
 
 void SnakeGame::updateDirection()
 {

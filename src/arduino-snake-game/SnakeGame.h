@@ -31,6 +31,9 @@ private:
     Direction getDirection();
     bool locationIsOutOfBounds(GridLocation location);
     void updateDirection();
+    bool locationIsOccupied(GridLocation location);
+    bool hitsSnake(GridLocation location);
+    bool hitsApple(GridLocation location);
 
 public:
     bool isOver();
