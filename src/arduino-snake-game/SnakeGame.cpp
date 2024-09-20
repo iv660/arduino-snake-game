@@ -9,6 +9,21 @@ void SnakeGame::shuffle()
     randomSeed(analogRead(RANDOM_SEED_PIN));
 }
 
+void SnakeGame::initDirectionControl()
+{
+    pinMode(VRX_PIN, INPUT);
+    pinMode(VRY_PIN, INPUT);
+    direction = Direction::NONE;
+}
+
+void SnakeGame::placeNewSnake()
+{
+    resetSnake();
+    getHead()->setColumn(0);
+    getHead()->setRow(5);
+    scene.draw(getHead());
+}
+
 void SnakeGame::resetSnake()
 {
     snake.reset();
@@ -243,17 +258,8 @@ SnakeGame *SnakeGame::startUp()
     scene.begin();
 
     shuffle();
-
-    pinMode(VRX_PIN, INPUT);
-    pinMode(VRY_PIN, INPUT);
-
-    resetSnake();
-    getHead()->setColumn(0);
-    getHead()->setRow(5);
-    scene.draw(getHead());
-
-    direction = Direction::NONE;
-
+    initDirectionControl();
+    placeNewSnake();
     placeNewApple();
 
     return this;
