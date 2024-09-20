@@ -16,6 +16,7 @@ private:
     Snake snake;
 
     Direction direction = Direction::NONE;
+    void startupScreen();
     void shuffle();
     void initDirectionControl();
     void placeNewSnake();

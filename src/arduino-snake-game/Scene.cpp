@@ -17,6 +17,7 @@ Scene::Scene()
 void Scene::draw(DrawableInterface *drawable)
 {
     screen.stroke(0, 255, 0);
+    screen.setTextSize(2);
     screen.text(drawable->getText(), 
         locationColumnToScreenX(drawable->getColumn()), 
         locationRowToScreenY(drawable->getRow()));
@@ -25,6 +26,7 @@ void Scene::draw(DrawableInterface *drawable)
 void Scene::erase(DrawableInterface *drawable)
 {
     screen.stroke(0, 0, 0);
+    screen.setTextSize(2);
     screen.text(drawable->getText(), 
         locationColumnToScreenX(drawable->getColumn()), 
         locationRowToScreenY(drawable->getRow()));
@@ -66,6 +68,15 @@ void Scene::clear()
 void Scene::putText(char *text, int column, int row)
 {
     screen.stroke(0, 255, 0);
+    screen.setTextSize(2);
+    screen.text(text, locationColumnToScreenX(column), 
+        locationRowToScreenY(row));
+}
+
+void Scene::putSmallText(char *text, int column, int row)
+{
+    screen.stroke(0, 255, 0);
+    screen.setTextSize(1);
     screen.text(text, locationColumnToScreenX(column), 
         locationRowToScreenY(row));
 }

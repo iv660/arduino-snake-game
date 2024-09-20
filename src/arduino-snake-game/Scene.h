@@ -30,6 +30,7 @@ public:
     int getRows();
     void clear();
     void putText(char *text, int column, int row);
+    void putSmallText(char *text, int column, int row);
 };
 
 

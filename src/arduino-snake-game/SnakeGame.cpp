@@ -4,6 +4,18 @@
 #define VRY_PIN A1
 #define RANDOM_SEED_PIN A2
 
+void SnakeGame::startupScreen()
+{
+    scene.clear();
+    scene.putText("SNAKE GAME", 2, 3);
+    delay(700);
+    scene.putSmallText("Push joystick to start", 2, 5);
+    while (direction == Direction::NONE) {
+        updateDirection();
+    }
+    scene.clear();
+}
+
 void SnakeGame::shuffle()
 {
     randomSeed(analogRead(RANDOM_SEED_PIN));
@@ -259,6 +271,9 @@ SnakeGame *SnakeGame::startUp()
 
     shuffle();
     initDirectionControl();
+
+    startupScreen();
+
     placeNewSnake();
     placeNewApple();
 
