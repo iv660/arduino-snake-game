@@ -20,7 +20,6 @@ private:
     int locationColumnToScreenX(int xPosition);
     int locationRowToScreenY(int yPosition);
 public:
-    Scene(/* args */);
     void draw(DrawableInterface* drawable);
     void erase(DrawableInterface* drawable);
     void begin();

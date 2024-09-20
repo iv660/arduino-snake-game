@@ -10,10 +10,6 @@ int Scene::locationRowToScreenY(int yPosition)
     return yPosition * gridSizeY;
 }
 
-Scene::Scene()
-{
-}
-
 void Scene::draw(DrawableInterface *drawable)
 {
     screen.stroke(0, 255, 0);
