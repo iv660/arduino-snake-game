@@ -57,3 +57,15 @@ int Scene::getRows()
 {
     return getHeight() / gridSizeY;
 }
+
+void Scene::clear()
+{
+    screen.background(0, 0, 0);
+}
+
+void Scene::putText(char *text, int column, int row)
+{
+    screen.stroke(0, 255, 0);
+    screen.text(text, locationColumnToScreenX(column), 
+        locationRowToScreenY(row));
+}

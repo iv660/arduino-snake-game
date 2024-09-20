@@ -28,6 +28,8 @@ public:
     long getHeight();
     int getColumns();
     int getRows();
+    void clear();
+    void putText(char *text, int column, int row);
 };
 
 

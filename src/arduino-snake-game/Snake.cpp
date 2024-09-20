@@ -54,9 +54,6 @@ Snake *Snake::reset()
     {
         removeTail();
     }
-
-    // delete head;
-    // head = new SnakeSegment();
     
     return this;
 }

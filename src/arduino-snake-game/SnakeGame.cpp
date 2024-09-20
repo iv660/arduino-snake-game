@@ -303,7 +303,7 @@ SnakeGame *SnakeGame::increaseScore()
     return this;
 }
 
-void SnakeGame::delay()
+void SnakeGame::pause()
 {
     unsigned long startTime = millis();
 
@@ -314,5 +314,9 @@ void SnakeGame::delay()
 
 void SnakeGame::end()
 {
+    scene.clear();
+    scene.putText("GAME OVER", 3, 4);
+    delay(4000);
+    scene.clear();
 }
 

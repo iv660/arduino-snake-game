@@ -46,7 +46,7 @@ public:
     SnakeGame* placeNewApple();
     SnakeGame* removeApple();
     SnakeGame* increaseScore();
-    void delay();
+    void pause();
     void end();
 };
 
