@@ -46,3 +46,17 @@ Snake *Snake::removeTail()
 
     return this;
 }
+
+
+Snake *Snake::reset()
+{
+    while (false == getHead()->isTail())
+    {
+        removeTail();
+    }
+
+    // delete head;
+    // head = new SnakeSegment();
+    
+    return this;
+}

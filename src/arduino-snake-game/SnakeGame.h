@@ -17,6 +17,7 @@ private:
 
     Direction direction = Direction::NONE;
     void shuffle();
+    void resetSnake();
     void drawSnake(SnakeSegment *snakeSegment);
     void drawApple(Apple *apple);
     void stretchHead();

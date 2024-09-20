@@ -13,6 +13,7 @@ public:
     SnakeSegment *getTail();
     Snake *stretchHeadTo(GridLocation location);
     Snake *removeTail();
+    Snake *reset();
 };
 
 #endif // SNAKE_H)

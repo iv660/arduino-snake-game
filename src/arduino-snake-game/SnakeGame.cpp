@@ -9,6 +9,11 @@ void SnakeGame::shuffle()
     randomSeed(analogRead(RANDOM_SEED_PIN));
 }
 
+void SnakeGame::resetSnake()
+{
+    snake.reset();
+}
+
 void SnakeGame::drawSnake(SnakeSegment *snakeSegment)
 {
     SnakeSegment *currentSegment = snakeSegment;
@@ -177,6 +182,10 @@ bool SnakeGame::hitsApple(GridLocation location)
 
 bool SnakeGame::hitsSnake(GridLocation location)
 {
+    if (getDirection() == Direction::NONE) {
+        return false;
+    }
+
     SnakeSegment *snakeSegment = snake.getHead();
     
     do {
@@ -185,7 +194,7 @@ bool SnakeGame::hitsSnake(GridLocation location)
             return true;
         }
         snakeSegment = snakeSegment->getNextSegment();
-    } while (snakeSegment->getNextSegment() != nullptr);
+    } while (snakeSegment != nullptr);
 
     return false;
 }
@@ -208,6 +217,15 @@ void SnakeGame::updateDirection()
 
 bool SnakeGame::isOver()
 {
+    GridLocation nextLocation = getNextLocation(getHead());
+    if (locationIsOutOfBounds(nextLocation)) {
+        return true;
+    }
+
+    if (hitsSnake(nextLocation)) {
+        return true;
+    }
+
     return false;
 }
 
@@ -229,9 +247,12 @@ SnakeGame *SnakeGame::startUp()
     pinMode(VRX_PIN, INPUT);
     pinMode(VRY_PIN, INPUT);
 
+    resetSnake();
     getHead()->setColumn(0);
     getHead()->setRow(5);
     scene.draw(getHead());
+
+    direction = Direction::NONE;
 
     placeNewApple();
 
