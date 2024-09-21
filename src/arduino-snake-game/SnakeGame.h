@@ -16,6 +16,8 @@ private:
     Snake snake;
 
     Direction direction = Direction::NONE;
+    const unsigned long bonus = 100;
+    unsigned long score = 0;
     void startupScreen();
     void shuffle();
     void initDirectionControl();

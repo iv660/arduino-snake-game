@@ -277,6 +277,8 @@ SnakeGame *SnakeGame::startUp()
     placeNewSnake();
     placeNewApple();
 
+    score = 0;
+
     return this;
 }
 
@@ -302,6 +304,12 @@ SnakeGame *SnakeGame::growSnake()
 
 SnakeGame *SnakeGame::deductScore()
 {
+    if (score == 0) {
+        return this;
+    }
+
+    score--;
+
     return this;
 }
 
@@ -321,6 +329,7 @@ SnakeGame *SnakeGame::removeApple()
 
 SnakeGame *SnakeGame::increaseScore()
 {
+    score += bonus;
     return this;
 }
 
@@ -337,6 +346,9 @@ void SnakeGame::end()
 {
     scene.clear();
     scene.putText("GAME OVER", 3, 4);
+    char scoreBuffer[16];
+    sprintf(scoreBuffer, "Score: %d", score);
+    scene.putSmallText(scoreBuffer, 4, 6);
     delay(4000);
     scene.clear();
 }

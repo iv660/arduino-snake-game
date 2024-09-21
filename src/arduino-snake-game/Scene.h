@@ -13,7 +13,7 @@ class Scene
 {
 private:
     const int gridSizeX = 10;
-    const int gridSizeY = 12;
+    const int gridSizeY = 14;
     const long width = 160;
     const long height = 128;
     TFT screen = TFT(cs, dc, rst);
