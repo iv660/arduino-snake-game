@@ -4,7 +4,7 @@
 #define VRY_PIN A1
 #define RANDOM_SEED_PIN A2
 
-void SnakeGame::startupScreen()
+void SnakeGame::showStartupScreen()
 {
     scene.clear();
     scene.putText("SNAKE GAME", 2, 3);
@@ -31,8 +31,7 @@ void SnakeGame::initDirectionControl()
 void SnakeGame::placeNewSnake()
 {
     resetSnake();
-    getHead()->setColumn(0);
-    getHead()->setRow(5);
+    moveSnakeToStartingPoint();
     scene.draw(getHead());
 }
 
@@ -207,6 +206,66 @@ bool SnakeGame::hitsApple(GridLocation location)
     return false;
 }
 
+void SnakeGame::showLifeLostScreen(int livesBefore, int livesAfter)
+{
+    char messageBuffer[16];
+
+    scene.clear();
+    sprintf(messageBuffer, "Lives: %d", livesBefore);
+    scene.putText(messageBuffer, 3, 3);
+    
+    delay(500);
+    
+    scene.clear();
+    sprintf(messageBuffer, "Lives: %d", livesAfter);
+    scene.putText(messageBuffer, 3, 3);
+
+    scene.putSmallText("Push joystick to continue", 1, 5);
+
+    waitForDirection();
+    scene.clear();
+}
+
+void SnakeGame::moveSnakeToStartingPoint()
+{
+    getHead()->setColumn(0);
+    getHead()->setRow(5);
+}
+
+void SnakeGame::waitForDirection()
+{
+    while (direction == Direction::NONE) {
+        updateDirection();
+    }
+}
+
+bool SnakeGame::hasLivesLeft()
+{
+    if (lives > 0) {
+        return true;
+    }
+
+    return false;
+}
+
+SnakeGame *SnakeGame::loseLife()
+{
+    initDirectionControl();
+    showLifeLostScreen(lives, lives - 1);
+    lives--;
+
+    return this;
+}
+
+SnakeGame *SnakeGame::startRound()
+{
+    initDirectionControl();
+    moveSnakeToStartingPoint();
+    placeNewApple();
+
+    return this;
+}
+
 bool SnakeGame::hitsSnake(GridLocation location)
 {
     if (getDirection() == Direction::NONE) {
@@ -269,15 +328,13 @@ SnakeGame *SnakeGame::startUp()
 {
     scene.begin();
 
+    score = 0;
+    lives = 3;
+
     shuffle();
     initDirectionControl();
-
-    startupScreen();
-
-    placeNewSnake();
-    placeNewApple();
-
-    score = 0;
+    showStartupScreen();
+    resetSnake();
 
     return this;
 }
@@ -333,7 +390,7 @@ SnakeGame *SnakeGame::increaseScore()
     return this;
 }
 
-void SnakeGame::pause()
+void SnakeGame::slowDown()
 {
     unsigned long startTime = millis();
 

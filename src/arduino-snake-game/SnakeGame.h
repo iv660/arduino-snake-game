@@ -18,7 +18,10 @@ private:
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
     unsigned long score = 0;
-    void startupScreen();
+    int lives = 3;
+    char lifeIcon = (char)0x2b; // (char)0x3;
+
+    void showStartupScreen();
     void shuffle();
     void initDirectionControl();
     void placeNewSnake();
@@ -40,6 +43,9 @@ private:
     bool locationIsOccupied(GridLocation location);
     bool hitsSnake(GridLocation location);
     bool hitsApple(GridLocation location);
+    void showLifeLostScreen(int livesBefore, int livesAfter);
+    void moveSnakeToStartingPoint();
+    void waitForDirection();
 
 public:
     bool isOver();
@@ -51,7 +57,10 @@ public:
     SnakeGame* placeNewApple();
     SnakeGame* removeApple();
     SnakeGame* increaseScore();
-    void pause();
+    SnakeGame* loseLife();
+    SnakeGame* startRound();
+    bool hasLivesLeft();
+    void slowDown();
     void end();
 };
 

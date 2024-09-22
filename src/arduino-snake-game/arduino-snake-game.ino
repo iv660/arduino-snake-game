@@ -11,18 +11,23 @@ void loop()
 {
     game.startUp();
 
-    while (!game.isOver()) {
-        if (game.reachedAnApple()) {
-            game.removeApple()
-                ->growSnake()
-                ->placeNewApple()
-                ->increaseScore();
-        } else {
-            game.moveSnake()
-                ->deductScore();
+    while (game.hasLivesLeft()) {
+        game.startRound();
+        while (!game.isOver()) {
+            if (game.reachedAnApple()) {
+                game.removeApple()
+                    ->growSnake()
+                    ->placeNewApple()
+                    ->increaseScore();
+            } else {
+                game.moveSnake()
+                    ->deductScore();
+            }
+
+            game.slowDown();
         }
 
-        game.pause();
+        game.loseLife();
     }
 
     game.end();
