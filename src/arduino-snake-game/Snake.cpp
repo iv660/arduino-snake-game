@@ -47,6 +47,21 @@ Snake *Snake::removeTail()
     return this;
 }
 
+Snake *Snake::clearLocations()
+{
+    SnakeSegment* tailSegment = getTail();
+    SnakeSegment* currentSegment = getHead();
+
+    while (!currentSegment->isTail()) {
+        currentSegment->setColumn(-1);
+        currentSegment->setRow(-1);
+        currentSegment->hide();
+        
+        currentSegment = currentSegment->getNextSegment();
+    }
+
+    return this;
+}
 
 Snake *Snake::reset()
 {

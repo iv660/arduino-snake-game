@@ -9,6 +9,7 @@ private:
     int column = 0;
     int row = 0;
     SnakeSegment * nextSegment = nullptr;
+    bool visible = true;
 
 public:
     SnakeSegment(/* args */);
@@ -22,6 +23,9 @@ public:
     SnakeSegment* getNextSegment();
     void removeNextSegment();
     bool isTail();
+    bool isVisible();
+    void hide();
+    void show();
 };
 
 

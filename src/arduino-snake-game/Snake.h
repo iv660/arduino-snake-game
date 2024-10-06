@@ -14,6 +14,7 @@ public:
     Snake *stretchHeadTo(GridLocation location);
     Snake *removeTail();
     Snake *reset();
+    Snake *clearLocations();
 };
 
 #endif // SNAKE_H)

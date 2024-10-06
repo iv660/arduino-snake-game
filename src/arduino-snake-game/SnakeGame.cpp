@@ -228,8 +228,10 @@ void SnakeGame::showLifeLostScreen(int livesBefore, int livesAfter)
 
 void SnakeGame::moveSnakeToStartingPoint()
 {
+    snake.clearLocations();
     getHead()->setColumn(0);
     getHead()->setRow(5);
+    getHead()->show();
 }
 
 void SnakeGame::waitForDirection()
@@ -276,7 +278,8 @@ bool SnakeGame::hitsSnake(GridLocation location)
     
     do {
         if (snakeSegment->getColumn() == location.column 
-            && snakeSegment->getRow() == location.row) {
+            && snakeSegment->getRow() == location.row
+            && snakeSegment->isVisible()) {
             return true;
         }
         snakeSegment = snakeSegment->getNextSegment();

@@ -14,6 +14,21 @@ bool SnakeSegment::isTail()
     return false;
 }
 
+bool SnakeSegment::isVisible()
+{
+    return visible;
+}
+
+void SnakeSegment::hide()
+{
+    visible = false;
+}
+
+void SnakeSegment::show()
+{
+    visible = true;
+}
+
 SnakeSegment::SnakeSegment() : DrawableInterface(/* args */)
 {
 }
