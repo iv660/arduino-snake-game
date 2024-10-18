@@ -18,8 +18,9 @@ private:
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
     unsigned long score = 0;
+    unsigned long highScore = 0;
     int lives = 3;
-    char lifeIcon = (char)0x2b; // (char)0x3;
+    char lifeIcon = (char) 0x2b; // (char) 0x3;
 
     void showStartupScreen();
     void shuffle();
@@ -59,6 +60,7 @@ public:
     SnakeGame* increaseScore();
     SnakeGame* loseLife();
     SnakeGame* startRound();
+    SnakeGame* updateHighScore();
     bool hasLivesLeft();
     void slowDown();
     void end();

@@ -268,6 +268,13 @@ SnakeGame *SnakeGame::startRound()
     return this;
 }
 
+SnakeGame *SnakeGame::updateHighScore()
+{
+    highScore = max(highScore, score);
+
+    return this;
+}
+
 bool SnakeGame::hitsSnake(GridLocation location)
 {
     if (getDirection() == Direction::NONE) {
@@ -405,10 +412,13 @@ void SnakeGame::slowDown()
 void SnakeGame::end()
 {
     scene.clear();
-    scene.putText("GAME OVER", 3, 4);
+    scene.putText("GAME OVER", 3, 3);
     char scoreBuffer[16];
     sprintf(scoreBuffer, "Score: %d", score);
-    scene.putSmallText(scoreBuffer, 4, 6);
+    scene.putSmallText(scoreBuffer, 4, 5);
+    char highScoreBuffer[16];
+    sprintf(highScoreBuffer, "High Score: %d", highScore);
+    scene.putSmallText(highScoreBuffer, 4, 6);
     delay(4000);
     scene.clear();
 }

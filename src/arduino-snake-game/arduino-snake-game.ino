@@ -30,5 +30,6 @@ void loop()
         game.loseLife();
     }
 
-    game.end();
+    game.updateHighScore()
+        ->end();
 }
