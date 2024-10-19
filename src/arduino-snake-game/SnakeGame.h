@@ -8,6 +8,10 @@
 #include "Snake.h"
 #include "Direction.h"
 
+#define STORAGE_ADDRESS 0
+#define STORAGE_KEY_ADDRESS STORAGE_ADDRESS + sizeof(highScore)
+#define STORAGE_KEY 17
+
 class SnakeGame
 {
 private:
@@ -47,6 +51,10 @@ private:
     void showLifeLostScreen(int livesBefore, int livesAfter);
     void moveSnakeToStartingPoint();
     void waitForDirection();
+    void storeHighScore(unsigned long highScore);
+    unsigned long loadHighScore();
+    bool hasStoredHighScore();
+    void initStorage();
 
 public:
     bool isOver();

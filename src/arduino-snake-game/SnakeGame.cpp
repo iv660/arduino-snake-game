@@ -1,4 +1,5 @@
 #include "SnakeGame.h"
+#include <EEPROM.h>
 
 #define VRX_PIN A0
 #define VRY_PIN A1
@@ -241,6 +242,40 @@ void SnakeGame::waitForDirection()
     }
 }
 
+void SnakeGame::storeHighScore(unsigned long highScore)
+{
+    if (!hasStoredHighScore()) {
+        initStorage();
+    }
+
+    EEPROM.put(STORAGE_ADDRESS, highScore);
+}
+
+unsigned long SnakeGame::loadHighScore()
+{
+    if (!hasStoredHighScore()) {
+        return 0;
+    }
+
+    unsigned long loadedHighScore = 0;
+    EEPROM.get(STORAGE_ADDRESS, loadedHighScore);
+    return loadedHighScore;
+}
+
+bool SnakeGame::hasStoredHighScore()
+{
+    if (EEPROM.read(STORAGE_KEY_ADDRESS) == STORAGE_KEY) {
+        return true;
+    }
+
+    return false;
+}
+
+void SnakeGame::initStorage()
+{
+    EEPROM.write(STORAGE_KEY_ADDRESS, STORAGE_KEY);
+}
+
 bool SnakeGame::hasLivesLeft()
 {
     if (lives > 0) {
@@ -271,6 +306,7 @@ SnakeGame *SnakeGame::startRound()
 SnakeGame *SnakeGame::updateHighScore()
 {
     highScore = max(highScore, score);
+    storeHighScore(highScore);
 
     return this;
 }
@@ -345,6 +381,7 @@ SnakeGame *SnakeGame::startUp()
     initDirectionControl();
     showStartupScreen();
     resetSnake();
+    highScore = loadHighScore();
 
     return this;
 }
