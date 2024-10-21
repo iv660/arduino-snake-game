@@ -1,4 +1,5 @@
 #include "SnakeGame.h"
+#include "StartupScreenLayout.h"
 #include <EEPROM.h>
 
 #define VRX_PIN A0
@@ -8,9 +9,9 @@
 void SnakeGame::showStartupScreen()
 {
     scene.clear();
-    scene.putText("SNAKE GAME", 2, 3);
-    delay(700);
-    scene.putSmallText("Push joystick to start", 2, 5);
+    
+    StartupScreenLayout().render();
+
     while (direction == Direction::NONE) {
         updateDirection();
     }
