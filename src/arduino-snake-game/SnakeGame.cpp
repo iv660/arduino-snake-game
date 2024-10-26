@@ -1,6 +1,7 @@
+#include <EEPROM.h>
 #include "SnakeGame.h"
 #include "StartupScreenLayout.h"
-#include <EEPROM.h>
+#include "GameOverScreenLayout.h"
 
 #define VRX_PIN A0
 #define VRY_PIN A1
@@ -456,14 +457,22 @@ void SnakeGame::slowDown()
 void SnakeGame::end()
 {
     scene.clear();
-    scene.putText("GAME OVER", 3, 3);
-    char scoreBuffer[16];
-    sprintf(scoreBuffer, "Score: %d", score);
-    scene.putSmallText(scoreBuffer, 4, 5);
-    char highScoreBuffer[16];
-    sprintf(highScoreBuffer, "High Score: %d", highScore);
-    scene.putSmallText(highScoreBuffer, 4, 6);
+//     scene.putText("GAME OVER", 3, 0);
+//     char scoreBuffer[16];
+//     sprintf(scoreBuffer, "Score: %d", score);
+//     scene.putSmallText(scoreBuffer, 4, 1);
+//     char highScoreBuffer[16];
+//     sprintf(highScoreBuffer, "High Score: %d", highScore);
+//     scene.putSmallText(highScoreBuffer, 4, 3);
+
+    GameOverScreenLayout().setScreen(&screen)
+        ->setHighScore(highScore)
+        ->setScore(score)
+        ->render();
+
     delay(4000);
     scene.clear();
+
+
 }
 
