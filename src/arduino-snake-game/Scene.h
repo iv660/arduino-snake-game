@@ -13,7 +13,7 @@ private:
     const int gridSizeY = 14;
     const long width = 160;
     const long height = 128;
-    TFT screen = TFT(cs, dc, rst);
+    TFT* screen;
     int locationColumnToScreenX(int xPosition);
     int locationRowToScreenY(int yPosition);
 public:
@@ -27,6 +27,7 @@ public:
     void clear();
     void putText(char *text, int column, int row);
     void putSmallText(char *text, int column, int row);
+    void setScreen(TFT* screen);
 };
 
 

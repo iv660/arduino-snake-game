@@ -10,11 +10,12 @@ void SnakeGame::showStartupScreen()
 {
     scene.clear();
     
-    StartupScreenLayout().render();
+    StartupScreenLayout().setScreen(&screen)->render();
 
     while (direction == Direction::NONE) {
         updateDirection();
     }
+
     scene.clear();
 }
 
@@ -275,6 +276,11 @@ bool SnakeGame::hasStoredHighScore()
 void SnakeGame::initStorage()
 {
     EEPROM.write(STORAGE_KEY_ADDRESS, STORAGE_KEY);
+}
+
+SnakeGame::SnakeGame()
+{
+    scene.setScreen(&screen);
 }
 
 bool SnakeGame::hasLivesLeft()

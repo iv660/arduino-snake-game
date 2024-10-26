@@ -7,6 +7,7 @@
 #include "GridLocation.h"
 #include "Snake.h"
 #include "Direction.h"
+#include "TFT.h"
 
 #define STORAGE_ADDRESS 0
 #define STORAGE_KEY_ADDRESS STORAGE_ADDRESS + sizeof(highScore)
@@ -18,6 +19,7 @@ private:
     Scene scene;
     Apple apple;
     Snake snake;
+    TFT screen = TFT(cs, dc, rst);
 
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
@@ -57,6 +59,8 @@ private:
     void initStorage();
 
 public:
+    SnakeGame();
+    
     /**
      * @brief Returns true if the game is over, false otherwise.
      *

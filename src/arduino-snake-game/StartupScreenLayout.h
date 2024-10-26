@@ -7,7 +7,7 @@
 class StartupScreenLayout
 {
 private:
-    TFT screen = TFT(cs, dc, rst);
+    TFT* screen;
 
     void initScreen();
     void renderTitle();
@@ -15,6 +15,7 @@ private:
     void wait(unsigned long ms);
 public:
     void render();
+    StartupScreenLayout* setScreen(TFT* screen);
 };
 
 
