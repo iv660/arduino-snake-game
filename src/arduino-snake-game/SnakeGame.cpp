@@ -457,13 +457,6 @@ void SnakeGame::slowDown()
 void SnakeGame::end()
 {
     scene.clear();
-//     scene.putText("GAME OVER", 3, 0);
-//     char scoreBuffer[16];
-//     sprintf(scoreBuffer, "Score: %d", score);
-//     scene.putSmallText(scoreBuffer, 4, 1);
-//     char highScoreBuffer[16];
-//     sprintf(highScoreBuffer, "High Score: %d", highScore);
-//     scene.putSmallText(highScoreBuffer, 4, 3);
 
     GameOverScreenLayout().setScreen(&screen)
         ->setHighScore(highScore)
