@@ -31,7 +31,6 @@ void GameOverScreenLayout::renderScore()
 void GameOverScreenLayout::renderHighScores()
 {
     screen->stroke(255, 255, 255);
-    setTextSize(1);
 
     tabs().empty()
         ->text("High scores:")
