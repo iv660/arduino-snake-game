@@ -20,7 +20,6 @@ private:
     void initScreen();
     void renderGameOverTitle();
     void renderScore();
-    char* toString(unsigned long number);
     void renderHighScores();
     unsigned int getTextWidth(char* text);
     unsigned int getCharWidth();

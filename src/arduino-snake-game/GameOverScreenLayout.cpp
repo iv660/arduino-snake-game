@@ -19,18 +19,13 @@ void GameOverScreenLayout::renderGameOverTitle()
 void GameOverScreenLayout::renderScore()
 {
     screen->stroke(255, 255, 255);
-    setTextSize(1);
-    screen->text("Your score:", leaderNameTabStop, cursorY);
-    screen->text(toString(score), leaderScoreTabStop, cursorY);
+
+    tabs().empty()
+        ->text("Your score:")
+        ->number(score)
+        ->renderOn(screen);
+
     newLine();
-}
-
-char *GameOverScreenLayout::toString(unsigned long number)
-{
-    static char buffer[10];
-    sprintf(buffer, "%d", number);
-
-    return buffer;
 }
 
 void GameOverScreenLayout::renderHighScores()
