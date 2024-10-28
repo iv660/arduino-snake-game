@@ -56,16 +56,6 @@ void GameOverScreenLayout::renderHighScores()
     newLine();
 }
 
-unsigned int GameOverScreenLayout::getTextWidth(char *text)
-{
-    return strlen(text) * getCharWidth();
-}
-
-unsigned int GameOverScreenLayout::getCharWidth()
-{
-    return baseCharWidth * textSize;
-}
-
 TabbedText GameOverScreenLayout::tabs()
 {
     TabbedText tabbedText = TabbedText();
@@ -126,3 +116,4 @@ GameOverScreenLayout *GameOverScreenLayout::setHighScore(unsigned long highScore
     
     return this;
 }
+
