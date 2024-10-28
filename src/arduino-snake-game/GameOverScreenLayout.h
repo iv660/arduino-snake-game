@@ -13,13 +13,19 @@ private:
     unsigned int leaderScoreTabStop = 116;
     unsigned int cursorY = 0;
     unsigned int lineHeight = 10;
+    unsigned int textSize = 1;
+    unsigned int baseCharWidth = 6;
 
     void initScreen();
     void renderGameOverTitle();
     void renderScore();
     char* toString(unsigned long number);
     void renderHighScores();
+    unsigned int getTextWidth(char* text);
+    unsigned int getCharWidth();
     GameOverScreenLayout* newLine();
+    GameOverScreenLayout* putCenteredText(char* text);
+    GameOverScreenLayout* setTextSize(unsigned int size);
 
 public:
     void render();

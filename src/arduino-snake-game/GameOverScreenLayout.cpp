@@ -8,14 +8,14 @@ void GameOverScreenLayout::initScreen()
 void GameOverScreenLayout::renderGameOverTitle()
 {
     screen->stroke(255, 255, 255);
-    screen->setTextSize(2);
-    screen->text("GAME OVER", 30, 25);
+    setTextSize(2);
+    putCenteredText("GAME OVER");
 }
 
 void GameOverScreenLayout::renderScore()
 {
     screen->stroke(255, 255, 255);
-    screen->setTextSize(1);
+    setTextSize(1);
     screen->text("Your score:", leaderNameTabStop, cursorY);
     screen->text(toString(score), leaderScoreTabStop, cursorY);
     newLine();
@@ -32,7 +32,7 @@ char *GameOverScreenLayout::toString(unsigned long number)
 void GameOverScreenLayout::renderHighScores()
 {
     screen->stroke(255, 255, 255);
-    screen->setTextSize(1);
+    setTextSize(1);
     screen->text("High scores:", leaderNameTabStop, cursorY);
     newLine();
     screen->text("1.", leaderPositionTabStop, cursorY);
@@ -46,6 +46,16 @@ void GameOverScreenLayout::renderHighScores()
     newLine();
 }
 
+unsigned int GameOverScreenLayout::getTextWidth(char *text)
+{
+    return strlen(text) * getCharWidth();
+}
+
+unsigned int GameOverScreenLayout::getCharWidth()
+{
+    return baseCharWidth * textSize;
+}
+
 GameOverScreenLayout *GameOverScreenLayout::newLine()
 {
     cursorY += lineHeight;
@@ -53,9 +63,29 @@ GameOverScreenLayout *GameOverScreenLayout::newLine()
     return this;
 }
 
+GameOverScreenLayout *GameOverScreenLayout::putCenteredText(char *text)
+{
+    const unsigned int textWidth = getTextWidth(text);
+    const unsigned int width = screen->width();
+    const unsigned int positionX = (width - textWidth) / 2;
+
+    screen->text(text, positionX, cursorY);
+
+    return this;
+}
+
+GameOverScreenLayout *GameOverScreenLayout::setTextSize(unsigned int size)
+{
+    textSize = size;
+    screen->textSize(textSize);
+
+    return this;
+}
+
 void GameOverScreenLayout::render()
 {
     initScreen();
+    cursorY = 25;
     renderGameOverTitle();
     cursorY = 50;
     renderHighScores();
