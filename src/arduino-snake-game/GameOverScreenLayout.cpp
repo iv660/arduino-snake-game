@@ -1,5 +1,6 @@
 #include "GameOverScreenLayout.h"
 #include "CenteredText.h"
+#include "TabbedText.h"
 
 void GameOverScreenLayout::initScreen()
 {
@@ -36,16 +37,28 @@ void GameOverScreenLayout::renderHighScores()
 {
     screen->stroke(255, 255, 255);
     setTextSize(1);
-    screen->text("High scores:", leaderNameTabStop, cursorY);
+
+    tabs().empty()
+        ->text("High scores:")
+        ->renderOn(screen);
     newLine();
-    screen->text("1.", leaderPositionTabStop, cursorY);
-    screen->text(toString(highScore), leaderScoreTabStop, cursorY);
+    
+    tabs().text("1.")
+        ->empty()
+        ->number(highScore)
+        ->renderOn(screen);
     newLine();
-    screen->text("2.", leaderPositionTabStop, cursorY);
-    screen->text(toString(0), leaderScoreTabStop, cursorY);
+
+    tabs().text("2.")
+        ->empty()
+        ->number(0)
+        ->renderOn(screen);
     newLine();
-    screen->text("3.", leaderPositionTabStop, cursorY);
-    screen->text(toString(0), leaderScoreTabStop, cursorY);
+
+    tabs().text("3.")
+        ->empty()
+        ->number(0)
+        ->renderOn(screen);
     newLine();
 }
 
@@ -57,6 +70,20 @@ unsigned int GameOverScreenLayout::getTextWidth(char *text)
 unsigned int GameOverScreenLayout::getCharWidth()
 {
     return baseCharWidth * textSize;
+}
+
+TabbedText GameOverScreenLayout::tabs()
+{
+    TabbedText tabbedText = TabbedText();
+
+    tabbedText
+        .tab(leaderPositionTabStop)
+        ->tab(leaderNameTabStop)
+        ->tab(leaderScoreTabStop)
+        ->size(1)
+        ->top(cursorY);
+
+    return tabbedText;
 }
 
 GameOverScreenLayout *GameOverScreenLayout::newLine()

@@ -2,6 +2,7 @@
 #define GAME_OVER_SCREEN_LAYOUT_H
 
 #include "TFT.h"
+#include "TabbedText.h"
 
 class GameOverScreenLayout {
 private:
@@ -23,6 +24,7 @@ private:
     void renderHighScores();
     unsigned int getTextWidth(char* text);
     unsigned int getCharWidth();
+    TabbedText tabs();
     GameOverScreenLayout* newLine();
     GameOverScreenLayout* setTextSize(unsigned int size);
 
