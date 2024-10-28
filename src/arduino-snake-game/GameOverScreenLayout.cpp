@@ -9,8 +9,6 @@ void GameOverScreenLayout::renderGameOverTitle()
 {
     screen->stroke(255, 255, 255);
     screen->setTextSize(2);
-    screen->text("0        1         2         3", 0, 0);
-    screen->text("123456789012345678901234567890", 0, 16);
     screen->text("GAME OVER", 30, 25);
 }
 
