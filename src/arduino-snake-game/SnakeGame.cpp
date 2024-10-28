@@ -463,7 +463,7 @@ void SnakeGame::end()
         ->setScore(score)
         ->render();
 
-    delay(4000);
+    delay(6000);
     scene.clear();
 
 

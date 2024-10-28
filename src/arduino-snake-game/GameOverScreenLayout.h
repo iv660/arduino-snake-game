@@ -8,16 +8,18 @@ private:
     TFT* screen;
     unsigned long highScore;
     unsigned long score = 0;
-    unsigned int leaderPositionTabStop = 0;
-    unsigned int leaderNameTabStop = 16;
-    unsigned int leaderScoreTabStop = 100;
+    unsigned int leaderPositionTabStop = 10;
+    unsigned int leaderNameTabStop = 26;
+    unsigned int leaderScoreTabStop = 116;
+    unsigned int cursorY = 0;
+    unsigned int lineHeight = 10;
 
     void initScreen();
     void renderGameOverTitle();
     void renderScore();
     char* toString(unsigned long number);
     void renderHighScores();
-    // void wait(unsigned long ms);
+    GameOverScreenLayout* newLine();
 
 public:
     void render();
