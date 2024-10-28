@@ -24,7 +24,6 @@ private:
     unsigned int getTextWidth(char* text);
     unsigned int getCharWidth();
     GameOverScreenLayout* newLine();
-    GameOverScreenLayout* putCenteredText(char* text);
     GameOverScreenLayout* setTextSize(unsigned int size);
 
 public:

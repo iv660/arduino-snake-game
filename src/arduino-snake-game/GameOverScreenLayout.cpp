@@ -1,4 +1,5 @@
 #include "GameOverScreenLayout.h"
+#include "CenteredText.h"
 
 void GameOverScreenLayout::initScreen()
 {
@@ -8,8 +9,10 @@ void GameOverScreenLayout::initScreen()
 void GameOverScreenLayout::renderGameOverTitle()
 {
     screen->stroke(255, 255, 255);
-    setTextSize(2);
-    putCenteredText("GAME OVER");
+
+    CenteredText("GAME OVER").size(2)
+        ->top(cursorY)
+        ->renderOn(screen);
 }
 
 void GameOverScreenLayout::renderScore()
@@ -59,17 +62,6 @@ unsigned int GameOverScreenLayout::getCharWidth()
 GameOverScreenLayout *GameOverScreenLayout::newLine()
 {
     cursorY += lineHeight;
-
-    return this;
-}
-
-GameOverScreenLayout *GameOverScreenLayout::putCenteredText(char *text)
-{
-    const unsigned int textWidth = getTextWidth(text);
-    const unsigned int width = screen->width();
-    const unsigned int positionX = (width - textWidth) / 2;
-
-    screen->text(text, positionX, cursorY);
 
     return this;
 }
