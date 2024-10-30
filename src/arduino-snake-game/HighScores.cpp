@@ -24,7 +24,7 @@ HighScore HighScores::get(unsigned int position) {
     return HighScore("", 0);
 }
 
-void HighScores::addCandidate(unsigned long score) {
+void HighScores::updateHighScore(unsigned long score) {
     for (unsigned int index = 0; index < MAX_HIGH_SCORES; index++) {
         if (score > scores[index].getScore()) {
             shiftLowerScoresDown(index);

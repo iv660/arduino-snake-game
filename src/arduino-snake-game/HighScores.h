@@ -12,7 +12,7 @@ private:
 public:
     unsigned int getSize();
     HighScore get(unsigned int position);
-    void addCandidate(unsigned long score);
+    void updateHighScore(unsigned long score);
     HighScores* setHighScore(unsigned int position, unsigned long score);
 };
 
