@@ -37,23 +37,15 @@ void GameOverScreenLayout::renderHighScores()
         ->renderOn(screen);
     newLine();
     
-    tabs().text("1.")
-        ->empty()
-        ->number(highScore)
-        ->renderOn(screen);
-    newLine();
+    for (unsigned int position = 1; position <= highScores.getSize(); position++) {
+        const HighScore highScore = highScores.get(position);
 
-    tabs().text("2.")
-        ->empty()
-        ->number(0)
-        ->renderOn(screen);
-    newLine();
-
-    tabs().text("3.")
-        ->empty()
-        ->number(0)
-        ->renderOn(screen);
-    newLine();
+        tabs().text(toFormat("%d.", position))
+            ->text(highScore.getName())
+            ->number(highScore.getScore())
+            ->renderOn(screen);
+        newLine();
+    }
 }
 
 TabbedText GameOverScreenLayout::tabs()
@@ -85,6 +77,15 @@ GameOverScreenLayout *GameOverScreenLayout::setTextSize(unsigned int size)
     return this;
 }
 
+char *GameOverScreenLayout::toFormat(char *format, unsigned long number)
+{
+    static char buffer[10];
+
+    sprintf(buffer, format, number);
+
+    return buffer;
+}
+
 void GameOverScreenLayout::render()
 {
     initScreen();
@@ -112,7 +113,7 @@ GameOverScreenLayout *GameOverScreenLayout::setScore(unsigned long score)
 
 GameOverScreenLayout *GameOverScreenLayout::setHighScore(unsigned long highScore)
 {
-    this->highScore = highScore;
+    this->highScores.setHighScore(1, highScore);
     
     return this;
 }

@@ -3,11 +3,13 @@
 
 #include "TFT.h"
 #include "TabbedText.h"
+#include "HighScores.h"
 
 class GameOverScreenLayout {
 private:
     TFT* screen;
-    unsigned long highScore;
+    
+    HighScores highScores;
     unsigned long score = 0;
     unsigned int leaderPositionTabStop = 10;
     unsigned int leaderNameTabStop = 26;
@@ -24,6 +26,7 @@ private:
     TabbedText tabs();
     GameOverScreenLayout* newLine();
     GameOverScreenLayout* setTextSize(unsigned int size);
+    char* toFormat(char* format, unsigned long number);
 
 public:
     void render();
