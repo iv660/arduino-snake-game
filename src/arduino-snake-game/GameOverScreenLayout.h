@@ -31,7 +31,7 @@ private:
 public:
     void render();
     GameOverScreenLayout* setScreen(TFT* screen);
-    GameOverScreenLayout* setHighScore(unsigned long highScore);
+    GameOverScreenLayout* setHighScores(HighScores highScores);
     GameOverScreenLayout* setScore(unsigned long score);
 };
 

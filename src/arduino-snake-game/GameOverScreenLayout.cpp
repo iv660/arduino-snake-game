@@ -104,17 +104,16 @@ GameOverScreenLayout *GameOverScreenLayout::setScreen(TFT *screen)
     return this;
 }
 
+GameOverScreenLayout *GameOverScreenLayout::setHighScores(HighScores highScores)
+{
+    this->highScores = highScores;
+
+    return this;
+}
+
 GameOverScreenLayout *GameOverScreenLayout::setScore(unsigned long score)
 {
     this->score = score;
     
     return this;
 }
-
-GameOverScreenLayout *GameOverScreenLayout::setHighScore(unsigned long highScore)
-{
-    this->highScores.setHighScore(1, highScore);
-    
-    return this;
-}
-

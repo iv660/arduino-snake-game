@@ -458,8 +458,10 @@ void SnakeGame::end()
 {
     scene.clear();
 
+    highScores.setHighScore(1, highScore);
+
     GameOverScreenLayout().setScreen(&screen)
-        ->setHighScore(highScore)
+        ->setHighScores(highScores)
         ->setScore(score)
         ->render();
 

@@ -8,6 +8,8 @@
 #include "Snake.h"
 #include "Direction.h"
 #include "TFT.h"
+#include "const.h"
+#include "HighScores.h"
 
 #define STORAGE_ADDRESS 0
 #define STORAGE_KEY_ADDRESS STORAGE_ADDRESS + sizeof(highScore)
@@ -20,6 +22,7 @@ private:
     Apple apple;
     Snake snake;
     TFT screen = TFT(cs, dc, rst);
+    HighScores highScores;
 
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
