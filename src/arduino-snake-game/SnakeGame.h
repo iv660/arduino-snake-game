@@ -10,10 +10,7 @@
 #include "TFT.h"
 #include "const.h"
 #include "HighScores.h"
-
-#define STORAGE_ADDRESS 0
-#define STORAGE_KEY_ADDRESS STORAGE_ADDRESS + sizeof(highScore)
-#define STORAGE_KEY 17
+#include "Storage.h"
 
 class SnakeGame
 {
@@ -23,11 +20,11 @@ private:
     Snake snake;
     TFT screen = TFT(cs, dc, rst);
     HighScores highScores;
+    Storage storage;
 
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
     unsigned long score = 0;
-    unsigned long highScore = 0;
     int lives = 3;
     char lifeIcon = (char) 0x2b; // (char) 0x3;
 
@@ -56,10 +53,8 @@ private:
     void showLifeLostScreen(int livesBefore, int livesAfter);
     void moveSnakeToStartingPoint();
     void waitForDirection();
-    void storeHighScore(unsigned long highScore);
-    unsigned long loadHighScore();
-    bool hasStoredHighScore();
-    void initStorage();
+    void storeHighScores(HighScores highScores);
+    HighScores loadHighScores();
 
 public:
     SnakeGame();

@@ -2,6 +2,7 @@
 #include "SnakeGame.h"
 #include "StartupScreenLayout.h"
 #include "GameOverScreenLayout.h"
+#include "HighScore.h"
 
 #define VRX_PIN A0
 #define VRY_PIN A1
@@ -245,38 +246,14 @@ void SnakeGame::waitForDirection()
     }
 }
 
-void SnakeGame::storeHighScore(unsigned long highScore)
+void SnakeGame::storeHighScores(HighScores highScores)
 {
-    if (!hasStoredHighScore()) {
-        initStorage();
-    }
-
-    EEPROM.put(STORAGE_ADDRESS, highScore);
+    storage.storeHighScores(highScores);
 }
 
-unsigned long SnakeGame::loadHighScore()
+HighScores SnakeGame::loadHighScores()
 {
-    if (!hasStoredHighScore()) {
-        return 0;
-    }
-
-    unsigned long loadedHighScore = 0;
-    EEPROM.get(STORAGE_ADDRESS, loadedHighScore);
-    return loadedHighScore;
-}
-
-bool SnakeGame::hasStoredHighScore()
-{
-    if (EEPROM.read(STORAGE_KEY_ADDRESS) == STORAGE_KEY) {
-        return true;
-    }
-
-    return false;
-}
-
-void SnakeGame::initStorage()
-{
-    EEPROM.write(STORAGE_KEY_ADDRESS, STORAGE_KEY);
+    return storage.getHighScores();
 }
 
 SnakeGame::SnakeGame()
@@ -313,8 +290,9 @@ SnakeGame *SnakeGame::startRound()
 
 SnakeGame *SnakeGame::updateHighScore()
 {
-    highScore = max(highScore, score);
-    storeHighScore(highScore);
+    if (highScores.updateHighScore(score)) {
+        storeHighScores(highScores);
+    }
 
     return this;
 }
@@ -389,7 +367,7 @@ SnakeGame *SnakeGame::startUp()
     initDirectionControl();
     showStartupScreen();
     resetSnake();
-    highScore = loadHighScore();
+    highScores = loadHighScores();
 
     return this;
 }
@@ -458,8 +436,6 @@ void SnakeGame::end()
 {
     scene.clear();
 
-    highScores.setHighScore(1, highScore);
-
     GameOverScreenLayout().setScreen(&screen)
         ->setHighScores(highScores)
         ->setScore(score)
@@ -467,7 +443,5 @@ void SnakeGame::end()
 
     delay(6000);
     scene.clear();
-
-
 }
 

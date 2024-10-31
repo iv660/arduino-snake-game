@@ -13,7 +13,8 @@ unsigned int HighScores::getSize()
     return MAX_HIGH_SCORES;
 }
 
-HighScore HighScores::get(unsigned int position) {
+HighScore HighScores::get(unsigned int position) 
+{
     unsigned int index = position - 1;
 
     if (index <= MAX_HIGH_SCORES - 1) {
@@ -24,14 +25,17 @@ HighScore HighScores::get(unsigned int position) {
     return HighScore("", 0);
 }
 
-void HighScores::updateHighScore(unsigned long score) {
+bool HighScores::updateHighScore(unsigned long score) 
+{
     for (unsigned int index = 0; index < MAX_HIGH_SCORES; index++) {
         if (score > scores[index].getScore()) {
             shiftLowerScoresDown(index);
             scores[index] = HighScore("", score); // Default name
-            break;
+            return true;
         }
     }
+
+    return false;
 }
 
 HighScores *HighScores::setHighScore(unsigned int position, unsigned long score)

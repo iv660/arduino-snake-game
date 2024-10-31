@@ -1,18 +1,18 @@
 #if !defined(HIGH_SCORES_H)
 #define HIGH_SCORES_H
 
+#include "const.h"
 #include "HighScore.h"
 
 class HighScores
 {
 private:
-    static const unsigned int MAX_HIGH_SCORES = 3;
     HighScore scores[MAX_HIGH_SCORES];
     void shiftLowerScoresDown(unsigned int fromIndex);
 public:
     unsigned int getSize();
     HighScore get(unsigned int position);
-    void updateHighScore(unsigned long score);
+    bool updateHighScore(unsigned long score);
     HighScores* setHighScore(unsigned int position, unsigned long score);
 };
 
