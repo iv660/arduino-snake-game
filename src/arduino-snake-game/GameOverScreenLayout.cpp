@@ -97,13 +97,6 @@ void GameOverScreenLayout::render()
     renderScore();
 }
 
-GameOverScreenLayout *GameOverScreenLayout::setScreen(TFT *screen)
-{
-    this->screen = screen;
-    
-    return this;
-}
-
 GameOverScreenLayout *GameOverScreenLayout::setHighScores(HighScores highScores)
 {
     this->highScores = highScores;

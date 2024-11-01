@@ -13,11 +13,11 @@ class BaseScreenLayout
         virtual void render() = 0;
 };
 
-#endif // BASE_SCREEN_LAYOUT_H
-
 template<typename Derived>
 Derived * BaseScreenLayout<Derived>::setScreen(TFT * screen)
 {
     this->screen = screen;
     return this;
 }
+
+#endif // BASE_SCREEN_LAYOUT_H

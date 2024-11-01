@@ -4,11 +4,11 @@
 #include "TFT.h"
 #include "TabbedText.h"
 #include "HighScores.h"
+#include "BaseScreenLayout.h"
 
-class GameOverScreenLayout {
+class GameOverScreenLayout : public BaseScreenLayout<GameOverScreenLayout>
+{
 private:
-    TFT* screen;
-    
     HighScores highScores;
     unsigned long score = 0;
     unsigned int leaderPositionTabStop = 10;
@@ -30,7 +30,7 @@ private:
 
 public:
     void render();
-    GameOverScreenLayout* setScreen(TFT* screen);
+    using BaseScreenLayout<GameOverScreenLayout>::setScreen;
     GameOverScreenLayout* setHighScores(HighScores highScores);
     GameOverScreenLayout* setScore(unsigned long score);
 };
