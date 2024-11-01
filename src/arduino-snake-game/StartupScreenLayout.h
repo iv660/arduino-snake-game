@@ -3,8 +3,9 @@
 
 #include "const.h"
 #include "TFT.h"
+#include "BaseScreenLayout.h"
 
-class StartupScreenLayout
+class StartupScreenLayout : public BaseScreenLayout<StartupScreenLayout>
 {
 private:
     TFT* screen;
