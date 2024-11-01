@@ -8,15 +8,13 @@
 class StartupScreenLayout : public BaseScreenLayout<StartupScreenLayout>
 {
 private:
-    TFT* screen;
-
     void initScreen();
     void renderTitle();
     void renderStartupInstructions();
     void wait(unsigned long ms);
 public:
     void render();
-    StartupScreenLayout* setScreen(TFT* screen);
+    using BaseScreenLayout<StartupScreenLayout>::setScreen;
 };
 
 

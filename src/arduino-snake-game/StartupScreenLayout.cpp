@@ -33,10 +33,3 @@ void StartupScreenLayout::render()
     wait(700);
     renderStartupInstructions();
 }
-
-StartupScreenLayout *StartupScreenLayout::setScreen(TFT *screen)
-{
-    this->screen = screen;
-    
-    return this;
-}
