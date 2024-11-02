@@ -136,6 +136,27 @@ public:
     SnakeGame* increaseScore();
 
     /**
+     * @brief Shows information about the current level.
+     *
+     * @return A pointer to the current SnakeGame instance.
+     */
+    SnakeGame* showLevelInfo();
+
+    /**
+     * @brief Checks if the snake has reached the next level.
+     *
+     * @return True if the snake has reached the next level, otherwise false.
+     */
+    bool reachedLevelUp();
+
+    /**
+     * @brief Increases level by one and applies level bonuses.
+     *
+     * @return A pointer to the current SnakeGame instance.
+     */
+    SnakeGame* levelUp();
+
+    /**
      * @brief Reduces the number of lives left by one and shows a "life lost" animation.
      *
      * @return A pointer to the current SnakeGame instance.

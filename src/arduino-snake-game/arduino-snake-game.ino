@@ -12,13 +12,19 @@ void loop()
     game.startUp();
 
     while (game.hasLivesLeft()) {
-        game.startRound();
+        game.startRound()
+            ->showLevelInfo();
         while (!game.isOver()) {
             if (game.reachedAnApple()) {
                 game.removeApple()
                     ->growSnake()
                     ->placeNewApple()
                     ->increaseScore();
+                
+                if (game.reachedLevelUp()) {
+                    game.levelUp()
+                        ->showLevelInfo();
+                }
             } else {
                 game.moveSnake()
                     ->deductScore();

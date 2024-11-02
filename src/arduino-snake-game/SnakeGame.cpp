@@ -423,6 +423,21 @@ SnakeGame *SnakeGame::increaseScore()
     return this;
 }
 
+SnakeGame *SnakeGame::showLevelInfo()
+{
+    return this;
+}
+
+bool SnakeGame::reachedLevelUp()
+{
+    return false;
+}
+
+SnakeGame *SnakeGame::levelUp()
+{
+    return this;
+}
+
 void SnakeGame::slowDown()
 {
     unsigned long startTime = millis();
