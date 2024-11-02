@@ -276,7 +276,7 @@ void SnakeGame::initLevel()
 {
     level = 1;
     snakeLengthForNextLevel = INITIAL_LENGTH_REQUIREMENT;
-    lives = 3;
+    lives = INITIAL_LIVES;
 }
 
 HighScores SnakeGame::loadHighScores()
@@ -389,7 +389,6 @@ SnakeGame *SnakeGame::startUp()
     scene.begin();
 
     score = 0;
-    lives = 3;
 
     shuffle();
     initLevel();
