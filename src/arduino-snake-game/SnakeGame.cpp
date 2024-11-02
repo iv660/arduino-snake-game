@@ -3,6 +3,7 @@
 #include "StartupScreenLayout.h"
 #include "GameOverScreenLayout.h"
 #include "HighScore.h"
+#include "LevelInfoScreenLayout.h"
 
 #define VRX_PIN A0
 #define VRY_PIN A1
@@ -281,7 +282,8 @@ SnakeGame *SnakeGame::loseLife()
 
 SnakeGame *SnakeGame::startRound()
 {
-    initDirectionControl();
+    scene.clear();
+    // initDirectionControl();
     moveSnakeToStartingPoint();
     placeNewApple();
 
@@ -425,6 +427,10 @@ SnakeGame *SnakeGame::increaseScore()
 
 SnakeGame *SnakeGame::showLevelInfo()
 {
+    LevelInfoScreenLayout()
+        .setScreen(&screen)
+        ->setLevel(level)
+        ->render();
     return this;
 }
 

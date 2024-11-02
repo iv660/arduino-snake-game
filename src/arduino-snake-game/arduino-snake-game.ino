@@ -9,11 +9,11 @@ void setup()
 
 void loop()
 {
-    game.startUp();
+    game.startUp()->
+        showLevelInfo();
 
     while (game.hasLivesLeft()) {
-        game.startRound()
-            ->showLevelInfo();
+        game.startRound();
         while (!game.isOver()) {
             if (game.reachedAnApple()) {
                 game.removeApple()

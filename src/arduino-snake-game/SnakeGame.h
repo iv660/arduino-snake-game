@@ -25,6 +25,7 @@ private:
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
     unsigned long score = 0;
+    unsigned int level = 1;
     int lives = 3;
     char lifeIcon = (char) 0x2b; // (char) 0x3;
 
