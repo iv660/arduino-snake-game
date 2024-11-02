@@ -23,7 +23,8 @@ void loop()
                 
                 if (game.reachedLevelUp()) {
                     game.levelUp()
-                        ->showLevelInfo();
+                        ->showLevelInfo()
+                        ->startRound();
                 }
             } else {
                 game.moveSnake()

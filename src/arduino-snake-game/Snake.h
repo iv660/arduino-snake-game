@@ -15,6 +15,7 @@ public:
     Snake *removeTail();
     Snake *reset();
     Snake *clearLocations();
+    unsigned long getLength();
 };
 
 #endif // SNAKE_H)

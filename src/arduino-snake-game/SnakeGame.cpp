@@ -252,6 +252,33 @@ void SnakeGame::storeHighScores(HighScores highScores)
     storage.storeHighScores(highScores);
 }
 
+inline void SnakeGame::applyLifeBonus()
+{
+    if (lives >= MAX_LIVES) {
+        return;
+    }
+
+    lives++;
+}
+
+inline void SnakeGame::updateLengthLevelRequirement()
+{
+    unsigned long maxLength = scene.getRows() * scene.getColumns() / 2;
+
+    if (snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH > maxLength) {
+        return;
+    }
+
+    snakeLengthForNextLevel += SNAKE_LENGTH_REQUIREMENT_GROWTH;
+}
+
+void SnakeGame::initLevel()
+{
+    level = 1;
+    snakeLengthForNextLevel = INITIAL_LENGTH_REQUIREMENT;
+    lives = 3;
+}
+
 HighScores SnakeGame::loadHighScores()
 {
     return storage.getHighScores();
@@ -365,6 +392,7 @@ SnakeGame *SnakeGame::startUp()
     lives = 3;
 
     shuffle();
+    initLevel();
     initDirectionControl();
     showStartupScreen();
     resetSnake();
@@ -435,11 +463,21 @@ SnakeGame *SnakeGame::showLevelInfo()
 
 bool SnakeGame::reachedLevelUp()
 {
+    if (snake.getLength() >= snakeLengthForNextLevel) {
+        return true;
+    }
+
     return false;
 }
 
 SnakeGame *SnakeGame::levelUp()
 {
+    level++;
+    resetSnake();
+    direction = Direction::RIGHT;
+    updateLengthLevelRequirement();
+    applyLifeBonus();
+
     return this;
 }
 

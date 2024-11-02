@@ -15,6 +15,11 @@
 class SnakeGame
 {
 private:
+    static const long INITIAL_LENGTH_REQUIREMENT = 5;
+    static const unsigned long SNAKE_LENGTH_REQUIREMENT_GROWTH = 5;
+    static const int INITIAL_LIVES = 3;
+    static const int MAX_LIVES = 5;
+
     Scene scene;
     Apple apple;
     Snake snake;
@@ -24,13 +29,15 @@ private:
 
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
+    unsigned long snakeLengthForNextLevel = INITIAL_LENGTH_REQUIREMENT;
     unsigned long score = 0;
     unsigned int level = 1;
-    int lives = 3;
+    int lives = INITIAL_LIVES;
     char lifeIcon = (char) 0x2b; // (char) 0x3;
 
     void showStartupScreen();
     void shuffle();
+    void initLevel();
     void initDirectionControl();
     void placeNewSnake();
     void resetSnake();
@@ -55,6 +62,8 @@ private:
     void moveSnakeToStartingPoint();
     void waitForDirection();
     void storeHighScores(HighScores highScores);
+    inline void applyLifeBonus();
+    inline void updateLengthLevelRequirement();
     HighScores loadHighScores();
 
 public:

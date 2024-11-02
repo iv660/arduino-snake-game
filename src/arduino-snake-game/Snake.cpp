@@ -63,6 +63,20 @@ Snake *Snake::clearLocations()
     return this;
 }
 
+unsigned long Snake::getLength()
+{
+    SnakeSegment* currentSegment = getHead();
+
+    unsigned long length = 1;
+
+    while (!currentSegment->isTail()) {
+        length++;
+        currentSegment = currentSegment->getNextSegment();
+    }
+
+    return length;
+}
+
 Snake *Snake::reset()
 {
     while (false == getHead()->isTail())
