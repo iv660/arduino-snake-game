@@ -283,7 +283,6 @@ SnakeGame *SnakeGame::loseLife()
 SnakeGame *SnakeGame::startRound()
 {
     scene.clear();
-    // initDirectionControl();
     moveSnakeToStartingPoint();
     placeNewApple();
 

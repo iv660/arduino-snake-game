@@ -9,10 +9,14 @@ class LevelInfoScreenLayout : public BaseScreenLayout<LevelInfoScreenLayout>
 private:
     unsigned int level = 0;
 
+    const RGB BACKGROUND_COLOR = RGB(0, 0, 0);
+    const RGB STROKE_COLOR = RGB(255, 255, 255);
+
     void initScreen();
     void renderLevelNumber();
     void background(RGB color);
     void stroke(RGB color);
+    void countdown(unsigned int from);
 
 public:
     LevelInfoScreenLayout* setLevel(unsigned int level);
