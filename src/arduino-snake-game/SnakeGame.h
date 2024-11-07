@@ -11,6 +11,7 @@
 #include "const.h"
 #include "HighScores.h"
 #include "Storage.h"
+#include "ToggleButton.h"
 
 class SnakeGame
 {
@@ -34,6 +35,8 @@ private:
     unsigned int level = 1;
     int lives = INITIAL_LIVES;
     char lifeIcon = (char) 0x2b; // (char) 0x3;
+    bool paused = false;
+    ToggleButton pauseButton = ToggleButton(PIN3);
 
     void showStartupScreen();
     void shuffle();
@@ -68,6 +71,9 @@ private:
 
 public:
     SnakeGame();
+
+    void updatePausedState();
+    bool isPaused();
     
     /**
      * @brief Returns true if the game is over, false otherwise.
@@ -200,7 +206,7 @@ public:
      * The function also updates the direction of the snake while it is waiting
      * so that the user can change the direction of the snake during the delay.
      */
-    void slowDown();
+    void wait();
 
     /**
      * @brief Displays the game over screen.

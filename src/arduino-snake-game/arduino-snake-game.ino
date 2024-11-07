@@ -4,7 +4,7 @@ SnakeGame game;
 
 void setup()
 {
-
+    pinMode(PIN3, INPUT_PULLUP);
 }
 
 void loop()
@@ -31,7 +31,11 @@ void loop()
                     ->deductScore();
             }
 
-            game.slowDown();
+            game.wait();
+
+            while (game.isPaused()) {
+                game.updatePausedState();
+            }
         }
 
         game.loseLife();

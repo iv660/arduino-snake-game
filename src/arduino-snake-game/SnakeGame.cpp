@@ -289,6 +289,11 @@ SnakeGame::SnakeGame()
     scene.setScreen(&screen);
 }
 
+bool SnakeGame::isPaused()
+{
+    return paused;
+}
+
 bool SnakeGame::hasLivesLeft()
 {
     if (lives > 0) {
@@ -359,6 +364,12 @@ void SnakeGame::updateDirection()
     } else if (yValue < 23) {
         direction = Direction::UP;
     }
+}
+
+void SnakeGame::updatePausedState()
+{
+    pauseButton.tick();
+    paused = pauseButton.isOn();
 }
 
 bool SnakeGame::isOver()
@@ -480,12 +491,13 @@ SnakeGame *SnakeGame::levelUp()
     return this;
 }
 
-void SnakeGame::slowDown()
+void SnakeGame::wait()
 {
     unsigned long startTime = millis();
 
     while ((millis() - startTime) < 300) {
         updateDirection();
+        updatePausedState();
     }
 }
 
