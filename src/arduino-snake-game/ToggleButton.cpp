@@ -6,9 +6,14 @@ inline void ToggleButton::toggleState()
     on = !on;
 }
 
+ToggleButton::ToggleButton(int pin)
+{
+    this->pin = pin;
+    pinMode(pin, INPUT_PULLUP);
+}
+
 void ToggleButton::tick()
 {
-    static int lastState = HIGH;
     static unsigned long lastTime = 0;
 
     unsigned long currentTime = millis();
@@ -29,4 +34,10 @@ void ToggleButton::tick()
 bool ToggleButton::isOn()
 {
     return on;
+}
+
+void ToggleButton::reset()
+{
+    on = false;
+    lastState = HIGH;
 }

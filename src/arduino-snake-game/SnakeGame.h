@@ -68,6 +68,7 @@ private:
     inline void applyLifeBonus();
     inline void updateLengthLevelRequirement();
     HighScores loadHighScores();
+    void unpause();
 
 public:
     SnakeGame();

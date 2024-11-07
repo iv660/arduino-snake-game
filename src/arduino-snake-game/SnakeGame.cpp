@@ -284,6 +284,12 @@ HighScores SnakeGame::loadHighScores()
     return storage.getHighScores();
 }
 
+void SnakeGame::unpause()
+{
+    paused = false;
+    pauseButton.reset();
+}
+
 SnakeGame::SnakeGame()
 {
     scene.setScreen(&screen);
@@ -315,6 +321,7 @@ SnakeGame *SnakeGame::loseLife()
 SnakeGame *SnakeGame::startRound()
 {
     scene.clear();
+    unpause();
     moveSnakeToStartingPoint();
     placeNewApple();
 
