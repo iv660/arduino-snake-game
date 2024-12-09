@@ -390,6 +390,10 @@ bool SnakeGame::isOver()
         return true;
     }
 
+    if (timebomb.hasGoneOff()) {
+        return true;
+    }
+
     return false;
 }
 
@@ -498,14 +502,19 @@ SnakeGame *SnakeGame::levelUp()
     return this;
 }
 
-void SnakeGame::wait()
+void SnakeGame::endCycle()
 {
-    unsigned long startTime = millis();
-
-    while ((millis() - startTime) < 300) {
+    while ((millis() - cycleStartTime) < 320) {
         updateDirection();
         updatePausedState();
     }
+}
+
+SnakeGame *SnakeGame::startCycle()
+{
+    cycleStartTime = millis();
+
+    return this;
 }
 
 void SnakeGame::end()
