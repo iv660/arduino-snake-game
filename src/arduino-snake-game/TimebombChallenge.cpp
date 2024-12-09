@@ -2,7 +2,13 @@
 
 bool TimebombChallenge::isTimeToArm()
 {
-    return false;
+    return false; // Temporarily disabled
+
+    if (timebomb.isArmed()) {
+        return false;
+    }
+    
+    return true;
 }
 
 void TimebombChallenge::armTimebomb()
@@ -16,6 +22,7 @@ void TimebombChallenge::redraw()
         return;
     }
 
+    scene->erase(&timebomb);
     scene->draw(&timebomb);
 }
 

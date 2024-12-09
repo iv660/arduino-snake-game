@@ -11,6 +11,10 @@ class Timebomb: public DrawableInterface
         long armedAt = 0;
         long detonationDelay = 0;
 
+        char* counter = "9";
+        char* getCounter();
+        void updateCouner();
+
     public:
         int getColumn();
         int getRow();

@@ -1,6 +1,28 @@
 #include <Arduino.h>
 #include "Timebomb.h"
 
+char *Timebomb::getCounter()
+{
+    updateCouner();
+    
+    return counter;
+}
+
+void Timebomb::updateCouner()
+{
+    if (!isArmed()) {
+        return;
+    }
+
+    if(hasGoneOff()) {
+        return;
+    }
+
+    int interval = detonationDelay / 9;
+    int counterValue = 9 - (millis() - armedAt) / interval;
+    sprintf(counter, "%d", counterValue);
+}
+
 int Timebomb::getColumn()
 {
     return 0;
@@ -13,7 +35,11 @@ int Timebomb::getRow()
 
 char *Timebomb::getText()
 {
-    return "*";
+    if (hasGoneOff()) {
+        return "*";
+    }
+
+    return getCounter();
 }
 
 Timebomb *Timebomb::setColumn(int column)
@@ -29,6 +55,7 @@ Timebomb *Timebomb::setRow(int row)
 void Timebomb::armFor(long detonationDelay)
 {
     armedAt = millis();
+    this->detonationDelay = detonationDelay;
 }
 
 bool Timebomb::isArmed()
@@ -38,6 +65,14 @@ bool Timebomb::isArmed()
 
 bool Timebomb::hasGoneOff()
 {
+    if (!isArmed()) {
+        return false;
+    }
+
+    if (millis() > (armedAt + detonationDelay)) {
+        return true;
+    }
+
     return false;
 }
 

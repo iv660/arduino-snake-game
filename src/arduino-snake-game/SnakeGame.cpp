@@ -506,7 +506,7 @@ SnakeGame *SnakeGame::levelUp()
 
 void SnakeGame::endCycle()
 {
-    while ((millis() - cycleStartTime) < 320) {
+    while ((millis() - cycleStartTime) < 300) {
         updateDirection();
         updatePausedState();
     }
