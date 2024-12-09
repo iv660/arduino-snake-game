@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "Timebomb.h"
 
 int Timebomb::getColumn()
@@ -12,7 +13,7 @@ int Timebomb::getRow()
 
 char *Timebomb::getText()
 {
-    return nullptr;
+    return "*";
 }
 
 Timebomb *Timebomb::setColumn(int column)
@@ -27,11 +28,12 @@ Timebomb *Timebomb::setRow(int row)
 
 void Timebomb::armFor(long detonationDelay)
 {
+    armedAt = millis();
 }
 
 bool Timebomb::isArmed()
 {
-    return false;
+    return armedAt > 0;
 }
 
 bool Timebomb::hasGoneOff()

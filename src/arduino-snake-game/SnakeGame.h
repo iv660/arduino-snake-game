@@ -12,7 +12,7 @@
 #include "HighScores.h"
 #include "Storage.h"
 #include "ToggleButton.h"
-#include "Timebomb.h"
+#include "TimebombChallenge.h"
 
 class SnakeGame
 {
@@ -25,7 +25,7 @@ private:
     Scene scene;
     Apple apple;
     Snake snake;
-    Timebomb timebomb;
+    TimebombChallenge timebombChallenge;
     TFT screen = TFT(cs, dc, rst);
     HighScores highScores;
     Storage storage;

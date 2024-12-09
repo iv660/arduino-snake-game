@@ -8,7 +8,6 @@ class Timebomb: public DrawableInterface
     private:
         int column = 0;
         int row = 0;
-        bool armed = false;
         long armedAt = 0;
         long detonationDelay = 0;
 

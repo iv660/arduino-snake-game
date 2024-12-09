@@ -390,7 +390,7 @@ bool SnakeGame::isOver()
         return true;
     }
 
-    if (timebomb.hasGoneOff()) {
+    if (timebombChallenge.hasFailed()) {
         return true;
     }
 
@@ -418,6 +418,8 @@ SnakeGame *SnakeGame::startUp()
     showStartupScreen();
     resetSnake();
     highScores = loadHighScores();
+
+    timebombChallenge.setScene(&scene);
 
     return this;
 }
@@ -508,11 +510,15 @@ void SnakeGame::endCycle()
         updateDirection();
         updatePausedState();
     }
+
+    timebombChallenge.endCycle();
 }
 
 SnakeGame *SnakeGame::startCycle()
 {
     cycleStartTime = millis();
+    
+    timebombChallenge.startCycle();
 
     return this;
 }
