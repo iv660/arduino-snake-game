@@ -2,7 +2,7 @@
 
 bool TimebombChallenge::isTimeToArm()
 {
-    return false; // Temporarily disabled
+    // return false; // Temporarily disabled
 
     if (timebomb.isArmed()) {
         return false;
@@ -47,7 +47,20 @@ void TimebombChallenge::endCycle()
 
 }
 
+void TimebombChallenge::startRound()
+{
+    timebomb.reset();
+}
+
 bool TimebombChallenge::hasFailed()
 {
     return timebomb.hasGoneOff();
+}
+
+TimebombChallenge::handleCollisionAt(GridLocation location)
+{
+    if (timebomb.getLocation() == location) {
+        scene->erase(&timebomb);
+        timebomb.reset();
+    }
 }

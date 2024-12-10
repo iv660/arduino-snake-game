@@ -324,6 +324,7 @@ SnakeGame *SnakeGame::startRound()
     unpause();
     moveSnakeToStartingPoint();
     placeNewApple();
+    timebombChallenge.startRound();
 
     return this;
 }
@@ -519,6 +520,7 @@ SnakeGame *SnakeGame::startCycle()
     cycleStartTime = millis();
     
     timebombChallenge.startCycle();
+    timebombChallenge.handleCollisionAt(snake.getHead()->getLocation());
 
     return this;
 }

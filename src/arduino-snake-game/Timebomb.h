@@ -2,6 +2,7 @@
 #define TIMEBOMB_H
 
 #include "DrawableInterface.h"
+#include "GridLocation.h"
 
 class Timebomb: public DrawableInterface
 {
@@ -19,6 +20,7 @@ class Timebomb: public DrawableInterface
         int getColumn();
         int getRow();
         char* getText();
+        GridLocation getLocation();
 
         Timebomb* setColumn(int column);
         Timebomb* setRow(int row);

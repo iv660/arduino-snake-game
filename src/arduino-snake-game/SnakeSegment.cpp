@@ -29,6 +29,15 @@ void SnakeSegment::show()
     visible = true;
 }
 
+GridLocation SnakeSegment::getLocation()
+{
+    GridLocation location;
+    location.row = row;
+    location.column = column;
+
+    return location;
+}
+
 SnakeSegment::SnakeSegment() : DrawableInterface(/* args */)
 {
 }

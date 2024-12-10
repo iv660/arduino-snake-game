@@ -3,6 +3,7 @@
 
 #include "Timebomb.h"
 #include "Scene.h"
+#include "GridLocation.h"
 
 class TimebombChallenge
 {
@@ -18,7 +19,9 @@ class TimebombChallenge
 
         void startCycle();
         void endCycle();
+        void startRound();
         bool hasFailed();
+        handleCollisionAt(GridLocation location);
 };
 
 

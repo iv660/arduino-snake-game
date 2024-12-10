@@ -42,6 +42,15 @@ char *Timebomb::getText()
     return getCounter();
 }
 
+GridLocation Timebomb::getLocation()
+{
+    GridLocation location;
+    location.column = column;
+    location.row = row;
+
+    return location;
+}
+
 Timebomb *Timebomb::setColumn(int column)
 {
     return this;
@@ -78,4 +87,6 @@ bool Timebomb::hasGoneOff()
 
 void Timebomb::reset()
 {
+    armedAt = 0;
+    detonationDelay = 0;
 }
