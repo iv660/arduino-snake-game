@@ -1,8 +1,10 @@
 #include "TimebombChallenge.h"
 
-bool TimebombChallenge::isTimeToArm()
+bool TimebombChallenge::isTimeToArm(SnakeGameState state)
 {
-    // return false; // Temporarily disabled
+    if (state.level < 5) {
+        return false;
+    }
 
     if (timebomb.isArmed()) {
         return false;
@@ -33,9 +35,9 @@ TimebombChallenge *TimebombChallenge::setScene(Scene *scene)
     return this;
 }
 
-void TimebombChallenge::startCycle()
+void TimebombChallenge::startCycle(SnakeGameState state)
 {
-    if (isTimeToArm()) {
+    if (isTimeToArm(state)) {
         armTimebomb();
     }
 

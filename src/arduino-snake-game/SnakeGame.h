@@ -13,6 +13,7 @@
 #include "Storage.h"
 #include "ToggleButton.h"
 #include "TimebombChallenge.h"
+#include "SnakeGameState.h"
 
 class SnakeGame
 {
@@ -40,6 +41,8 @@ private:
     bool paused = false;
     ToggleButton pauseButton = ToggleButton(PIN3);
     long cycleStartTime = 0;
+
+    SnakeGameState getState();
 
     void showStartupScreen();
     void shuffle();

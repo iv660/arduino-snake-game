@@ -4,6 +4,7 @@
 #include "Timebomb.h"
 #include "Scene.h"
 #include "GridLocation.h"
+#include "SnakeGameState.h"
 
 class TimebombChallenge
 {
@@ -11,13 +12,13 @@ class TimebombChallenge
         Timebomb timebomb;
         Scene* scene;
 
-        bool isTimeToArm();
+        bool isTimeToArm(SnakeGameState state);
         void armTimebomb();
         void redraw();
     public:
         TimebombChallenge* setScene(Scene *scene);
 
-        void startCycle();
+        void startCycle(SnakeGameState state);
         void endCycle();
         void startRound();
         bool hasFailed();

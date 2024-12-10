@@ -9,6 +9,15 @@
 #define VRY_PIN A1
 #define RANDOM_SEED_PIN A2
 
+SnakeGameState SnakeGame::getState()
+{
+    SnakeGameState state;
+
+    state.level = level;
+
+    return state;
+}
+
 void SnakeGame::showStartupScreen()
 {
     scene.clear();
@@ -519,7 +528,8 @@ SnakeGame *SnakeGame::startCycle()
 {
     cycleStartTime = millis();
     
-    timebombChallenge.startCycle();
+    SnakeGameState state = getState();
+    timebombChallenge.startCycle(state);
     timebombChallenge.handleCollisionAt(snake.getHead()->getLocation());
 
     return this;
