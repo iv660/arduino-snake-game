@@ -16,6 +16,8 @@ public:
     Snake *reset();
     Snake *clearLocations();
     unsigned long getLength();
+
+    bool occupies(GridLocation location);
 };
 
 #endif // SNAKE_H)

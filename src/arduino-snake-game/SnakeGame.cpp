@@ -353,18 +353,7 @@ bool SnakeGame::hitsSnake(GridLocation location)
         return false;
     }
 
-    SnakeSegment *snakeSegment = snake.getHead();
-    
-    do {
-        if (snakeSegment->getColumn() == location.column 
-            && snakeSegment->getRow() == location.row
-            && snakeSegment->isVisible()) {
-            return true;
-        }
-        snakeSegment = snakeSegment->getNextSegment();
-    } while (snakeSegment != nullptr);
-
-    return false;
+    return snake.occupies(location);
 }
 
 void SnakeGame::updateDirection()
