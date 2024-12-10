@@ -3,8 +3,9 @@
 
 #include "SnakeSegment.h"
 #include "GridLocation.h"
+#include "GridOccupantInterface.h"
 
-class Snake
+class Snake: public GridOccupantInterface
 {
 private:
     SnakeSegment *head = new SnakeSegment();
