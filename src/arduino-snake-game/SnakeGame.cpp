@@ -523,7 +523,7 @@ SnakeGame *SnakeGame::startCycle()
     
     SnakeGameState state = getState();
     timebombChallenge.startCycle(state);
-    timebombChallenge.handleCollisionAt(snake.getHead()->getLocation());
+    timebombChallenge.handleCollisionAt(getNextLocation(getHead()));
 
     return this;
 }
