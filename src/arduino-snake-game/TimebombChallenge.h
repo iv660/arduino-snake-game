@@ -10,6 +10,8 @@
 class TimebombChallenge
 {
     private:
+        static unsigned int const MIN_LEVEL = 5;
+
         Timebomb timebomb;
         Scene* scene;
         GridAllocator gridAllocator;

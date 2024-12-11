@@ -25,12 +25,12 @@ void Timebomb::updateCouner()
 
 int Timebomb::getColumn()
 {
-    return 0;
+    return column;
 }
 
 int Timebomb::getRow()
 {
-    return 0;
+    return row;
 }
 
 char *Timebomb::getText()
@@ -53,11 +53,15 @@ GridLocation Timebomb::getLocation()
 
 Timebomb *Timebomb::setColumn(int column)
 {
+    this->column =  column;
+
     return this;
 }
 
 Timebomb *Timebomb::setRow(int row)
 {
+    this->row = row;
+    
     return this;
 }
 

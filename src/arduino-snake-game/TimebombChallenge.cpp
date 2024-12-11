@@ -2,7 +2,7 @@
 
 bool TimebombChallenge::isTimeToArm(SnakeGameState state)
 {
-    if (state.level < 5) {
+    if (state.level < MIN_LEVEL) {
         return false;
     }
 
@@ -15,6 +15,10 @@ bool TimebombChallenge::isTimeToArm(SnakeGameState state)
 
 void TimebombChallenge::armTimebomb()
 {
+    GridLocation vacantLocation = gridAllocator.getRandomVacantLocation();
+    timebomb.setColumn(vacantLocation.column);
+    timebomb.setRow(vacantLocation.row);
+
     timebomb.armFor(15000);
 }
 
