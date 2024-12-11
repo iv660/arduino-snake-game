@@ -10,7 +10,9 @@
 class TimebombChallenge
 {
     private:
-        static unsigned int const MIN_LEVEL = 5;
+        static unsigned int const TIMEBOMBS_STARTING_LEVEL = 3;
+        static unsigned int const BASE_ACTIVATION_TRESHOLD = 100;
+        static unsigned int const MIN_ACTIVATION_TRESHOLD = 1;
 
         Timebomb timebomb;
         Scene* scene;
@@ -19,6 +21,7 @@ class TimebombChallenge
         bool isTimeToArm(SnakeGameState state);
         void armTimebomb();
         void redraw();
+        unsigned int getActivationTreshold(SnakeGameState state);
     public:
         TimebombChallenge* setScene(Scene *scene);
         TimebombChallenge* setGridAllocator(GridAllocator gridAllocator);

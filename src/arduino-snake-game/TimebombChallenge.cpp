@@ -1,16 +1,21 @@
+#include <Arduino.h>
 #include "TimebombChallenge.h"
 
 bool TimebombChallenge::isTimeToArm(SnakeGameState state)
 {
-    if (state.level < MIN_LEVEL) {
+    if (state.level < TIMEBOMBS_STARTING_LEVEL) {
         return false;
     }
 
     if (timebomb.isArmed()) {
         return false;
     }
+
+    if (random(1, getActivationTreshold(state)) == 1) {
+        return true;
+    }
     
-    return true;
+    return false;
 }
 
 void TimebombChallenge::armTimebomb()
@@ -30,6 +35,17 @@ void TimebombChallenge::redraw()
 
     scene->erase(&timebomb);
     scene->draw(&timebomb);
+}
+
+unsigned int TimebombChallenge::getActivationTreshold(SnakeGameState state)
+{
+    int treshold = BASE_ACTIVATION_TRESHOLD - ((state.level - TIMEBOMBS_STARTING_LEVEL) * 10);
+
+    if (treshold < MIN_ACTIVATION_TRESHOLD) {
+        return MIN_ACTIVATION_TRESHOLD;
+    }
+
+    return treshold;
 }
 
 TimebombChallenge *TimebombChallenge::setScene(Scene *scene)
