@@ -14,6 +14,7 @@
 #include "ToggleButton.h"
 #include "TimebombChallenge.h"
 #include "SnakeGameState.h"
+#include "GridAllocator.h"
 
 class SnakeGame
 {
@@ -43,6 +44,7 @@ private:
     long cycleStartTime = 0;
 
     SnakeGameState getState();
+    GridAllocator getGridAllocator();
 
     void showStartupScreen();
     void shuffle();

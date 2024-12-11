@@ -35,6 +35,14 @@ TimebombChallenge *TimebombChallenge::setScene(Scene *scene)
     return this;
 }
 
+TimebombChallenge *TimebombChallenge::setGridAllocator(
+    GridAllocator gridAllocator)
+{
+    this->gridAllocator = gridAllocator;
+
+    return this;
+}
+
 void TimebombChallenge::startCycle(SnakeGameState state)
 {
     if (isTimeToArm(state)) {

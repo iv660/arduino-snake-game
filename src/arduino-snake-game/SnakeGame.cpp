@@ -18,6 +18,18 @@ SnakeGameState SnakeGame::getState()
     return state;
 }
 
+GridAllocator SnakeGame::getGridAllocator()
+{
+    GridAllocator allocator;
+
+    allocator.setGridColumns(scene.getColumns())
+        ->setGridRows(scene.getRows())
+        ->setSnake(&snake)
+        ->setApple(&apple);
+
+    return allocator;
+}
+
 void SnakeGame::showStartupScreen()
 {
     scene.clear();
@@ -63,6 +75,7 @@ void SnakeGame::drawSnake(SnakeSegment *snakeSegment)
     } while ((currentSegment = currentSegment->getNextSegment()) != nullptr);
 
 }
+
 
 void SnakeGame::drawApple(Apple *apple)
 {
@@ -144,17 +157,7 @@ GridLocation SnakeGame::getAppleLocation()
 
 GridLocation SnakeGame::getNewAppleLocation()
 {
-    GridLocation newLocation;
-
-    do {
-        long newColumn = random(0, scene.getColumns() - 1);
-        long newRow = random(0, scene.getRows() - 1);
-        
-        newLocation.column = newColumn;
-        newLocation.row = newRow;
-    } while (locationIsOccupied(newLocation));
-
-    return newLocation;
+    return getGridAllocator().getRandomVacantLocation();
 }
 
 SnakeSegment *SnakeGame::getTail()
@@ -418,7 +421,8 @@ SnakeGame *SnakeGame::startUp()
     resetSnake();
     highScores = loadHighScores();
 
-    timebombChallenge.setScene(&scene);
+    timebombChallenge.setScene(&scene)
+        ->setGridAllocator(getGridAllocator());
 
     return this;
 }
