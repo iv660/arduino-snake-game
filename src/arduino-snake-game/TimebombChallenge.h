@@ -27,6 +27,7 @@ class TimebombChallenge
         bool gotPaused(bool newPausedState);
         bool gotUnpaused(bool newPausedState);
         unsigned int getActivationTreshold(SnakeGameState state);
+        
     public:
         TimebombChallenge* setScene(Scene *scene);
         TimebombChallenge* setGridAllocator(GridAllocator gridAllocator);
