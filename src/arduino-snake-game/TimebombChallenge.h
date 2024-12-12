@@ -18,9 +18,14 @@ class TimebombChallenge
         Scene* scene;
         GridAllocator gridAllocator;
 
+        bool isPaused = false;
+
         bool isTimeToArm(SnakeGameState state);
         void armTimebomb();
         void redraw();
+        bool pausedStateHasChanged(bool newPausedState);
+        bool gotPaused(bool newPausedState);
+        bool gotUnpaused(bool newPausedState);
         unsigned int getActivationTreshold(SnakeGameState state);
     public:
         TimebombChallenge* setScene(Scene *scene);
@@ -30,6 +35,7 @@ class TimebombChallenge
         void endCycle();
         void startRound();
         bool hasFailed();
+        void setPausedState(bool isPaused);
         handleCollisionAt(GridLocation location);
 };
 

@@ -37,6 +37,37 @@ void TimebombChallenge::redraw()
     scene->draw(&timebomb);
 }
 
+bool TimebombChallenge::pausedStateHasChanged(bool newPausedState)
+{
+    return isPaused != newPausedState;
+}
+
+bool TimebombChallenge::gotPaused(bool newPausedState)
+{
+    if (!pausedStateHasChanged(newPausedState)) {
+        return false;
+    }
+
+    if (true == newPausedState) {
+        return true;
+    }
+
+    return false;
+}
+
+bool TimebombChallenge::gotUnpaused(bool newPausedState)
+{
+    if (!pausedStateHasChanged(newPausedState)) {
+        return false;
+    }
+
+    if (false == newPausedState) {
+        return true;
+    }
+
+    return false;
+}
+
 unsigned int TimebombChallenge::getActivationTreshold(SnakeGameState state)
 {
     int treshold = BASE_ACTIVATION_TRESHOLD - ((state.level - TIMEBOMBS_STARTING_LEVEL) * 10);
@@ -85,6 +116,19 @@ void TimebombChallenge::startRound()
 bool TimebombChallenge::hasFailed()
 {
     return timebomb.hasGoneOff();
+}
+
+void TimebombChallenge::setPausedState(bool isPaused)
+{
+    if (gotPaused(isPaused)) {
+        timebomb.pause();
+    }
+
+    if (gotUnpaused(isPaused)) {
+        timebomb.resume();
+    }
+
+    this->isPaused = isPaused;
 }
 
 TimebombChallenge::handleCollisionAt(GridLocation location)

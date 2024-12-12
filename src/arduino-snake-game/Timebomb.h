@@ -10,11 +10,14 @@ class Timebomb: public DrawableInterface
         int column = 0;
         int row = 0;
         long armedAt = 0;
+        long pausedAt = 0;
         long detonationDelay = 0;
 
         char* counter = "9";
         char* getCounter();
         void updateCouner();
+
+        bool isPaused();
 
     public:
         int getColumn();
@@ -26,6 +29,8 @@ class Timebomb: public DrawableInterface
         Timebomb* setRow(int row);
 
         void armFor(long detonationDelay);
+        void pause();
+        void resume();
         bool isArmed();
         bool hasGoneOff();
         void reset();

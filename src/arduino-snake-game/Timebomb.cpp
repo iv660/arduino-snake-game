@@ -23,6 +23,11 @@ void Timebomb::updateCouner()
     sprintf(counter, "%d", counterValue);
 }
 
+bool Timebomb::isPaused()
+{
+    return pausedAt > 0;
+}
+
 int Timebomb::getColumn()
 {
     return column;
@@ -61,7 +66,7 @@ Timebomb *Timebomb::setColumn(int column)
 Timebomb *Timebomb::setRow(int row)
 {
     this->row = row;
-    
+
     return this;
 }
 
@@ -69,6 +74,33 @@ void Timebomb::armFor(long detonationDelay)
 {
     armedAt = millis();
     this->detonationDelay = detonationDelay;
+}
+
+void Timebomb::pause()
+{
+    if (!isArmed()) {
+        return;
+    }
+
+    if (isPaused()) {
+        return;
+    }
+
+    pausedAt = millis();
+}
+
+void Timebomb::resume()
+{
+    if (!isArmed()) {
+        return;
+    }
+
+    if (!isPaused()) {
+        return;
+    }
+
+    long hasBeenPausedFor = millis() - pausedAt;
+    armedAt += hasBeenPausedFor;
 }
 
 bool Timebomb::isArmed()
@@ -93,4 +125,5 @@ void Timebomb::reset()
 {
     armedAt = 0;
     detonationDelay = 0;
+    pausedAt = 0;
 }

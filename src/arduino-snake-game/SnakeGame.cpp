@@ -379,6 +379,7 @@ void SnakeGame::updatePausedState()
 {
     pauseButton.tick();
     paused = pauseButton.isOn();
+    timebombChallenge.setPausedState(paused);
 }
 
 bool SnakeGame::isOver()
