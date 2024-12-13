@@ -11,6 +11,10 @@ bool GridAllocator::locationIsOccupied(GridLocation location)
         return true;
     }
 
+    if (timebombChallenge->occupies(location)) {
+        return true;
+    }
+
     return false;
 }
 
@@ -28,16 +32,23 @@ GridAllocator *GridAllocator::setGridRows(int rows)
     return this;
 }
 
-GridAllocator *GridAllocator::setSnake(Snake *snake)
+GridAllocator *GridAllocator::setSnake(GridOccupantInterface *snake)
 {
     this->snake = snake;
 
     return this;
 }
 
-GridAllocator *GridAllocator::setApple(Apple *apple)
+GridAllocator *GridAllocator::setApple(GridOccupantInterface *apple)
 {
     this->apple = apple;
+
+    return this;
+}
+
+GridAllocator *GridAllocator::setTimebombChallenge(GridOccupantInterface *timebombChallenge)
+{
+    this->timebombChallenge = timebombChallenge;
 
     return this;
 }

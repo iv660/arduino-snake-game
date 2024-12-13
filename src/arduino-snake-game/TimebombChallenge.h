@@ -4,10 +4,10 @@
 #include "Timebomb.h"
 #include "Scene.h"
 #include "GridLocation.h"
-#include "GridAllocator.h"
 #include "SnakeGameState.h"
+#include "GridAllocator.h"
 
-class TimebombChallenge
+class TimebombChallenge: public GridOccupantInterface
 {
     private:
         static unsigned int const TIMEBOMBS_STARTING_LEVEL = 3;
@@ -27,10 +27,12 @@ class TimebombChallenge
         bool gotPaused(bool newPausedState);
         bool gotUnpaused(bool newPausedState);
         unsigned int getActivationTreshold(SnakeGameState state);
-        
+
     public:
         TimebombChallenge* setScene(Scene *scene);
         TimebombChallenge* setGridAllocator(GridAllocator gridAllocator);
+
+        bool occupies(GridLocation location);
 
         void startCycle(SnakeGameState state);
         void endCycle();

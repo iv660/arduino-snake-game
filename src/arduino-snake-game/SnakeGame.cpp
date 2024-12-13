@@ -25,7 +25,8 @@ GridAllocator SnakeGame::getGridAllocator()
     allocator.setGridColumns(scene.getColumns())
         ->setGridRows(scene.getRows())
         ->setSnake(&snake)
-        ->setApple(&apple);
+        ->setApple(&apple)
+        ->setTimebombChallenge(&timebombChallenge);
 
     return allocator;
 }

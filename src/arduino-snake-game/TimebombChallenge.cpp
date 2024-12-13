@@ -94,6 +94,15 @@ TimebombChallenge *TimebombChallenge::setGridAllocator(
     return this;
 }
 
+bool TimebombChallenge::occupies(GridLocation location)
+{
+    if (timebomb.getLocation() == location) {
+        return true;
+    }
+
+    return false;
+}
+
 void TimebombChallenge::startCycle(SnakeGameState state)
 {
     if (isTimeToArm(state)) {
