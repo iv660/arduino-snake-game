@@ -2,6 +2,7 @@
 #define SNAKE_SEGMENT_H
 
 #include "DrawableInterface.h"
+#include "GridLocation.h"
 
 class SnakeSegment: public DrawableInterface
 {
@@ -26,6 +27,7 @@ public:
     bool isVisible();
     void hide();
     void show();
+    GridLocation getLocation();
 };
 
 

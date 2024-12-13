@@ -2,8 +2,10 @@
 #define APPLE_H
 
 #include "DrawableInterface.h"
+#include "GridLocation.h"
+#include "GridOccupantInterface.h"
 
-class Apple: public DrawableInterface
+class Apple: public DrawableInterface, public GridOccupantInterface
 {
 private:
     int column = 0;
@@ -15,6 +17,7 @@ public:
     char* getText();
     void setColumn(int column);
     void setRow(int row);
+    bool occupies(GridLocation location);
 };
 
 

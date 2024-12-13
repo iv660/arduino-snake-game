@@ -77,6 +77,22 @@ unsigned long Snake::getLength()
     return length;
 }
 
+bool Snake::occupies(GridLocation location)
+{
+    SnakeSegment *snakeSegment = getHead();
+    
+    do {
+        if (snakeSegment->getColumn() == location.column 
+            && snakeSegment->getRow() == location.row
+            && snakeSegment->isVisible()) {
+            return true;
+        }
+        snakeSegment = snakeSegment->getNextSegment();
+    } while (snakeSegment != nullptr);
+
+    return false;
+}
+
 Snake *Snake::reset()
 {
     while (false == getHead()->isTail())
