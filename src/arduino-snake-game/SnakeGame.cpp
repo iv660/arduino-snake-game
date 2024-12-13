@@ -9,6 +9,28 @@
 #define VRY_PIN A1
 #define RANDOM_SEED_PIN A2
 
+SnakeGameState SnakeGame::getState()
+{
+    SnakeGameState state;
+
+    state.level = level;
+
+    return state;
+}
+
+GridAllocator SnakeGame::getGridAllocator()
+{
+    GridAllocator allocator;
+
+    allocator.setGridColumns(scene.getColumns())
+        ->setGridRows(scene.getRows())
+        ->setSnake(&snake)
+        ->setApple(&apple)
+        ->setTimebombChallenge(&timebombChallenge);
+
+    return allocator;
+}
+
 void SnakeGame::showStartupScreen()
 {
     scene.clear();
@@ -54,6 +76,7 @@ void SnakeGame::drawSnake(SnakeSegment *snakeSegment)
     } while ((currentSegment = currentSegment->getNextSegment()) != nullptr);
 
 }
+
 
 void SnakeGame::drawApple(Apple *apple)
 {
@@ -135,17 +158,7 @@ GridLocation SnakeGame::getAppleLocation()
 
 GridLocation SnakeGame::getNewAppleLocation()
 {
-    GridLocation newLocation;
-
-    do {
-        long newColumn = random(0, scene.getColumns() - 1);
-        long newRow = random(0, scene.getRows() - 1);
-        
-        newLocation.column = newColumn;
-        newLocation.row = newRow;
-    } while (locationIsOccupied(newLocation));
-
-    return newLocation;
+    return getGridAllocator().getRandomVacantLocation();
 }
 
 SnakeSegment *SnakeGame::getTail()
@@ -324,6 +337,7 @@ SnakeGame *SnakeGame::startRound()
     unpause();
     moveSnakeToStartingPoint();
     placeNewApple();
+    timebombChallenge.startRound();
 
     return this;
 }
@@ -343,18 +357,7 @@ bool SnakeGame::hitsSnake(GridLocation location)
         return false;
     }
 
-    SnakeSegment *snakeSegment = snake.getHead();
-    
-    do {
-        if (snakeSegment->getColumn() == location.column 
-            && snakeSegment->getRow() == location.row
-            && snakeSegment->isVisible()) {
-            return true;
-        }
-        snakeSegment = snakeSegment->getNextSegment();
-    } while (snakeSegment != nullptr);
-
-    return false;
+    return snake.occupies(location);
 }
 
 void SnakeGame::updateDirection()
@@ -377,6 +380,7 @@ void SnakeGame::updatePausedState()
 {
     pauseButton.tick();
     paused = pauseButton.isOn();
+    timebombChallenge.setPausedState(paused);
 }
 
 bool SnakeGame::isOver()
@@ -387,6 +391,10 @@ bool SnakeGame::isOver()
     }
 
     if (hitsSnake(nextLocation)) {
+        return true;
+    }
+
+    if (timebombChallenge.hasFailed()) {
         return true;
     }
 
@@ -414,6 +422,9 @@ SnakeGame *SnakeGame::startUp()
     showStartupScreen();
     resetSnake();
     highScores = loadHighScores();
+
+    timebombChallenge.setScene(&scene)
+        ->setGridAllocator(getGridAllocator());
 
     return this;
 }
@@ -498,14 +509,25 @@ SnakeGame *SnakeGame::levelUp()
     return this;
 }
 
-void SnakeGame::wait()
+void SnakeGame::endCycle()
 {
-    unsigned long startTime = millis();
-
-    while ((millis() - startTime) < 300) {
+    while ((millis() - cycleStartTime) < 300) {
         updateDirection();
         updatePausedState();
     }
+
+    timebombChallenge.endCycle();
+}
+
+SnakeGame *SnakeGame::startCycle()
+{
+    cycleStartTime = millis();
+    
+    SnakeGameState state = getState();
+    timebombChallenge.startCycle(state);
+    timebombChallenge.handleCollisionAt(getNextLocation(getHead()));
+
+    return this;
 }
 
 void SnakeGame::end()

@@ -22,10 +22,11 @@ void Scene::draw(DrawableInterface *drawable)
 void Scene::erase(DrawableInterface *drawable)
 {
     screen->stroke(0, 0, 0);
-    screen->setTextSize(2);
-    screen->text(drawable->getText(), 
+    screen->fill(0, 0, 0);
+    screen->rect(
         locationColumnToScreenX(drawable->getColumn()), 
-        locationRowToScreenY(drawable->getRow()));
+        locationRowToScreenY(drawable->getRow()), 
+        gridSizeX, gridSizeY);
 }
 
 void Scene::begin()

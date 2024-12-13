@@ -3,8 +3,9 @@
 
 #include "SnakeSegment.h"
 #include "GridLocation.h"
+#include "GridOccupantInterface.h"
 
-class Snake
+class Snake: public GridOccupantInterface
 {
 private:
     SnakeSegment *head = new SnakeSegment();
@@ -16,6 +17,8 @@ public:
     Snake *reset();
     Snake *clearLocations();
     unsigned long getLength();
+
+    bool occupies(GridLocation location);
 };
 
 #endif // SNAKE_H)

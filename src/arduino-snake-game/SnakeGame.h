@@ -12,6 +12,9 @@
 #include "HighScores.h"
 #include "Storage.h"
 #include "ToggleButton.h"
+#include "TimebombChallenge.h"
+#include "SnakeGameState.h"
+#include "GridAllocator.h"
 
 class SnakeGame
 {
@@ -24,6 +27,7 @@ private:
     Scene scene;
     Apple apple;
     Snake snake;
+    TimebombChallenge timebombChallenge;
     TFT screen = TFT(cs, dc, rst);
     HighScores highScores;
     Storage storage;
@@ -37,6 +41,10 @@ private:
     char lifeIcon = (char) 0x2b; // (char) 0x3;
     bool paused = false;
     ToggleButton pauseButton = ToggleButton(PIN3);
+    long cycleStartTime = 0;
+
+    SnakeGameState getState();
+    GridAllocator getGridAllocator();
 
     void showStartupScreen();
     void shuffle();
@@ -207,7 +215,14 @@ public:
      * The function also updates the direction of the snake while it is waiting
      * so that the user can change the direction of the snake during the delay.
      */
-    void wait();
+    void endCycle();
+
+    /**
+     * @brief Starts a new game cycle.
+     * 
+     * @return A pointer to the current SnakeGame instance.
+     */
+    SnakeGame* startCycle();
 
     /**
      * @brief Displays the game over screen.

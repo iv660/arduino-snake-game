@@ -14,6 +14,7 @@ void loop()
     while (game.hasLivesLeft()) {
         game.startRound();
         while (!game.isOver()) {
+            game.startCycle();
             if (game.reachedAnApple()) {
                 game.removeApple()
                     ->growSnake()
@@ -30,7 +31,7 @@ void loop()
                     ->deductScore();
             }
 
-            game.wait();
+            game.endCycle();
 
             while (game.isPaused()) {
                 game.updatePausedState();
