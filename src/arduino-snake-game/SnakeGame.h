@@ -1,6 +1,7 @@
 #if !defined(SNAKE_GAME_H)
 #define SNAKE_GAME_H
 
+#include "Appliance.h"
 #include "Scene.h"
 #include "Apple.h"
 #include "SnakeSegment.h"
@@ -24,11 +25,14 @@ private:
     static const int INITIAL_LIVES = 3;
     static const int MAX_LIVES = 5;
 
+    XC::Hardware::Appliance appliance;
+    TFT screen = TFT(cs, dc, rst);
+    ToggleButton pauseButton = ToggleButton(PIN3);
+
     Scene scene;
     Apple apple;
     Snake snake;
     TimebombChallenge timebombChallenge;
-    TFT screen = TFT(cs, dc, rst);
     HighScores highScores;
     Storage storage;
 
@@ -40,43 +44,48 @@ private:
     int lives = INITIAL_LIVES;
     char lifeIcon = (char) 0x2b; // (char) 0x3;
     bool paused = false;
-    ToggleButton pauseButton = ToggleButton(PIN3);
     long cycleStartTime = 0;
 
     SnakeGameState getState();
     GridAllocator getGridAllocator();
 
     void showStartupScreen();
-    void shuffle();
-    void initLevel();
-    void initDirectionControl();
-    void placeNewSnake();
-    void resetSnake();
+    void showLifeLostScreen(int livesBefore, int livesAfter);
     void drawSnake(SnakeSegment *snakeSegment);
     void drawApple(Apple *apple);
-    void stretchHead();
-    void retractTail();
-    Apple getNewApple();
-    GridLocation getNextLocation(SnakeSegment *snakeSegment);
-    GridLocation getAppleLocation();
-    GridLocation getNewAppleLocation();
-    SnakeSegment *getTail();
-    SnakeSegment *getHead();
-    void removeTail();
-    Direction getDirection();
-    bool locationIsOutOfBounds(GridLocation location);
-    void updateDirection();
-    bool locationIsOccupied(GridLocation location);
-    bool hitsSnake(GridLocation location);
-    bool hitsApple(GridLocation location);
-    void showLifeLostScreen(int livesBefore, int livesAfter);
-    void moveSnakeToStartingPoint();
-    void waitForDirection();
+
+    void initLevel();
+    void initDirectionControl();
+    HighScores loadHighScores();
     void storeHighScores(HighScores highScores);
     inline void applyLifeBonus();
     inline void updateLengthLevelRequirement();
-    HighScores loadHighScores();
     void unpause();
+    void shuffle();
+
+    
+    Direction getDirection();
+    void updateDirection();
+    void waitForDirection();
+
+    void placeNewSnake();
+    void resetSnake();
+    void moveSnakeToStartingPoint();
+    void stretchHead();
+    void retractTail();
+    SnakeSegment *getTail();
+    SnakeSegment *getHead();
+    void removeTail();
+    
+    GridLocation getNextLocation(SnakeSegment *snakeSegment);
+    bool locationIsOutOfBounds(GridLocation location);
+    bool locationIsOccupied(GridLocation location);
+    bool hitsSnake(GridLocation location);
+    bool hitsApple(GridLocation location);
+    
+    Apple getNewApple();
+    GridLocation getAppleLocation();
+    GridLocation getNewAppleLocation();
 
 public:
     SnakeGame();
