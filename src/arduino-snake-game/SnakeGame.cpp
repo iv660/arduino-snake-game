@@ -300,7 +300,7 @@ HighScores SnakeGame::loadHighScores()
 void SnakeGame::unpause()
 {
     paused = false;
-    pauseButton.reset();
+    appliance.pauseButton->reset();
 }
 
 SnakeGame::SnakeGame()
@@ -378,8 +378,8 @@ void SnakeGame::updateDirection()
 
 void SnakeGame::updatePausedState()
 {
-    pauseButton.tick();
-    paused = pauseButton.isOn();
+    appliance.pauseButton->tick();
+    paused = appliance.pauseButton->isOn();
     timebombChallenge.setPausedState(paused);
 }
 
@@ -425,6 +425,8 @@ SnakeGame *SnakeGame::startUp()
 
     timebombChallenge.setScene(&scene)
         ->setGridAllocator(getGridAllocator());
+
+    appliance.pauseButton = &pauseButton;
 
     return this;
 }

@@ -8,6 +8,9 @@ namespace XC
         class ToggleButtonInterface
         {
             public:
+                virtual void tick() = 0;
+                virtual void reset() = 0;
+                virtual bool isOn() = 0;
         };
     }
 }
