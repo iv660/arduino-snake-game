@@ -25,7 +25,7 @@
 class SnakeGame
 {
 private:
-    static const long INITIAL_LENGTH_REQUIREMENT = 5;
+    static const long INITIAL_LENGTH_REQUIREMENT = 15;
     static const unsigned long SNAKE_LENGTH_REQUIREMENT_GROWTH = 5;
     static const int INITIAL_LIVES = 3;
     static const int MAX_LIVES = 5;
