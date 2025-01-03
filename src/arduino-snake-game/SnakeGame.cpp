@@ -5,10 +5,6 @@
 #include "HighScore.h"
 #include "LevelInfoScreenLayout.h"
 
-#define VRX_PIN A0
-#define VRY_PIN A1
-#define RANDOM_SEED_PIN A2
-
 SnakeGameState SnakeGame::getState()
 {
     SnakeGameState state;
@@ -362,17 +358,19 @@ bool SnakeGame::hitsSnake(GridLocation location)
 
 void SnakeGame::updateDirection()
 {
-    long xValue = analogRead(VRX_PIN);
-    long yValue = analogRead(VRY_PIN);
-
-    if (xValue > 1000) {
-        direction = Direction::RIGHT;
-    } else if (xValue < 23) {
-        direction = Direction::LEFT;
-    } else if (yValue > 1000) {
-        direction = Direction::DOWN;
-    } else if (yValue < 23) {
-        direction = Direction::UP;
+    switch (appliance.directionSwitch->getDirection()) {
+        case XC::Hardware::DirectionSwitchInterface::Direction::LEFT:
+            direction = Direction::LEFT;
+            return;
+        case XC::Hardware::DirectionSwitchInterface::Direction::RIGHT:
+            direction = Direction::RIGHT;
+            return;
+        case XC::Hardware::DirectionSwitchInterface::Direction::UP:
+            direction = Direction::UP;
+            return;
+        case XC::Hardware::DirectionSwitchInterface::Direction::DOWN:
+            direction = Direction::DOWN;
+            return; 
     }
 }
 
@@ -419,14 +417,16 @@ SnakeGame *SnakeGame::startUp()
     shuffle();
     initLevel();
     initDirectionControl();
+
+    appliance.pauseButton = &pauseButton;
+    appliance.directionSwitch = &directionSwitch;
+    
     showStartupScreen();
     resetSnake();
     highScores = loadHighScores();
 
     timebombChallenge.setScene(&scene)
         ->setGridAllocator(getGridAllocator());
-
-    appliance.pauseButton = &pauseButton;
 
     return this;
 }

@@ -8,8 +8,8 @@ void setup()
 
 void loop()
 {
-    game.startUp()->
-        showLevelInfo();
+    game.startUp()
+        ->showLevelInfo();
 
     while (game.hasLivesLeft()) {
         game.startRound();

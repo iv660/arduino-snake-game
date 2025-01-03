@@ -1,6 +1,10 @@
 #if !defined(SNAKE_GAME_H)
 #define SNAKE_GAME_H
 
+#define VRX_PIN A0
+#define VRY_PIN A1
+#define RANDOM_SEED_PIN A2
+
 #include "Appliance.h"
 #include "Scene.h"
 #include "Apple.h"
@@ -16,6 +20,7 @@
 #include "TimebombChallenge.h"
 #include "SnakeGameState.h"
 #include "GridAllocator.h"
+#include "AnalogJoystickDirectionSwitch.h"
 
 class SnakeGame
 {
@@ -28,6 +33,8 @@ private:
     XC::Hardware::Appliance appliance;
     TFT screen = TFT(cs, dc, rst);
     ToggleButton pauseButton = ToggleButton(PIN3);
+    AnalogJoystickDirectionSwitch directionSwitch = 
+        AnalogJoystickDirectionSwitch(VRX_PIN, VRY_PIN);
 
     Scene scene;
     Apple apple;

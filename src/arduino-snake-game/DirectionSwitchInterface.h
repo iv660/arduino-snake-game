@@ -8,6 +8,15 @@ namespace XC
         class DirectionSwitchInterface
         {
             public:
+                enum Direction {
+                    NONE,
+                    LEFT,
+                    RIGHT,
+                    UP,
+                    DOWN,
+                };
+
+                virtual Direction getDirection() = 0;
         };
     }; // namespace Hardware
 }; // namespace XC
