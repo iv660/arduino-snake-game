@@ -12,7 +12,7 @@
 #include "GridLocation.h"
 #include "Snake.h"
 #include "Direction.h"
-#include "TFT.h"
+#include "TFTScreen.h"
 #include "const.h"
 #include "HighScores.h"
 #include "Storage.h"
@@ -31,7 +31,7 @@ private:
     static const int MAX_LIVES = 5;
 
     XC::Hardware::Appliance appliance;
-    TFT screen = TFT(cs, dc, rst);
+    TFTScreen screen = TFTScreen(cs, dc, rst);
     ToggleButton pauseButton = ToggleButton(PIN3);
     AnalogJoystickDirectionSwitch directionSwitch = 
         AnalogJoystickDirectionSwitch(VRX_PIN, VRY_PIN);

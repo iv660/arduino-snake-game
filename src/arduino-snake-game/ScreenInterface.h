@@ -10,7 +10,7 @@ namespace XC
             public:
                 
         };
-    }; // namespace Types
+    }; // namespace Hardware
 }; // namespace XC
 
 
