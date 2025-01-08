@@ -10,6 +10,11 @@ class TFTScreen: public ScreenInterface, public TFT
 {
     public:
         TFTScreen(int CSPin, int DCPin, int RSTPin) : TFT(CSPin, DCPin, RSTPin) {}
+
+        void begin() override 
+        {
+            TFT::begin();
+        }
 };
 
 #endif // TFT_SCREEN_H)

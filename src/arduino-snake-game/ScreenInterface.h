@@ -8,7 +8,7 @@ namespace XC
         class ScreenInterface
         {
             public:
-                
+                virtual void begin() = 0;
         };
     }; // namespace Hardware
 }; // namespace XC
