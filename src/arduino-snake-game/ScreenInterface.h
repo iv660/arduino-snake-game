@@ -12,6 +12,7 @@ namespace XC
 
                 virtual void background(int b, int g, int r) = 0; 
                 virtual void stroke(int b, int g, int r) = 0;
+                virtual void textSize(int size) = 0;
         };
     }; // namespace Hardware
 }; // namespace XC

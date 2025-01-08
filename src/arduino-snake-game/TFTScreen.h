@@ -25,6 +25,11 @@ class TFTScreen: public ScreenInterface, public TFT
         {
             TFT::stroke(b, g, r);
         }
+
+        void textSize(int size) override
+        {
+            TFT::textSize(size);
+        }
 };
 
 #endif // TFT_SCREEN_H)
