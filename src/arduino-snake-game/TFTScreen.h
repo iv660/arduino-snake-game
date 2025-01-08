@@ -15,6 +15,11 @@ class TFTScreen: public ScreenInterface, public TFT
         {
             TFT::begin();
         }
+
+        void background(int b, int g, int r) override
+        {
+            TFT::background(b, g, r);
+        }
 };
 
 #endif // TFT_SCREEN_H)

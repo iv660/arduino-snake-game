@@ -9,6 +9,8 @@ namespace XC
         {
             public:
                 virtual void begin() = 0;
+
+                virtual void background(int b, int g, int r) = 0; 
         };
     }; // namespace Hardware
 }; // namespace XC
