@@ -20,6 +20,11 @@ class TFTScreen: public ScreenInterface, public TFT
         {
             TFT::background(b, g, r);
         }
+
+        void stroke(int b, int g, int r) override
+        {
+            TFT::stroke(b, g, r);
+        }
 };
 
 #endif // TFT_SCREEN_H)

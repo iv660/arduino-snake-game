@@ -11,6 +11,7 @@ namespace XC
                 virtual void begin() = 0;
 
                 virtual void background(int b, int g, int r) = 0; 
+                virtual void stroke(int b, int g, int r) = 0;
         };
     }; // namespace Hardware
 }; // namespace XC
