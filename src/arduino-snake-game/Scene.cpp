@@ -76,7 +76,7 @@ void Scene::putSmallText(char *text, int column, int row)
         locationRowToScreenY(row));
 }
 
-void Scene::setScreen(TFT *screen)
+void Scene::setScreen(ScreenInterface *screen)
 {
     this->screen = screen;
 }
