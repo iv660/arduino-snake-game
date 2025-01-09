@@ -41,6 +41,11 @@ class TFTScreen: public ScreenInterface, public TFT
             TFT::fill(b, g, r);
         }
 
+        void rect(int x, int y, int w, int h) override
+        {
+            TFT::rect(x, y, w, h);
+        }
+
 };
 
 #endif // TFT_SCREEN_H)

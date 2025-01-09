@@ -16,6 +16,7 @@ namespace XC
                 virtual void stroke(int b, int g, int r) = 0;
 
                 virtual void text(char *text, int x, int y) = 0;
+                virtual void rect(int x, int y, int w, int h) = 0;
         };
     }; // namespace Hardware
 }; // namespace XC
