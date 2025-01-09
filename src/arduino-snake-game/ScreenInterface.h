@@ -10,6 +10,8 @@ namespace XC
             public:
                 virtual void begin() = 0;
 
+                virtual int width() = 0;
+
                 virtual void textSize(int size) = 0;
                 virtual void background(int b, int g, int r) = 0; 
                 virtual void fill(int b, int g, int r) = 0;
