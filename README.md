@@ -13,7 +13,7 @@ Here are some ideas to improve the classic Snake game:
 
 * [ ] **Obstacles**: Add obstacles like rocks, walls, or other barriers that the snake must navigate around.
 
-* [ ] **Multiple apples**: Place multiple apples at a time. Require player to eat them all before placing any new apples.
+* [ ] **Multiple apples**: Place multiple apples at a time. Require the player to eat all the apples before placing any new ones.
 
 * [ ] **Fake targets**: Place multiple apples, only one of which is actually edible.
 
@@ -23,7 +23,7 @@ Here are some ideas to improve the classic Snake game:
 
 * [ ] **Time attack**: Add a time limit for each level or a timer that counts down, and challenge the player to eat as many apples as possible within the time limit.
 
-* [x] **Time bomb challenge**: Randomly activate bombs with countdown timers. Player is required to deactivate time bomb, reaching it before time goes out.
+* [x] **Time bomb challenge**: Randomly activate bombs with countdown timers. The player must deactivate the time bomb by colliding into it before the timer reaches zero.
 
 * [x] **Score targets**: Set specific score targets for each level, and reward the player for achieving them.
 
