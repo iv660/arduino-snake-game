@@ -35,6 +35,12 @@ class TFTScreen: public ScreenInterface, public TFT
         {
             TFT::text(text, x, y);
         }
+
+        void fill(int b, int g, int r) override
+        {
+            TFT::fill(b, g, r);
+        }
+
 };
 
 #endif // TFT_SCREEN_H)
