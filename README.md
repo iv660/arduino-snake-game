@@ -19,6 +19,8 @@ Here are some ideas to improve the classic Snake game:
 
 * [ ] **Avalanche effect**: Eating each apple brings two new apples.
 
+* [ ] **Invisible apples**: When this challenge is active, each apple appears on the screen for a short amount of time and then disappears. The player must memorize the location of the hidden apple and find it without visual guidance.
+
 * [ ] **Multiple snakes**: Introduce multiple snakes that can be controlled simultaneously, either by the same player or by multiple players.
 
 * [ ] **Time attack**: Add a time limit for each level or a timer that counts down, and challenge the player to eat as many apples as possible within the time limit.
