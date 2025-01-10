@@ -31,7 +31,7 @@ void SnakeGame::showStartupScreen()
 {
     scene.clear();
     
-    StartupScreenLayout().setScreen(&screen)->render();
+    StartupScreenLayout().setScreen(appliance.screen)->render();
 
     while (direction == Direction::NONE) {
         updateDirection();
@@ -301,7 +301,8 @@ void SnakeGame::unpause()
 
 SnakeGame::SnakeGame()
 {
-    scene.setScreen(&screen);
+    appliance.screen = &screen;
+    scene.setScreen(appliance.screen);
 }
 
 bool SnakeGame::isPaused()
@@ -410,6 +411,8 @@ bool SnakeGame::reachedAnApple()
 
 SnakeGame *SnakeGame::startUp()
 {
+
+
     scene.begin();
 
     score = 0;
@@ -485,7 +488,7 @@ SnakeGame *SnakeGame::increaseScore()
 SnakeGame *SnakeGame::showLevelInfo()
 {
     LevelInfoScreenLayout()
-        .setScreen(&screen)
+        .setScreen(appliance.screen)
         ->setLevel(level)
         ->render();
     return this;
@@ -536,7 +539,7 @@ void SnakeGame::end()
 {
     scene.clear();
 
-    GameOverScreenLayout().setScreen(&screen)
+    GameOverScreenLayout().setScreen(appliance.screen)
         ->setHighScores(highScores)
         ->setScore(score)
         ->render();
