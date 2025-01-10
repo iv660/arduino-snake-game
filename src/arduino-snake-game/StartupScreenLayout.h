@@ -2,7 +2,6 @@
 #define STARTUP_SCREEN_LAYOUT_H)
 
 #include "const.h"
-#include "TFT.h"
 #include "BaseScreenLayout.h"
 
 class StartupScreenLayout : public BaseScreenLayout<StartupScreenLayout>

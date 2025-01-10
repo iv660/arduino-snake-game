@@ -1,4 +1,7 @@
+#include <string.h>
 #include "CenteredText.h"
+
+using XC::Hardware::ScreenInterface;
 
 unsigned int CenteredText::getTextWidth(char *text)
 {
@@ -29,7 +32,7 @@ CenteredText *CenteredText::top(unsigned int top)
     return this;
 }
 
-void CenteredText::renderOn(TFT *screen)
+void CenteredText::renderOn(ScreenInterface *screen)
 {
     screen->textSize(textSize);
     screen->text(text, (screen->width() - getTextWidth(text)) / 2, topPosition);

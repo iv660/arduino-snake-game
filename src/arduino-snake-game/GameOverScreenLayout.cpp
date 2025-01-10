@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "GameOverScreenLayout.h"
 #include "CenteredText.h"
 #include "TabbedText.h"

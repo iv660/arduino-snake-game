@@ -1,22 +1,25 @@
 #if !defined(BASE_SCREEN_LAYOUT_H)
 #define BASE_SCREEN_LAYOUT_H
 
-#include "TFT.h"
+#include <stdio.h>
+#include "ScreenInterface.h"
+
+using XC::Hardware::ScreenInterface;
 
 template <typename Derived>
 class BaseScreenLayout
 {
-protected:
-    TFT* screen = nullptr;
-public:
-    virtual void render() = 0;
+    protected:
+        ScreenInterface* screen = nullptr;
+    public:
+        virtual void render() = 0;
 
-    Derived* setScreen(TFT* screen);
-    char* toFormat(char* format, unsigned long number);
+        Derived* setScreen(ScreenInterface* screen);
+        char* toFormat(char* format, unsigned long number);
 };
 
 template<typename Derived>
-Derived * BaseScreenLayout<Derived>::setScreen(TFT * screen)
+Derived * BaseScreenLayout<Derived>::setScreen(ScreenInterface* screen)
 {
     this->screen = screen;
     return this;

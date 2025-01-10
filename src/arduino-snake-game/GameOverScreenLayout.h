@@ -1,7 +1,6 @@
 #if !defined(GAME_OVER_SCREEN_LAYOUT_H)
 #define GAME_OVER_SCREEN_LAYOUT_H
 
-#include "TFT.h"
 #include "TabbedText.h"
 #include "HighScores.h"
 #include "BaseScreenLayout.h"
