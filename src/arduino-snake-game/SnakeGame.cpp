@@ -299,10 +299,10 @@ void SnakeGame::unpause()
     appliance.pauseButton->reset();
 }
 
-SnakeGame::SnakeGame()
+void SnakeGame::setAppliance(XC::Hardware::Appliance appliance)
 {
-    appliance.screen = &screen;
-    scene.setScreen(appliance.screen);
+    this->appliance = appliance;
+    scene.setScreen(this->appliance.screen);
 }
 
 bool SnakeGame::isPaused()
@@ -411,8 +411,6 @@ bool SnakeGame::reachedAnApple()
 
 SnakeGame *SnakeGame::startUp()
 {
-
-
     scene.begin();
 
     score = 0;
@@ -421,9 +419,6 @@ SnakeGame *SnakeGame::startUp()
     initLevel();
     initDirectionControl();
 
-    appliance.pauseButton = &pauseButton;
-    appliance.directionSwitch = &directionSwitch;
-    
     showStartupScreen();
     resetSnake();
     highScores = loadHighScores();

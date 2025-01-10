@@ -12,15 +12,12 @@
 #include "GridLocation.h"
 #include "Snake.h"
 #include "Direction.h"
-#include "TFTScreen.h"
 #include "const.h"
 #include "HighScores.h"
 #include "Storage.h"
-#include "ToggleButton.h"
 #include "TimebombChallenge.h"
 #include "SnakeGameState.h"
 #include "GridAllocator.h"
-#include "AnalogJoystickDirectionSwitch.h"
 
 class SnakeGame
 {
@@ -31,10 +28,6 @@ private:
     static const int MAX_LIVES = 5;
 
     XC::Hardware::Appliance appliance;
-    TFTScreen screen = TFTScreen(cs, dc, rst);
-    ToggleButton pauseButton = ToggleButton(PIN3);
-    AnalogJoystickDirectionSwitch directionSwitch = 
-        AnalogJoystickDirectionSwitch(VRX_PIN, VRY_PIN);
 
     Scene scene;
     Apple apple;
@@ -95,7 +88,7 @@ private:
     GridLocation getNewAppleLocation();
 
 public:
-    SnakeGame();
+    void setAppliance(XC::Hardware::Appliance appliance);
 
     void updatePausedState();
     bool isPaused();
