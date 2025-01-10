@@ -11,15 +11,14 @@ XC::Hardware::Appliance appliance;
 
 TFTScreen screen(cs, dc, rst);
 ToggleButton pauseButton(PIN3);
-AnalogJoystickDirectionSwitch directionSwitch = 
-        AnalogJoystickDirectionSwitch(VRX_PIN, VRY_PIN);
+AnalogJoystickDirectionSwitch directionSwitch(VRX_PIN, VRY_PIN);
 
 void setup()
 {
     appliance.screen = &screen;
     appliance.pauseButton = &pauseButton;
     appliance.directionSwitch = &directionSwitch;
-    
+
     game.setAppliance(appliance);
 }
 
