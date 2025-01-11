@@ -17,12 +17,12 @@ void LevelInfoScreenLayout::renderLevelNumber()
 
 void LevelInfoScreenLayout::background(RGB color)
 {
-    screen->background(color.blue, color.green, color.red);
+    screen->background(color.red, color.green, color.blue);
 }
 
 void LevelInfoScreenLayout::stroke(RGB color)
 {
-    screen->stroke(color.blue, color.green, color.red);
+    screen->stroke(color.red, color.green, color.blue);
 }
 
 void LevelInfoScreenLayout::countdown(unsigned int from)

@@ -13,15 +13,16 @@ class TFTScreen: public ScreenInterface, public TFT
 
         void begin() override 
         {
-            TFT::begin();
+            initR(INITR_BLACKTAB);
+            setRotation(1);
         }
 
-        void background(int b, int g, int r) override
+        void background(int r, int g, int b) override
         {
             TFT::background(b, g, r);
         }
 
-        void stroke(int b, int g, int r) override
+        void stroke(int r, int g, int b) override
         {
             TFT::stroke(b, g, r);
         }
@@ -36,7 +37,7 @@ class TFTScreen: public ScreenInterface, public TFT
             TFT::text(text, x, y);
         }
 
-        void fill(int b, int g, int r) override
+        void fill(int r, int g, int b) override
         {
             TFT::fill(b, g, r);
         }

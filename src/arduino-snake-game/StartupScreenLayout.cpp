@@ -4,7 +4,7 @@
 void StartupScreenLayout::initScreen()
 {
     screen->begin();
-    screen->background(22, 97, 28);
+    screen->background(70, 160, 80);
 }
 
 void StartupScreenLayout::renderTitle()
