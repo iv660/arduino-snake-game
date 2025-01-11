@@ -244,9 +244,10 @@ void SnakeGame::showLifeLostScreen(int livesBefore, int livesAfter)
 void SnakeGame::moveSnakeToStartingPoint()
 {
     snake.clearLocations();
-    getHead()->setColumn(0);
+    getHead()->setColumn(1);
     getHead()->setRow(5);
     getHead()->show();
+    scene.draw(getHead());
 }
 
 void SnakeGame::waitForDirection()
