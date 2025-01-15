@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "ScreenView.h"
 
 int Scene::locationColumnToScreenX(int xPosition)
 {
@@ -17,6 +18,15 @@ void Scene::draw(DrawableInterface *drawable)
     screen->text(drawable->getText(), 
         locationColumnToScreenX(drawable->getColumn()), 
         locationRowToScreenY(drawable->getRow()));
+}
+
+void Scene::render(DrawableInterface *drawable)
+{
+    ScreenView viewport(screen, 
+        locationColumnToScreenX(drawable->getColumn()), 
+        locationRowToScreenY(drawable->getRow()));
+
+    drawable->renderOn(&viewport);
 }
 
 void Scene::erase(DrawableInterface *drawable)

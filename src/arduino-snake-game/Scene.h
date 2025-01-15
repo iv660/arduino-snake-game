@@ -20,6 +20,7 @@ class Scene
         int locationRowToScreenY(int yPosition);
     public:
         void draw(DrawableInterface* drawable);
+        void render(DrawableInterface* drawable);
         void erase(DrawableInterface* drawable);
         void begin();
         long getWidth();

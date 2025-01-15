@@ -80,7 +80,7 @@ void SnakeGame::drawApple(Apple *apple)
     apple->setColumn(location.column);
     apple->setRow(location.row);
 
-    scene.draw(apple);
+    scene.render(apple);
 }
 
 void SnakeGame::stretchHead()
