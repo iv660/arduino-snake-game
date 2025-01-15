@@ -52,6 +52,11 @@ class TFTScreen: public ScreenInterface, public TFT
             return TFT::width();
         }
 
+        void drawPixel(int x, int y, uint16_t color) override
+        {
+            TFT::drawPixel(x, y, color);
+        }
+
 };
 
 #endif // TFT_SCREEN_H)

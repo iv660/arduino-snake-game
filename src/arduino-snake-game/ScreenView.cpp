@@ -39,3 +39,8 @@ void ScreenView::rect(int x, int y, int w, int h)
 {
     screen->rect(x + this->x, y + this->y, w, h);
 }
+
+void ScreenView::drawPixel(int x, int y, uint16_t color)
+{
+    screen->drawPixel(x + this->x, y + this->y, color);
+}

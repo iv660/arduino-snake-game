@@ -1,6 +1,8 @@
 #if !defined(SCREEN_INTERFACE_H)
 #define SCREEN_INTERFACE_H
 
+#include <stdint.h>
+
 namespace XC 
 {
     namespace Hardware
@@ -19,6 +21,7 @@ namespace XC
 
                 virtual void text(char *text, int x, int y) = 0;
                 virtual void rect(int x, int y, int w, int h) = 0;
+                virtual void drawPixel(int x, int y, uint16_t color) = 0;
         };
     }; // namespace Hardware
 }; // namespace XC

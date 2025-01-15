@@ -1,6 +1,7 @@
 #if !defined(SCREEN_VIEW_H)
 #define SCREEN_VIEW_H
 
+#include <stdint.h>
 #include "ScreenInterface.h"
 
 using XC::Hardware::ScreenInterface;
@@ -23,6 +24,7 @@ class ScreenView: public ScreenInterface
         void stroke(int r, int g, int b) override;
         void text(char *text, int x, int y) override;
         void rect(int x, int y, int w, int h) override;
+        void drawPixel(int x, int y, uint16_t color) override;
 };
 
 
