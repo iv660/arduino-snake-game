@@ -140,7 +140,7 @@ void TimebombChallenge::setPausedState(bool isPaused)
     this->isPaused = isPaused;
 }
 
-TimebombChallenge::handleCollisionAt(GridLocation location)
+void TimebombChallenge::handleCollisionAt(GridLocation location)
 {
     if (timebomb.getLocation() == location) {
         scene->erase(&timebomb);

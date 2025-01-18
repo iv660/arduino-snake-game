@@ -336,6 +336,7 @@ SnakeGame *SnakeGame::startRound()
     moveSnakeToStartingPoint();
     placeNewApple();
     timebombChallenge.startRound();
+    hyperspaceChallenge.startRound();
 
     return this;
 }
@@ -425,6 +426,9 @@ SnakeGame *SnakeGame::startUp()
     highScores = loadHighScores();
 
     timebombChallenge.setScene(&scene)
+        ->setGridAllocator(getGridAllocator());
+
+    hyperspaceChallenge.setScene(&scene)
         ->setGridAllocator(getGridAllocator());
 
     return this;

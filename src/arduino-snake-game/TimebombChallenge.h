@@ -6,8 +6,9 @@
 #include "GridLocation.h"
 #include "SnakeGameState.h"
 #include "GridAllocator.h"
+#include "BaseChallenge.h"
 
-class TimebombChallenge: public GridOccupantInterface
+class TimebombChallenge: public GridOccupantInterface, public BaseChallenge<TimebombChallenge>
 {
     private:
         static unsigned int const TIMEBOMBS_STARTING_LEVEL = 3;
@@ -29,17 +30,17 @@ class TimebombChallenge: public GridOccupantInterface
         unsigned int getActivationTreshold(SnakeGameState state);
 
     public:
-        TimebombChallenge* setScene(Scene *scene);
-        TimebombChallenge* setGridAllocator(GridAllocator gridAllocator);
+        TimebombChallenge* setScene(Scene *scene) override;
+        TimebombChallenge* setGridAllocator(GridAllocator gridAllocator) override;
+        void startRound() override;
 
         bool occupies(GridLocation location);
 
         void startCycle(SnakeGameState state);
         void endCycle();
-        void startRound();
         bool hasFailed();
         void setPausedState(bool isPaused);
-        handleCollisionAt(GridLocation location);
+        void handleCollisionAt(GridLocation location);
 };
 
 

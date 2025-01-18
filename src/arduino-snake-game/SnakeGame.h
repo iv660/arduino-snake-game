@@ -18,6 +18,7 @@
 #include "TimebombChallenge.h"
 #include "SnakeGameState.h"
 #include "GridAllocator.h"
+#include "HyperspaceChallenge.h"
 
 class SnakeGame
 {
@@ -34,7 +35,11 @@ private:
     Scene scene;
     Apple apple;
     Snake snake;
+
+
     TimebombChallenge timebombChallenge;
+    HyperspaceChallenge hyperspaceChallenge;
+
     HighScores highScores;
     Storage storage;
 
