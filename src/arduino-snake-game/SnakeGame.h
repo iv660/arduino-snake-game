@@ -22,11 +22,13 @@
 class SnakeGame
 {
 private:
+    // Constants
     static const long INITIAL_LENGTH_REQUIREMENT = 15;
     static const unsigned long SNAKE_LENGTH_REQUIREMENT_GROWTH = 5;
     static const int INITIAL_LIVES = 3;
     static const int MAX_LIVES = 5;
 
+    // Dependencies
     XC::Hardware::Appliance appliance;
 
     Scene scene;
@@ -36,6 +38,7 @@ private:
     HighScores highScores;
     Storage storage;
 
+    // Game state
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
     unsigned long snakeLengthForNextLevel = INITIAL_LENGTH_REQUIREMENT;
@@ -46,46 +49,53 @@ private:
     bool paused = false;
     long cycleStartTime = 0;
 
+    // Common accessors
     SnakeGameState getState();
     GridAllocator getGridAllocator();
 
-    void showStartupScreen();
-    void showLifeLostScreen(int livesBefore, int livesAfter);
-    void drawSnake(SnakeSegment *snakeSegment);
-    void drawApple(Apple *apple);
-
+    // Startup
     void initLevel();
     void initDirectionControl();
+    void showStartupScreen();
+    void showLifeLostScreen(int livesBefore, int livesAfter);
     HighScores loadHighScores();
     void storeHighScores(HighScores highScores);
-    inline void applyLifeBonus();
     inline void updateLengthLevelRequirement();
-    void unpause();
-    void shuffle();
 
+    // Game lifecycle
+    // void beforeMoveSnake();
     
+    // Direction
     Direction getDirection();
     void updateDirection();
     void waitForDirection();
+    
+    // Game objects
+    SnakeSegment *getTail();
+    SnakeSegment *getHead();
+    Apple getNewApple();
+    GridLocation getAppleLocation();
+    GridLocation getNewAppleLocation();
 
+    // Game actions
+    void unpause();
+    void shuffle();
+    void drawSnake(SnakeSegment *snakeSegment);
+    void drawApple(Apple *apple);
     void placeNewSnake();
     void resetSnake();
     void moveSnakeToStartingPoint();
     void stretchHead();
     void retractTail();
-    SnakeSegment *getTail();
-    SnakeSegment *getHead();
     void removeTail();
+    inline void applyLifeBonus();
     
+    // Location & collisions
     GridLocation getNextLocation(SnakeSegment *snakeSegment);
     bool locationIsOutOfBounds(GridLocation location);
     bool locationIsOccupied(GridLocation location);
     bool hitsSnake(GridLocation location);
     bool hitsApple(GridLocation location);
-    
-    Apple getNewApple();
-    GridLocation getAppleLocation();
-    GridLocation getNewAppleLocation();
 
 public:
     void setAppliance(XC::Hardware::Appliance appliance);
