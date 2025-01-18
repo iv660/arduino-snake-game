@@ -23,11 +23,19 @@ Here are some ideas to improve the classic Snake game:
 
 * [ ] **Multiple snakes**: Introduce multiple snakes that can be controlled simultaneously, either by the same player or by multiple players.
 
-* [ ] **Time attack**: Add a time limit for each level or a timer that counts down, and challenge the player to eat as many apples as possible within the time limit.
+* [ ] **Time attack**: Add a timer that counts down, and challenge the player to eat an apple before the timer runs out.
 
 * [x] **Time bomb challenge**: Randomly activate bombs with countdown timers. The player must deactivate the time bomb by colliding into it before the timer reaches zero.
 
-* [x] **Score targets**: Set specific score targets for each level, and reward the player for achieving them.
+* [ ] **Score targets**: Set specific score targets for each level, and reward the player for achieving them.
+
+* [ ] **Hyperspace challenge**: Divide the scene into two spaces. When an apple appears in the other space the snake does, open two wormhole ports to let the snake pass between spaces. When an apple is in the same space as the snake, close the wormhole ports.
+
+* [ ] **Collector challenge**: The player can collect a series of items. Reward player for completing a collection with points and/or extra life.
+
+* [ ] **Life bonus**: Place life bonus (a filled heart icon) on the scene for the player to collect.
+
+* [ ] **Max lives extension bonus**: Place a hollow heart icon to extend maximum lives limit.
 
 * [ ] **Visual and audio enhancements**: Improve the game's visuals and audio, such as:
 	* [ ] Smooth animations and transitions.
