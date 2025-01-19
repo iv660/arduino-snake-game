@@ -25,6 +25,8 @@ class ScreenView: public ScreenInterface
         void text(char *text, int x, int y) override;
         void rect(int x, int y, int w, int h) override;
         void drawPixel(int x, int y, uint16_t color) override;
+        void drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color) override;
+        void fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color) override;
 };
 
 

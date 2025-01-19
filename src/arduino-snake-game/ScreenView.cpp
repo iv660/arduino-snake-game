@@ -44,3 +44,13 @@ void ScreenView::drawPixel(int x, int y, uint16_t color)
 {
     screen->drawPixel(x + this->x, y + this->y, color);
 }
+
+void ScreenView::drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color)
+{
+    screen->drawCircle(x0 + this->x, y0 + this->y, r, color);
+}
+
+void ScreenView::fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color)
+{
+    screen->fillCircle(x0 + this->x, y0 + this->y, r, color);
+}

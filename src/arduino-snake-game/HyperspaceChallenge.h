@@ -7,6 +7,7 @@ class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>
 {
     private:
     public:
+        void startRound() override;
 };
 
 

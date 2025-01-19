@@ -57,6 +57,16 @@ class TFTScreen: public ScreenInterface, public TFT
             TFT::drawPixel(x, y, color);
         }
 
+        void drawCircle(int x, int y, int r, uint16_t color) override
+        {
+            TFT::drawCircle(x, y, r, color);
+        }
+
+        void fillCircle(int x, int y, int r, uint16_t color) override
+        {
+            TFT::fillCircle(x, y, r, color);
+        }
+
 };
 
 #endif // TFT_SCREEN_H)

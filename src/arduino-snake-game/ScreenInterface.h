@@ -22,6 +22,8 @@ namespace XC
                 virtual void text(char *text, int x, int y) = 0;
                 virtual void rect(int x, int y, int w, int h) = 0;
                 virtual void drawPixel(int x, int y, uint16_t color) = 0;
+                virtual void drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color) {}
+                virtual void fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color) {}
         };
     }; // namespace Hardware
 }; // namespace XC
