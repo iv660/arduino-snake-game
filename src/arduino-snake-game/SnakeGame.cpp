@@ -22,7 +22,8 @@ GridAllocator SnakeGame::getGridAllocator()
         ->setGridRows(scene.getRows())
         ->setSnake(&snake)
         ->setApple(&apple)
-        ->setTimebombChallenge(&timebombChallenge);
+        ->setTimebombChallenge(&timebombChallenge)
+        ->addOccupant(&hyperspaceChallenge);
 
     return allocator;
 }

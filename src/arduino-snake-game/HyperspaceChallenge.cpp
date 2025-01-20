@@ -1,17 +1,28 @@
 #include "HyperspaceChallenge.h"
-#include "WormholePort.h"
 
 void HyperspaceChallenge::startRound()
 {
-    WormholePort portA;
-    WormholePort portB;
+    GridLocation portALocation = gridAllocator.getRandomVacantLocation();
+    portA.setColumn(portALocation.column);
+    portA.setRow(portALocation.row);
 
-    portA.setColumn(8);
-    portA.setRow(6);
-
-    portB.setColumn(12);
-    portB.setRow(2);
+    GridLocation portBLocation = gridAllocator.getRandomVacantLocation();
+    portB.setColumn(portBLocation.column);
+    portB.setRow(portBLocation.row);
 
     scene->render(&portA);
     scene->render(&portB);
+}
+
+bool HyperspaceChallenge::occupies(GridLocation location)
+{
+    if (portA.occupies(location)) {
+        return true;
+    }
+
+    if (portB.occupies(location)) {
+        return true;
+    }
+
+    return false;
 }

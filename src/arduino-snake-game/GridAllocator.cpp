@@ -15,6 +15,12 @@ bool GridAllocator::locationIsOccupied(GridLocation location)
         return true;
     }
 
+    for (uint8_t i = 0; i <= occupantsIndex - 1; i++) {
+        if (occupants[i]->occupies(location)) {
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -50,6 +56,19 @@ GridAllocator *GridAllocator::setTimebombChallenge(GridOccupantInterface *timebo
 {
     this->timebombChallenge = timebombChallenge;
 
+    return this;
+}
+
+GridAllocator *GridAllocator::addOccupant(GridOccupantInterface *occupant)
+{
+    if (occupantsIndex > (MAX_OCCUPANTS_COUNT - 1)) {
+        // Subscript out of bounds
+        // We cannot throw exception, so we just freeze
+        while(true) {}
+    }
+
+    occupants[occupantsIndex] = occupant;
+    occupantsIndex++;
     return this;
 }
 

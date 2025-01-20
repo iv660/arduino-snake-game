@@ -33,3 +33,16 @@ void WormholePort::renderOn(ScreenInterface *screen)
     screen->fillCircle(4, 7, 3, 0x001F);
     screen->fillCircle(4, 7, 1, 0xFFFF);
 }
+
+bool WormholePort::occupies(GridLocation location)
+{
+    if (location.row != row) {
+        return false;
+    } 
+    
+    if (location.column != column) {
+        return false;
+    }
+
+    return true;
+}

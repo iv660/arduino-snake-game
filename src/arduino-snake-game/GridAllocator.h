@@ -7,11 +7,16 @@
 class GridAllocator
 {
     private:
+        static const uint8_t MAX_OCCUPANTS_COUNT = 10;
+
         int gridColumns;
         int gridRows;
         GridOccupantInterface* snake;
         GridOccupantInterface* apple;
         GridOccupantInterface* timebombChallenge;
+
+        GridOccupantInterface* occupants[MAX_OCCUPANTS_COUNT];
+        uint8_t occupantsIndex = 0;
 
         bool locationIsOccupied(GridLocation location);
     public:
@@ -20,6 +25,7 @@ class GridAllocator
         GridAllocator* setSnake(GridOccupantInterface* snake);
         GridAllocator* setApple(GridOccupantInterface* apple);
         GridAllocator* setTimebombChallenge(GridOccupantInterface* timebombChallenge);
+        GridAllocator* addOccupant(GridOccupantInterface* occupant);
 
         GridLocation getRandomVacantLocation();
 };

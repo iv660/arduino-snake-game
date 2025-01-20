@@ -2,12 +2,14 @@
 
 #include "DrawableInterface.h"
 #include "ScreenInterface.h"
+#include "GridOccupantInterface.h"
+#include "GridLocation.h"
 
-class WormholePort: public DrawableInterface
+class WormholePort: public DrawableInterface, public GridOccupantInterface
 {
     private:
-        int column = 0;
-        int row = 0;
+        int column = -1;
+        int row = -1;
     public:
         WormholePort* setColumn(int column);
         WormholePort* setRow(int row);
@@ -15,4 +17,6 @@ class WormholePort: public DrawableInterface
         int getRow() override;
         char* getText() override;
         void renderOn(ScreenInterface* screen) override;
+
+        bool occupies(GridLocation location) override;
 };
