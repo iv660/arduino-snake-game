@@ -333,11 +333,13 @@ SnakeGame *SnakeGame::loseLife()
 SnakeGame *SnakeGame::startRound()
 {
     scene.clear();
+    
     unpause();
     moveSnakeToStartingPoint();
+    
+    hyperspaceChallenge.beforeApplePlacement();
     placeNewApple();
     timebombChallenge.startRound();
-    hyperspaceChallenge.startRound();
 
     return this;
 }

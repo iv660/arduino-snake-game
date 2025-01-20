@@ -1,6 +1,6 @@
 #include "HyperspaceChallenge.h"
 
-void HyperspaceChallenge::startRound()
+void HyperspaceChallenge::beforeApplePlacement()
 {
     GridLocation portALocation = gridAllocator.getRandomVacantLocation();
     portA.setColumn(portALocation.column);

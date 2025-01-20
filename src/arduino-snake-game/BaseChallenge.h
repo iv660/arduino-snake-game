@@ -26,5 +26,6 @@ class BaseChallenge
         }
 
         virtual void startRound() {}
+        virtual void beforeApplePlacement() {}
 };
 
