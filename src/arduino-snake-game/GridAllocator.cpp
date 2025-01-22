@@ -26,27 +26,6 @@ GridAllocator *GridAllocator::setGridRows(int rows)
     return this;
 }
 
-GridAllocator *GridAllocator::setSnake(GridOccupantInterface *snake)
-{
-    addOccupant(snake);
-
-    return this;
-}
-
-GridAllocator *GridAllocator::setApple(GridOccupantInterface *apple)
-{
-    addOccupant(apple);
-
-    return this;
-}
-
-GridAllocator *GridAllocator::setTimebombChallenge(GridOccupantInterface *timebombChallenge)
-{
-    addOccupant(timebombChallenge);
-
-    return this;
-}
-
 GridAllocator *GridAllocator::addOccupant(GridOccupantInterface *occupant)
 {
     if (occupantsIndex > (MAX_OCCUPANTS_COUNT - 1)) {

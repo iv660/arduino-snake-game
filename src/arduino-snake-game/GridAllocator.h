@@ -22,9 +22,6 @@ class GridAllocator
     public:
         GridAllocator* setGridColumns(int columns);
         GridAllocator* setGridRows(int rows);
-        GridAllocator* setSnake(GridOccupantInterface* snake);
-        GridAllocator* setApple(GridOccupantInterface* apple);
-        GridAllocator* setTimebombChallenge(GridOccupantInterface* timebombChallenge);
         GridAllocator* addOccupant(GridOccupantInterface* occupant);
 
         GridLocation getRandomVacantLocation();
