@@ -70,6 +70,7 @@ private:
     // Game lifecycle
     // void beforeMoveSnake();
     void beforeRoundStart();
+    GridLocation afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation);
     
     // Direction
     Direction getDirection();

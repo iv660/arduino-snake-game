@@ -14,6 +14,19 @@ void HyperspaceChallenge::beforeRoundStart()
     scene->render(&portB);
 }
 
+GridLocation HyperspaceChallenge::afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation)
+{
+    if (portA.occupies(nextLocation)) {
+        return portB.getExitLocation(direction);
+    }
+
+    if (portB.occupies(nextLocation)) {
+        return portA.getExitLocation(direction);
+    }
+
+    return nextLocation;
+}
+
 bool HyperspaceChallenge::occupies(GridLocation location)
 {
     if (portA.occupies(location)) {

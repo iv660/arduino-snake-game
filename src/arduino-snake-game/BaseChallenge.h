@@ -2,6 +2,8 @@
 
 #include "Scene.h"
 #include "GridAllocator.h"
+#include "GridLocation.h"
+#include "Direction.h"
 
 template <typename Derived>
 class BaseChallenge
@@ -10,6 +12,7 @@ class BaseChallenge
     protected:
         Scene* scene;
         GridAllocator gridAllocator;
+        Direction direction;
     public:
         virtual Derived* setScene(Scene* scene)
         {
@@ -25,7 +28,20 @@ class BaseChallenge
             return this;
         }
 
+        virtual Derived* setDirection(Direction direction)
+        {
+            this->direction = direction;
+            
+            return this;
+        }
+
         virtual void startRound() {}
         virtual void beforeRoundStart() {}
+        
+        virtual GridLocation afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation) 
+        {
+            return nextLocation;
+        }
+
 };
 

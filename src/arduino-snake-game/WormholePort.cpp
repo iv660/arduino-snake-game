@@ -46,3 +46,8 @@ bool WormholePort::occupies(GridLocation location)
 
     return true;
 }
+
+GridLocation WormholePort::getExitLocation(Direction direction)
+{
+    return GridLocation(column, row);
+}

@@ -3,6 +3,8 @@
 #include "BaseChallenge.h"
 #include "GridOccupantInterface.h"
 #include "WormholePort.h"
+#include "GridLocation.h"
+#include "Direction.h"
 
 class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>, public GridOccupantInterface
 {
@@ -11,6 +13,7 @@ class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>, public Gri
         WormholePort portB;
     public:
         void beforeRoundStart() override;
+        GridLocation afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation) override;
 
         bool occupies(GridLocation location) override;
 };

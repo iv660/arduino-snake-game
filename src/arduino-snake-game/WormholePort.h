@@ -4,6 +4,7 @@
 #include "ScreenInterface.h"
 #include "GridOccupantInterface.h"
 #include "GridLocation.h"
+#include "Direction.h"
 
 class WormholePort: public DrawableInterface, public GridOccupantInterface
 {
@@ -19,4 +20,6 @@ class WormholePort: public DrawableInterface, public GridOccupantInterface
         void renderOn(ScreenInterface* screen) override;
 
         bool occupies(GridLocation location) override;
+
+        GridLocation getExitLocation(Direction direction);
 };
