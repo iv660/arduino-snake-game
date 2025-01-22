@@ -69,6 +69,7 @@ private:
 
     // Game lifecycle
     // void beforeMoveSnake();
+    void beforeRoundStart();
     
     // Direction
     Direction getDirection();

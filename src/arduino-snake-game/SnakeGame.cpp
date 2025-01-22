@@ -173,6 +173,11 @@ void SnakeGame::removeTail()
     snake.removeTail();
 }
 
+void SnakeGame::beforeRoundStart()
+{
+    hyperspaceChallenge.beforeRoundStart();
+}
+
 Direction SnakeGame::getDirection()
 {
     return direction;
@@ -337,7 +342,7 @@ SnakeGame *SnakeGame::startRound()
     unpause();
     moveSnakeToStartingPoint();
     
-    hyperspaceChallenge.beforeApplePlacement();
+    beforeRoundStart();
     placeNewApple();
     timebombChallenge.startRound();
 

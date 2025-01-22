@@ -10,7 +10,7 @@ class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>, public Gri
         WormholePort portA;
         WormholePort portB;
     public:
-        void beforeApplePlacement() override;
+        void beforeRoundStart() override;
 
         bool occupies(GridLocation location) override;
 };
