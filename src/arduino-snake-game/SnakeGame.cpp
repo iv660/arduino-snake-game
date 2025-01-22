@@ -4,6 +4,7 @@
 #include "GameOverScreenLayout.h"
 #include "HighScore.h"
 #include "LevelInfoScreenLayout.h"
+#include "Movement.h"
 
 SnakeGameState SnakeGame::getState()
 {
@@ -111,36 +112,7 @@ Apple SnakeGame::getNewApple()
 
 GridLocation SnakeGame::getNextLocation(SnakeSegment *snakeSegment)
 {
-    GridLocation nextLocation;
-
-    switch (getDirection()) {
-        case Direction::RIGHT:
-            nextLocation.column = snakeSegment->getColumn() + 1;
-            nextLocation.row = snakeSegment->getRow();
-            break;
-
-        case Direction::LEFT:   
-            nextLocation.column = snakeSegment->getColumn() - 1;
-            nextLocation.row = snakeSegment->getRow();
-            break;
-
-        case Direction::UP:
-            nextLocation.column = snakeSegment->getColumn();
-            nextLocation.row = snakeSegment->getRow() - 1;
-            break;
-
-        case Direction::DOWN:
-            nextLocation.column = snakeSegment->getColumn();
-            nextLocation.row = snakeSegment->getRow() + 1;
-            break;
-
-        default:
-            nextLocation.column = snakeSegment->getColumn();
-            nextLocation.row = snakeSegment->getRow();
-            break;
-    }
-
-    return nextLocation;
+    return Movement().calculateNextLocation(snakeSegment->getLocation(), getDirection());
 }
 
 GridLocation SnakeGame::getAppleLocation()
