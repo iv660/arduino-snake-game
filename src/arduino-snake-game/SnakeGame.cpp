@@ -154,7 +154,7 @@ void SnakeGame::beforeRoundStart()
 
 GridLocation SnakeGame::afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation)
 {
-    return hyperspaceChallenge.afterGettingNextLocation(currentLocation, nextLocation);
+    return hyperspaceChallenge.adjustNextLocation(currentLocation, nextLocation);
 }
 
 void SnakeGame::afterUpdateDirection(Direction newDirection)

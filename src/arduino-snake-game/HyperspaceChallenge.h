@@ -13,7 +13,7 @@ class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>, public Gri
         WormholePort portB;
     public:
         void beforeRoundStart() override;
-        GridLocation afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation) override;
+        GridLocation adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation) override;
 
         bool occupies(GridLocation location) override;
 };

@@ -38,7 +38,7 @@ class BaseChallenge
         virtual void startRound() {}
         virtual void beforeRoundStart() {}
         
-        virtual GridLocation afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation) 
+        virtual GridLocation adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation) 
         {
             return nextLocation;
         }
