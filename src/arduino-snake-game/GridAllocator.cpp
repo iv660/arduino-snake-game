@@ -3,18 +3,6 @@
 
 bool GridAllocator::locationIsOccupied(GridLocation location)
 {
-    if (snake->occupies(location)) {
-        return true;
-    }
-
-    if (apple->occupies(location)) {
-        return true;
-    }
-
-    if (timebombChallenge->occupies(location)) {
-        return true;
-    }
-
     for (uint8_t i = 0; i <= occupantsIndex - 1; i++) {
         if (occupants[i]->occupies(location)) {
             return true;
@@ -40,21 +28,21 @@ GridAllocator *GridAllocator::setGridRows(int rows)
 
 GridAllocator *GridAllocator::setSnake(GridOccupantInterface *snake)
 {
-    this->snake = snake;
+    addOccupant(snake);
 
     return this;
 }
 
 GridAllocator *GridAllocator::setApple(GridOccupantInterface *apple)
 {
-    this->apple = apple;
+    addOccupant(apple);
 
     return this;
 }
 
 GridAllocator *GridAllocator::setTimebombChallenge(GridOccupantInterface *timebombChallenge)
 {
-    this->timebombChallenge = timebombChallenge;
+    addOccupant(timebombChallenge);
 
     return this;
 }
