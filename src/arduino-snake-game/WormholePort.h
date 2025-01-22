@@ -5,6 +5,7 @@
 #include "GridOccupantInterface.h"
 #include "GridLocation.h"
 #include "Direction.h"
+#include "Movement.h"
 
 class WormholePort: public DrawableInterface, public GridOccupantInterface
 {

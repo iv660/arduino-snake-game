@@ -49,5 +49,7 @@ bool WormholePort::occupies(GridLocation location)
 
 GridLocation WormholePort::getExitLocation(Direction direction)
 {
-    return GridLocation(column, row);
+    const GridLocation currentLocation(column, row);
+
+    return Movement().calculateNextLocation(currentLocation, direction);
 }

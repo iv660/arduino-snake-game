@@ -71,6 +71,7 @@ private:
     // void beforeMoveSnake();
     void beforeRoundStart();
     GridLocation afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation);
+    void afterUpdateDirection(Direction newDirection);
     
     // Direction
     Direction getDirection();

@@ -112,7 +112,9 @@ Apple SnakeGame::getNewApple()
 
 GridLocation SnakeGame::getNextLocation(SnakeSegment *snakeSegment)
 {
-    return Movement().calculateNextLocation(snakeSegment->getLocation(), getDirection());
+    GridLocation nextLocation = Movement().calculateNextLocation(snakeSegment->getLocation(), getDirection());
+
+    return afterGettingNextLocation(snakeSegment->getLocation(), nextLocation);
 }
 
 GridLocation SnakeGame::getAppleLocation()
@@ -153,6 +155,11 @@ void SnakeGame::beforeRoundStart()
 GridLocation SnakeGame::afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation)
 {
     return hyperspaceChallenge.afterGettingNextLocation(currentLocation, nextLocation);
+}
+
+void SnakeGame::afterUpdateDirection(Direction newDirection)
+{
+    hyperspaceChallenge.setDirection(newDirection);
 }
 
 Direction SnakeGame::getDirection()
@@ -349,17 +356,19 @@ void SnakeGame::updateDirection()
     switch (appliance.directionSwitch->getDirection()) {
         case XC::Hardware::DirectionSwitchInterface::Direction::LEFT:
             direction = Direction::LEFT;
-            return;
+            break;
         case XC::Hardware::DirectionSwitchInterface::Direction::RIGHT:
             direction = Direction::RIGHT;
-            return;
+            break;
         case XC::Hardware::DirectionSwitchInterface::Direction::UP:
             direction = Direction::UP;
-            return;
+            break;
         case XC::Hardware::DirectionSwitchInterface::Direction::DOWN:
             direction = Direction::DOWN;
-            return; 
+            break; 
     }
+
+    afterUpdateDirection(direction);
 }
 
 void SnakeGame::updatePausedState()
