@@ -1,4 +1,5 @@
 #include "HyperspaceChallenge.h"
+#include "HyperspaceRift.h"
 
 void HyperspaceChallenge::beforeRoundStart()
 {
@@ -12,6 +13,9 @@ void HyperspaceChallenge::beforeRoundStart()
 
     scene->render(&portA);
     scene->render(&portB);
+
+    HyperspaceRift rift;
+    scene->render(&rift);
 }
 
 GridLocation HyperspaceChallenge::adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation)
