@@ -24,3 +24,8 @@ void HyperspaceRift::renderOn(ScreenInterface *screen)
     screen->stroke(255, 255, 255);
     screen->rect(x, 0, width, 128);
 }
+
+bool HyperspaceRift::occupies(GridLocation location)
+{
+    return area.occupies(location);
+}

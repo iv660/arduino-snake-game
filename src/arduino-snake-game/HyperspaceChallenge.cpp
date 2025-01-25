@@ -83,5 +83,9 @@ bool HyperspaceChallenge::occupies(GridLocation location)
         return true;
     }
 
+    if (getRift().occupies(location)) {
+        return true;
+    }
+
     return false;
 }
