@@ -4,9 +4,10 @@
 #include "GridAllocator.h"
 #include "GridLocation.h"
 #include "Direction.h"
+#include "GridOccupantInterface.h"
 
 template <typename Derived>
-class BaseChallenge
+class BaseChallenge: public GridOccupantInterface
 {
     private:
     protected:
@@ -47,5 +48,10 @@ class BaseChallenge
         {
             return false;
         } 
+
+        virtual bool occupies(GridLocation location) override 
+        {
+            return false;
+        }
 };
 

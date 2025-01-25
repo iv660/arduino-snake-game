@@ -8,7 +8,7 @@
 #include "GridArea.h"
 #include "HyperspaceRift.h"
 
-class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>, public GridOccupantInterface
+class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>
 {
     private:
         GridArea getSpaceA();

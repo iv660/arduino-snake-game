@@ -8,7 +8,7 @@
 #include "GridAllocator.h"
 #include "BaseChallenge.h"
 
-class TimebombChallenge: public GridOccupantInterface, public BaseChallenge<TimebombChallenge>
+class TimebombChallenge: public BaseChallenge<TimebombChallenge>
 {
     private:
         static unsigned int const TIMEBOMBS_STARTING_LEVEL = 3;
@@ -34,7 +34,7 @@ class TimebombChallenge: public GridOccupantInterface, public BaseChallenge<Time
         TimebombChallenge* setGridAllocator(GridAllocator gridAllocator) override;
         void startRound() override;
 
-        bool occupies(GridLocation location);
+        bool occupies(GridLocation location) override;
 
         void startCycle(SnakeGameState state);
         void endCycle();

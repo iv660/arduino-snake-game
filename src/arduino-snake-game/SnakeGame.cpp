@@ -24,7 +24,7 @@ GridAllocator SnakeGame::getGridAllocator()
         ->addOccupant(&snake)
         ->addOccupant(&apple)
         ->addOccupant(&timebombChallenge)
-        ->addOccupant(&hyperspaceChallenge);
+        ->addOccupant(&challengeDispatcher);
 
     return allocator;
 }
@@ -149,17 +149,17 @@ void SnakeGame::removeTail()
 
 void SnakeGame::beforeRoundStart()
 {
-    hyperspaceChallenge.beforeRoundStart();
+    challengeDispatcher.beforeRoundStart();
 }
 
 GridLocation SnakeGame::afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation)
 {
-    return hyperspaceChallenge.adjustNextLocation(currentLocation, nextLocation);
+    return challengeDispatcher.adjustNextLocation(currentLocation, nextLocation);
 }
 
 void SnakeGame::afterUpdateDirection(Direction newDirection)
 {
-    hyperspaceChallenge.setDirection(newDirection);
+    challengeDispatcher.setDirection(newDirection);
 }
 
 Direction SnakeGame::getDirection()
@@ -194,7 +194,7 @@ bool SnakeGame::locationIsOutOfBounds(GridLocation location)
 
 bool SnakeGame::challengeLocationIsOutOfBounds(GridLocation location)
 {
-    return hyperspaceChallenge.locationIsOutOfBounds(location);
+    return challengeDispatcher.locationIsOutOfBounds(location);
 }
 
 bool SnakeGame::locationIsOccupied(GridLocation location)
@@ -431,7 +431,7 @@ SnakeGame *SnakeGame::startUp()
     timebombChallenge.setScene(&scene)
         ->setGridAllocator(getGridAllocator());
 
-    hyperspaceChallenge.setScene(&scene)
+    challengeDispatcher.setScene(&scene)
         ->setGridAllocator(getGridAllocator());
 
     return this;

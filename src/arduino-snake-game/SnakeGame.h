@@ -38,7 +38,7 @@ private:
 
 
     TimebombChallenge timebombChallenge;
-    HyperspaceChallenge hyperspaceChallenge;
+    HyperspaceChallenge challengeDispatcher;
 
     HighScores highScores;
     Storage storage;
