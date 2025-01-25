@@ -73,6 +73,15 @@ GridLocation HyperspaceChallenge::adjustNextLocation(GridLocation currentLocatio
     return nextLocation;
 }
 
+bool HyperspaceChallenge::locationIsOutOfBounds(GridLocation location)
+{
+    if (getRift().occupies(location)) {
+        return true;
+    }
+
+    return false;
+}
+
 bool HyperspaceChallenge::occupies(GridLocation location)
 {
     if (portA.occupies(location)) {

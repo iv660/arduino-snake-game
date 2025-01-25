@@ -21,6 +21,7 @@ class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>, public Gri
     public:
         void beforeRoundStart() override;
         GridLocation adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation) override;
+        bool locationIsOutOfBounds(GridLocation location)  override;
 
         bool occupies(GridLocation location) override;
 };

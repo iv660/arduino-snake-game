@@ -43,5 +43,9 @@ class BaseChallenge
             return nextLocation;
         }
 
+        virtual bool locationIsOutOfBounds(GridLocation location) 
+        {
+            return false;
+        } 
 };
 

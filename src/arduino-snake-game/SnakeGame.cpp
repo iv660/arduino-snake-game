@@ -185,7 +185,16 @@ bool SnakeGame::locationIsOutOfBounds(GridLocation location)
         return true;
     }
 
+    if (challengeLocationIsOutOfBounds(location)) {
+        return true;
+    }
+
     return false;
+}
+
+bool SnakeGame::challengeLocationIsOutOfBounds(GridLocation location)
+{
+    return hyperspaceChallenge.locationIsOutOfBounds(location);
 }
 
 bool SnakeGame::locationIsOccupied(GridLocation location)

@@ -100,6 +100,7 @@ private:
     // Location & collisions
     GridLocation getNextLocation(SnakeSegment *snakeSegment);
     bool locationIsOutOfBounds(GridLocation location);
+    bool challengeLocationIsOutOfBounds(GridLocation location);
     bool locationIsOccupied(GridLocation location);
     bool hitsSnake(GridLocation location);
     bool hitsApple(GridLocation location);
