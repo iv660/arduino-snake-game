@@ -2,12 +2,15 @@
 
 #include "DrawableInterface.h"
 #include "ScreenInterface.h"
+#include "GridArea.h"
 
 class HyperspaceRift: public DrawableInterface
 {
     private:
-        uint8_t getCenterOfScreenX(ScreenInterface* screen);
+        GridArea area;
     public:
+        HyperspaceRift(GridArea area): area(area) {}
+
         int getColumn() override;
         int getRow() override;
         char* getText() override;

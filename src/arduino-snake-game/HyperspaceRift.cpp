@@ -1,18 +1,13 @@
 #include "HyperspaceRift.h"
 
-uint8_t HyperspaceRift::getCenterOfScreenX(ScreenInterface* screen)
-{
-    return screen->width() / 2;
-}
-
 int HyperspaceRift::getColumn()
 {
-    return 0;
+    return area.topLeft.column;
 }
 
 int HyperspaceRift::getRow()
 {
-    return 0;
+    return area.topLeft.row;
 }
 
 char *HyperspaceRift::getText()
@@ -22,10 +17,10 @@ char *HyperspaceRift::getText()
 
 void HyperspaceRift::renderOn(ScreenInterface *screen)
 {
-    const uint8_t riftWidth = 4;
-    uint8_t x = getCenterOfScreenX(screen) - (riftWidth / 2); 
-    
+    static const int x = 9;
+    static const int width = 4;
+
     screen->fill(0, 0, 255);
     screen->stroke(255, 255, 255);
-    screen->rect(x, 0, 4, 128);
+    screen->rect(x, 0, width, 128);
 }

@@ -6,6 +6,7 @@
 #include "GridLocation.h"
 #include "Direction.h"
 #include "GridArea.h"
+#include "HyperspaceRift.h"
 
 class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>, public GridOccupantInterface
 {
@@ -15,6 +16,8 @@ class HyperspaceChallenge: public BaseChallenge<HyperspaceChallenge>, public Gri
 
         GridArea getSpaceB();
         WormholePort portB;
+
+        HyperspaceRift getRift();
     public:
         void beforeRoundStart() override;
         GridLocation adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation) override;

@@ -26,6 +26,23 @@ GridArea HyperspaceChallenge::getSpaceB()
     });
 }
 
+HyperspaceRift HyperspaceChallenge::getRift()
+{
+    GridArea spaceA = getSpaceA();
+    GridArea spaceB = getSpaceB();
+
+    return HyperspaceRift({
+        {
+            spaceA.bottomRight.column + 1,
+            spaceA.topLeft.row
+        },
+        {
+            spaceB.topLeft.column - 1,
+            spaceB.bottomRight.row
+        }
+    });
+}
+
 void HyperspaceChallenge::beforeRoundStart()
 {
     GridLocation portALocation = gridAllocator.getRandomVacantLocationWithin(getSpaceA());
@@ -39,7 +56,7 @@ void HyperspaceChallenge::beforeRoundStart()
     scene->render(&portA);
     scene->render(&portB);
 
-    HyperspaceRift rift;
+    HyperspaceRift rift = getRift();
     scene->render(&rift);
 }
 
