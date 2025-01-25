@@ -6,6 +6,7 @@
 class HyperspaceRift: public DrawableInterface
 {
     private:
+        uint8_t getCenterOfScreenX(ScreenInterface* screen);
     public:
         int getColumn() override;
         int getRow() override;
