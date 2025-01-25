@@ -79,21 +79,6 @@ unsigned int TimebombChallenge::getActivationTreshold(SnakeGameState state)
     return treshold;
 }
 
-TimebombChallenge *TimebombChallenge::setScene(Scene *scene)
-{
-    this->scene = scene;
-
-    return this;
-}
-
-TimebombChallenge *TimebombChallenge::setGridAllocator(
-    GridAllocator gridAllocator)
-{
-    this->gridAllocator = gridAllocator;
-
-    return this;
-}
-
 bool TimebombChallenge::occupies(GridLocation location)
 {
     if (timebomb.getLocation() == location) {

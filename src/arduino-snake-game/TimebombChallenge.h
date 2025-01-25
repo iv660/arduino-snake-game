@@ -2,13 +2,11 @@
 #define TIMEBOMB_CHALLENGE_H
 
 #include "Timebomb.h"
-#include "Scene.h"
 #include "GridLocation.h"
 #include "SnakeGameState.h"
-#include "GridAllocator.h"
 #include "BaseChallenge.h"
 
-class TimebombChallenge: public BaseChallenge<TimebombChallenge>
+class TimebombChallenge: public BaseChallenge
 {
     private:
         static unsigned int const TIMEBOMBS_STARTING_LEVEL = 3;
@@ -16,8 +14,6 @@ class TimebombChallenge: public BaseChallenge<TimebombChallenge>
         static unsigned int const MIN_ACTIVATION_TRESHOLD = 1;
 
         Timebomb timebomb;
-        Scene* scene;
-        GridAllocator gridAllocator;
 
         bool isPaused = false;
 
@@ -30,8 +26,6 @@ class TimebombChallenge: public BaseChallenge<TimebombChallenge>
         unsigned int getActivationTreshold(SnakeGameState state);
 
     public:
-        TimebombChallenge* setScene(Scene *scene) override;
-        TimebombChallenge* setGridAllocator(GridAllocator gridAllocator) override;
         void startRound() override;
 
         bool occupies(GridLocation location) override;

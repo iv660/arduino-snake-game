@@ -1,47 +1,52 @@
 #include "ChallengeDispatcher.h"
 
-ChallengeDispatcher* ChallengeDispatcher::setScene(Scene* scene) 
+BaseChallenge* ChallengeDispatcher::getActiveChallenge()
 {
-    hyperspaceChallenge.setScene(scene);
+    return &hyperspaceChallenge;
+}
+
+BaseChallenge *ChallengeDispatcher::setScene(Scene *scene)
+{
+    getActiveChallenge()->setScene(scene);
 
     return this;
 }
 
-ChallengeDispatcher* ChallengeDispatcher::setGridAllocator(GridAllocator gridAllocator) 
+BaseChallenge* ChallengeDispatcher::setGridAllocator(GridAllocator gridAllocator) 
 {
-    hyperspaceChallenge.setGridAllocator(gridAllocator);
+    getActiveChallenge()->setGridAllocator(gridAllocator);
 
     return this;
 }
 
-ChallengeDispatcher* ChallengeDispatcher::setDirection(Direction direction) 
+BaseChallenge* ChallengeDispatcher::setDirection(Direction direction) 
 {
-    hyperspaceChallenge.setDirection(direction);
+    getActiveChallenge()->setDirection(direction);
 
     return this;
 }
 
 void ChallengeDispatcher::startRound() 
 {
-    hyperspaceChallenge.startRound();
+    getActiveChallenge()->startRound();
 }
 
 void ChallengeDispatcher::beforeRoundStart() 
 {
-    hyperspaceChallenge.beforeRoundStart();
+    getActiveChallenge()->beforeRoundStart();
 }
 
 GridLocation ChallengeDispatcher::adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation) 
 {
-    return hyperspaceChallenge.adjustNextLocation(currentLocation, nextLocation);
+    return getActiveChallenge()->adjustNextLocation(currentLocation, nextLocation);
 }
 
 bool ChallengeDispatcher::locationIsOutOfBounds(GridLocation location) 
 {
-    return hyperspaceChallenge.locationIsOutOfBounds(location);
+    return getActiveChallenge()->locationIsOutOfBounds(location);
 }
 
 bool ChallengeDispatcher::occupies(GridLocation location)
 {
-    return hyperspaceChallenge.occupies(location);
+    return getActiveChallenge()->occupies(location);
 }

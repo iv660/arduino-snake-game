@@ -5,8 +5,8 @@
 #include "GridLocation.h"
 #include "Direction.h"
 #include "GridOccupantInterface.h"
+#include "ChallengeInterface.h"
 
-template <typename Derived>
 class BaseChallenge: public GridOccupantInterface
 {
     private:
@@ -15,21 +15,21 @@ class BaseChallenge: public GridOccupantInterface
         GridAllocator gridAllocator;
         Direction direction;
     public:
-        virtual Derived* setScene(Scene* scene)
+        virtual BaseChallenge* setScene(Scene* scene)
         {
             this->scene = scene;
 
             return this;
         }
 
-        virtual Derived* setGridAllocator(GridAllocator gridAllocator)
+        virtual BaseChallenge* setGridAllocator(GridAllocator gridAllocator)
         {
             this->gridAllocator = gridAllocator;
 
             return this;
         }
 
-        virtual Derived* setDirection(Direction direction)
+        virtual BaseChallenge* setDirection(Direction direction)
         {
             this->direction = direction;
             
