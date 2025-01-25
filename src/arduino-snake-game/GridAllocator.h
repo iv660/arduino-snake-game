@@ -3,6 +3,7 @@
 
 #include "GridLocation.h"
 #include "GridOccupantInterface.h"
+#include "GridArea.h"
 
 class GridAllocator
 {
@@ -11,9 +12,6 @@ class GridAllocator
 
         int gridColumns;
         int gridRows;
-        GridOccupantInterface* snake;
-        GridOccupantInterface* apple;
-        GridOccupantInterface* timebombChallenge;
 
         GridOccupantInterface* occupants[MAX_OCCUPANTS_COUNT];
         uint8_t occupantsIndex = 0;
@@ -25,6 +23,7 @@ class GridAllocator
         GridAllocator* addOccupant(GridOccupantInterface* occupant);
 
         GridLocation getRandomVacantLocation();
+        GridLocation getRandomVacantLocationWithin(GridArea area);
 };
 
 

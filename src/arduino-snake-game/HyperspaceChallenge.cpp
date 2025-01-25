@@ -1,13 +1,38 @@
 #include "HyperspaceChallenge.h"
 #include "HyperspaceRift.h"
 
+GridArea HyperspaceChallenge::getSpaceA()
+{
+    return GridArea({
+        {0, 0}, 
+        {
+            scene->getColumns() / 2 - 1, 
+            scene->getRows() - 1
+        }
+    });
+}
+
+GridArea HyperspaceChallenge::getSpaceB()
+{
+    return GridArea({
+        {
+            scene->getColumns() / 2 + 2, 
+            0
+        }, 
+        {
+            scene->getColumns() - 1, 
+            scene->getRows() - 1
+        }
+    });
+}
+
 void HyperspaceChallenge::beforeRoundStart()
 {
-    GridLocation portALocation = gridAllocator.getRandomVacantLocation();
+    GridLocation portALocation = gridAllocator.getRandomVacantLocationWithin(getSpaceA());
     portA.setColumn(portALocation.column);
     portA.setRow(portALocation.row);
 
-    GridLocation portBLocation = gridAllocator.getRandomVacantLocation();
+    GridLocation portBLocation = gridAllocator.getRandomVacantLocationWithin(getSpaceB());
     portB.setColumn(portBLocation.column);
     portB.setRow(portBLocation.row);
 

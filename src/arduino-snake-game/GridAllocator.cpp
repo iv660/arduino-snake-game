@@ -41,16 +41,23 @@ GridAllocator *GridAllocator::addOccupant(GridOccupantInterface *occupant)
 
 GridLocation GridAllocator::getRandomVacantLocation()
 {
+    return getRandomVacantLocationWithin({
+        {0, 0}, 
+        {gridColumns - 1, gridRows - 1}
+    });
+}
+
+GridLocation GridAllocator::getRandomVacantLocationWithin(GridArea area)
+{
     GridLocation newLocation;
 
     do {
-        long newColumn = random(0, gridColumns - 1);
-        long newRow = random(0, gridRows - 1);
+        long newColumn = random(area.topLeft.column, area.bottomRight.column);
+        long newRow = random(area.topLeft.row, area.bottomRight.row);
         
         newLocation.column = newColumn;
         newLocation.row = newRow;
     } while (locationIsOccupied(newLocation));
 
     return newLocation;
-
 }
