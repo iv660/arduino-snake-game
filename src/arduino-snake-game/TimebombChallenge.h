@@ -30,11 +30,11 @@ class TimebombChallenge: public BaseChallenge
 
         bool occupies(GridLocation location) override;
 
-        void startCycle(SnakeGameState state);
-        void endCycle();
-        bool hasFailed();
-        void setPausedState(bool isPaused);
-        void handleCollisionAt(GridLocation location);
+        void startCycle(SnakeGameState state) override;
+        void endCycle() override;
+        bool hasFailed() override;
+        void setPausedState(bool isPaused) override;
+        void handleCollisionAt(GridLocation location) override;
 };
 
 

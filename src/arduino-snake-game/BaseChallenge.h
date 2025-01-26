@@ -5,6 +5,7 @@
 #include "GridLocation.h"
 #include "Direction.h"
 #include "GridOccupantInterface.h"
+#include "SnakeGameState.h"
 
 class BaseChallenge: public GridOccupantInterface
 {
@@ -13,6 +14,7 @@ class BaseChallenge: public GridOccupantInterface
         Scene* scene;
         GridAllocator gridAllocator;
         Direction direction;
+        bool isPaused;
     public:
         virtual BaseChallenge* setScene(Scene* scene)
         {
@@ -35,8 +37,22 @@ class BaseChallenge: public GridOccupantInterface
             return this;
         }
 
+        virtual void setPausedState(bool isPaused)
+        {
+            this->isPaused = isPaused;
+        }
+
         virtual void startRound() {}
+        virtual void startCycle(SnakeGameState state) {}
+        virtual void endCycle() {}
         virtual void beforeRoundStart() {}
+
+        virtual bool hasFailed()
+        {
+            return false;
+        }
+
+        virtual void handleCollisionAt(GridLocation location) {}
         
         virtual GridLocation adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation) 
         {
