@@ -51,3 +51,5 @@ Here are some ideas to improve the classic Snake game:
 * [x] **High score tracking**: Store and display high scores, either locally or online, to encourage competition and replayability.
 
 * [ ] **Mobile optimization**: If developing for mobile devices, consider optimizing the game for touch controls and smaller screens.
+
+21736

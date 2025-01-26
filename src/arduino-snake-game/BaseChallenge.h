@@ -5,7 +5,6 @@
 #include "GridLocation.h"
 #include "Direction.h"
 #include "GridOccupantInterface.h"
-#include "ChallengeInterface.h"
 
 class BaseChallenge: public GridOccupantInterface
 {

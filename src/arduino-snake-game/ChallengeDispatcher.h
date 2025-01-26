@@ -3,7 +3,6 @@
 #include "BaseChallenge.h"
 #include "HyperspaceChallenge.h"
 #include "Scene.h"
-#include "ChallengeInterface.h"
 
 /**
  * @brief Challenge dispatcher
