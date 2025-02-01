@@ -37,7 +37,6 @@ private:
     Snake snake;
 
 
-    TimebombChallenge timebombChallenge;
     ChallengeDispatcher challengeDispatcher;
 
     HighScores highScores;

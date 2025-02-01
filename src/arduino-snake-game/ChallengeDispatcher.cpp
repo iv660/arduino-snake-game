@@ -2,7 +2,16 @@
 
 BaseChallenge* ChallengeDispatcher::getActiveChallenge()
 {
-    return &hyperspaceChallenge;
+    if (state.level == 1) {
+        return &hyperspaceChallenge;
+    }
+
+    return &timebombChallenge;
+}
+
+void ChallengeDispatcher::updateState(SnakeGameState state)
+{
+    this->state = state;
 }
 
 BaseChallenge *ChallengeDispatcher::setScene(Scene *scene)
@@ -36,6 +45,26 @@ void ChallengeDispatcher::beforeRoundStart()
     getActiveChallenge()->beforeRoundStart();
 }
 
+void ChallengeDispatcher::startCycle(SnakeGameState state)
+{
+    getActiveChallenge()->startCycle(state);
+}
+
+void ChallengeDispatcher::endCycle()
+{
+    getActiveChallenge()->endCycle();
+}
+
+void ChallengeDispatcher::setPausedState(bool paused)
+{
+    getActiveChallenge()->setPausedState(paused);
+}
+
+bool ChallengeDispatcher::hasFailed()
+{
+    return getActiveChallenge()->hasFailed();
+}
+
 GridLocation ChallengeDispatcher::adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation) 
 {
     return getActiveChallenge()->adjustNextLocation(currentLocation, nextLocation);
@@ -44,6 +73,11 @@ GridLocation ChallengeDispatcher::adjustNextLocation(GridLocation currentLocatio
 bool ChallengeDispatcher::locationIsOutOfBounds(GridLocation location) 
 {
     return getActiveChallenge()->locationIsOutOfBounds(location);
+}
+
+void ChallengeDispatcher::handleCollisionAt(GridLocation location)
+{
+    getActiveChallenge()->handleCollisionAt(location);
 }
 
 bool ChallengeDispatcher::occupies(GridLocation location)

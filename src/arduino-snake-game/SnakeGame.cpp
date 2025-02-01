@@ -23,7 +23,6 @@ GridAllocator SnakeGame::getGridAllocator()
         ->setGridRows(scene.getRows())
         ->addOccupant(&snake)
         ->addOccupant(&apple)
-        ->addOccupant(&timebombChallenge)
         ->addOccupant(&challengeDispatcher);
 
     return allocator;
@@ -284,6 +283,8 @@ inline void SnakeGame::updateLengthLevelRequirement()
 void SnakeGame::initLevel()
 {
     level = 1;
+    challengeDispatcher.updateState(getState());
+
     snakeLengthForNextLevel = INITIAL_LENGTH_REQUIREMENT;
     lives = INITIAL_LIVES;
 }
@@ -337,7 +338,7 @@ SnakeGame *SnakeGame::startRound()
     
     beforeRoundStart();
     placeNewApple();
-    timebombChallenge.startRound();
+    challengeDispatcher.startRound();
 
     return this;
 }
@@ -384,7 +385,7 @@ void SnakeGame::updatePausedState()
 {
     appliance.pauseButton->tick();
     paused = appliance.pauseButton->isOn();
-    timebombChallenge.setPausedState(paused);
+    challengeDispatcher.setPausedState(paused);
 }
 
 bool SnakeGame::isOver()
@@ -398,7 +399,7 @@ bool SnakeGame::isOver()
         return true;
     }
 
-    if (timebombChallenge.hasFailed()) {
+    if (challengeDispatcher.hasFailed()) {
         return true;
     }
 
@@ -427,9 +428,6 @@ SnakeGame *SnakeGame::startUp()
     showStartupScreen();
     resetSnake();
     highScores = loadHighScores();
-
-    timebombChallenge.setScene(&scene)
-        ->setGridAllocator(getGridAllocator());
 
     challengeDispatcher.setScene(&scene)
         ->setGridAllocator(getGridAllocator());
@@ -509,10 +507,13 @@ bool SnakeGame::reachedLevelUp()
 SnakeGame *SnakeGame::levelUp()
 {
     level++;
+    challengeDispatcher.updateState(getState());
+
     resetSnake();
     direction = Direction::RIGHT;
     updateLengthLevelRequirement();
     applyLifeBonus();
+
 
     return this;
 }
@@ -524,7 +525,7 @@ void SnakeGame::endCycle()
         updatePausedState();
     }
 
-    timebombChallenge.endCycle();
+    challengeDispatcher.endCycle();
 }
 
 SnakeGame *SnakeGame::startCycle()
@@ -532,8 +533,8 @@ SnakeGame *SnakeGame::startCycle()
     cycleStartTime = millis();
     
     SnakeGameState state = getState();
-    timebombChallenge.startCycle(state);
-    timebombChallenge.handleCollisionAt(getNextLocation(getHead()));
+    challengeDispatcher.startCycle(state);
+    challengeDispatcher.handleCollisionAt(getNextLocation(getHead()));
 
     return this;
 }
