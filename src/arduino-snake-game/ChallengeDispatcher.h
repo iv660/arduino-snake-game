@@ -21,10 +21,17 @@ class ChallengeDispatcher: public BaseChallenge
     private:
         TimebombChallenge timebombChallenge;
         HyperspaceChallenge hyperspaceChallenge;
+        BaseChallenge emptyChallenge;
+
+        BaseChallenge* activeChallenge;
 
         SnakeGameState state;
 
+        Scene* scene;
+        GridAllocator gridAllocator;
+
         BaseChallenge* getActiveChallenge();
+        void initActiveChallenge();
     public:
         void updateState(SnakeGameState state);
 

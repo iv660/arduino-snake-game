@@ -2,20 +2,32 @@
 
 BaseChallenge* ChallengeDispatcher::getActiveChallenge()
 {
+    return activeChallenge;
+}
+
+void ChallengeDispatcher::initActiveChallenge() 
+{
     if (state.level == 1) {
-        return &hyperspaceChallenge;
+        activeChallenge = &hyperspaceChallenge;
+    } else {
+        activeChallenge = &timebombChallenge;
     }
 
-    return &timebombChallenge;
+    activeChallenge->setScene(scene);
+    activeChallenge->setGridAllocator(gridAllocator);
 }
 
 void ChallengeDispatcher::updateState(SnakeGameState state)
 {
     this->state = state;
+
+    initActiveChallenge();
 }
 
 BaseChallenge *ChallengeDispatcher::setScene(Scene *scene)
 {
+    this->scene = scene;
+
     getActiveChallenge()->setScene(scene);
 
     return this;
@@ -23,6 +35,8 @@ BaseChallenge *ChallengeDispatcher::setScene(Scene *scene)
 
 BaseChallenge* ChallengeDispatcher::setGridAllocator(GridAllocator gridAllocator) 
 {
+    this->gridAllocator = gridAllocator;
+
     getActiveChallenge()->setGridAllocator(gridAllocator);
 
     return this;
