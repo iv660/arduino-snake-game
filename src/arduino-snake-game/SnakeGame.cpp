@@ -220,6 +220,15 @@ bool SnakeGame::hitsApple(GridLocation location)
     return false;
 }
 
+bool SnakeGame::memoryIsLow()
+{
+    if (freeMemory() < FREE_MEMORY_REQUIREMENT) {
+        return true;
+    }
+
+    return false;
+}
+
 void SnakeGame::showLifeLostScreen(int livesBefore, int livesAfter)
 {
     char messageBuffer[16];
@@ -514,6 +523,11 @@ SnakeGame *SnakeGame::showLevelInfo()
 
 bool SnakeGame::reachedLevelUp()
 {
+    if (memoryIsLow()) {
+        // Force level up to avoid running out of memory
+        return true;
+    }
+
     if (snake.getLength() >= snakeLengthForNextLevel) {
         return true;
     }

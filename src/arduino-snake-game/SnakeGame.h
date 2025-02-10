@@ -29,6 +29,7 @@ private:
     static const unsigned long MAX_SNAKE_LENGTH = 45;
     static const int INITIAL_LIVES = 3;
     static const int MAX_LIVES = 5;
+    static const unsigned int FREE_MEMORY_REQUIREMENT = 150;
 
     // Dependencies
     XC::Hardware::Appliance appliance;
@@ -106,6 +107,7 @@ private:
     bool hitsApple(GridLocation location);
 
     // System information
+    bool memoryIsLow();
 
 public:
     void setAppliance(XC::Hardware::Appliance appliance);
