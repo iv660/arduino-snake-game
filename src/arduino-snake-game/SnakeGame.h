@@ -26,6 +26,7 @@ private:
     // Constants
     static const long INITIAL_LENGTH_REQUIREMENT = 15;
     static const unsigned long SNAKE_LENGTH_REQUIREMENT_GROWTH = 5;
+    static const unsigned long MAX_SNAKE_LENGTH = 45;
     static const int INITIAL_LIVES = 3;
     static const int MAX_LIVES = 5;
 
@@ -103,6 +104,8 @@ private:
     bool locationIsOccupied(GridLocation location);
     bool hitsSnake(GridLocation location);
     bool hitsApple(GridLocation location);
+
+    // System information
 
 public:
     void setAppliance(XC::Hardware::Appliance appliance);

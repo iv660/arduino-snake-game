@@ -5,6 +5,7 @@
 #include "HighScore.h"
 #include "LevelInfoScreenLayout.h"
 #include "Movement.h"
+#include "freeMemory.h"
 
 SnakeGameState SnakeGame::getState()
 {
@@ -271,9 +272,13 @@ inline void SnakeGame::applyLifeBonus()
 
 inline void SnakeGame::updateLengthLevelRequirement()
 {
-    unsigned long maxLength = scene.getRows() * scene.getColumns() / 2;
+    if (snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH > MAX_SNAKE_LENGTH) {
+        return;
+    }
 
-    if (snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH > maxLength) {
+    unsigned long maxLengthToFitOnScreen = scene.getRows() * scene.getColumns() / 2;
+
+    if (snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH > maxLengthToFitOnScreen) {
         return;
     }
 
@@ -450,7 +455,14 @@ SnakeGame *SnakeGame::moveSnake()
 
 SnakeGame *SnakeGame::growSnake()
 {
+    Serial.println("growSnake");
+    Serial.print("Snake length: "); Serial.println(snake.getLength());
+    Serial.print("Free memory: "); Serial.println(freeMemory());
+
     stretchHead();
+
+    Serial.print("Snake length: "); Serial.println(snake.getLength());
+    Serial.print("Free memory: "); Serial.println(freeMemory());
 
     return this;
 }
@@ -468,8 +480,13 @@ SnakeGame *SnakeGame::deductScore()
 
 SnakeGame *SnakeGame::placeNewApple()
 {
+    Serial.println("placeNewApple");
+    Serial.print("Free memory: "); Serial.println(freeMemory());
+
     apple = getNewApple();
     drawApple(&apple);
+
+    Serial.print("Free memory: "); Serial.println(freeMemory());
 
     return this;
 }
