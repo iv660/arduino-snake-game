@@ -15,9 +15,6 @@ AnalogJoystickDirectionSwitch directionSwitch(VRX_PIN, VRY_PIN);
 
 void setup()
 {
-    Serial.begin(31250);
-
-
     appliance.screen = &screen;
     appliance.pauseButton = &pauseButton;
     appliance.directionSwitch = &directionSwitch;

@@ -464,14 +464,7 @@ SnakeGame *SnakeGame::moveSnake()
 
 SnakeGame *SnakeGame::growSnake()
 {
-    Serial.println("growSnake");
-    Serial.print("Snake length: "); Serial.println(snake.getLength());
-    Serial.print("Free memory: "); Serial.println(freeMemory());
-
     stretchHead();
-
-    Serial.print("Snake length: "); Serial.println(snake.getLength());
-    Serial.print("Free memory: "); Serial.println(freeMemory());
 
     return this;
 }
@@ -489,13 +482,8 @@ SnakeGame *SnakeGame::deductScore()
 
 SnakeGame *SnakeGame::placeNewApple()
 {
-    Serial.println("placeNewApple");
-    Serial.print("Free memory: "); Serial.println(freeMemory());
-
     apple = getNewApple();
     drawApple(&apple);
-
-    Serial.print("Free memory: "); Serial.println(freeMemory());
 
     return this;
 }
