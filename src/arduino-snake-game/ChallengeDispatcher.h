@@ -31,6 +31,7 @@ class ChallengeDispatcher: public BaseChallenge
         GridAllocator gridAllocator;
 
         BaseChallenge* getActiveChallenge();
+        BaseChallenge* getRandomChallenge();
         void initActiveChallenge();
     public:
         void updateState(SnakeGameState state);

@@ -5,12 +5,44 @@ BaseChallenge* ChallengeDispatcher::getActiveChallenge()
     return activeChallenge;
 }
 
+BaseChallenge *ChallengeDispatcher::getRandomChallenge()
+{
+    unsigned int const timebombChallengeOdds = 7;
+    unsigned int const hyperspaceChallengeOdds = 1;
+    unsigned int const emptyChallengeOdds = 2;
+
+    unsigned int overallOdds = emptyChallengeOdds;
+    if (state.level > 3) {
+        overallOdds += timebombChallengeOdds;
+    }
+
+    if (state.level > 8) {
+        overallOdds += hyperspaceChallengeOdds;
+    }
+
+    unsigned int const randomOdds = random(1, overallOdds);
+
+    unsigned int currentTreshold = emptyChallengeOdds;
+    if (randomOdds <= currentTreshold) {
+        return &emptyChallenge;
+    }
+
+    currentTreshold += timebombChallengeOdds;
+    if (randomOdds <= currentTreshold) {
+        return &timebombChallenge;
+    } 
+
+    return &hyperspaceChallenge;
+}
+
 void ChallengeDispatcher::initActiveChallenge() 
 {
-    if (state.level == 1) {
+    if (state.level == 3) {
+        activeChallenge = &timebombChallenge;
+    } else if (state.level == 8) {
         activeChallenge = &hyperspaceChallenge;
     } else {
-        activeChallenge = &timebombChallenge;
+        activeChallenge = getRandomChallenge();
     }
 
     activeChallenge->setScene(scene);
