@@ -14,27 +14,23 @@ BaseChallenge* ChallengeDispatcher::getActiveChallenge()
 
 BaseChallenge *ChallengeDispatcher::getRandomChallenge()
 {
-    unsigned int const timebombChallengeOdds = TIMEBOMB_CHALLENGE_ODDS;
-    unsigned int const hyperspaceChallengeOdds = HYPERSPACE_CHALLENGE_ODDS;
-    unsigned int const emptyChallengeOdds = EMPTY_CHALLENGE_ODDS;
-
-    unsigned int overallOdds = emptyChallengeOdds;
+    unsigned int overallOdds = EMPTY_CHALLENGE_ODDS;
     if (state.level > TIMEBOMB_CHALLENGE_STARTING_LEVEL) {
-        overallOdds += timebombChallengeOdds;
+        overallOdds += TIMEBOMB_CHALLENGE_ODDS;
     }
 
     if (state.level > HYPERSPACE_CHALLENGE_STARTING_LEVEL) {
-        overallOdds += hyperspaceChallengeOdds;
+        overallOdds += HYPERSPACE_CHALLENGE_ODDS;
     }
 
     unsigned int const randomOdds = random(1, overallOdds);
 
-    unsigned int currentTreshold = emptyChallengeOdds;
+    unsigned int currentTreshold = EMPTY_CHALLENGE_ODDS;
     if (randomOdds <= currentTreshold) {
         return &emptyChallenge;
     }
 
-    currentTreshold += timebombChallengeOdds;
+    currentTreshold += TIMEBOMB_CHALLENGE_ODDS;
     if (randomOdds <= currentTreshold) {
         return &timebombChallenge;
     } 
@@ -44,9 +40,9 @@ BaseChallenge *ChallengeDispatcher::getRandomChallenge()
 
 void ChallengeDispatcher::initActiveChallenge() 
 {
-    if (state.level == 3) {
+    if (state.level == TIMEBOMB_CHALLENGE_STARTING_LEVEL) {
         activeChallenge = &timebombChallenge;
-    } else if (state.level == 7) {
+    } else if (state.level == HYPERSPACE_CHALLENGE_STARTING_LEVEL) {
         activeChallenge = &hyperspaceChallenge;
     } else {
         activeChallenge = getRandomChallenge();
