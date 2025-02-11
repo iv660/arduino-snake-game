@@ -29,7 +29,7 @@ Here are some ideas to improve the classic Snake game:
 
 * [ ] **Score targets**: Set specific score targets for each level, and reward the player for achieving them.
 
-* [ ] **Hyperspace challenge**: Divide the scene into two spaces. When an apple appears in the other space the snake does, open two wormhole ports to let the snake pass between spaces. When an apple is in the same space as the snake, close the wormhole ports.
+* [x] **Hyperspace challenge**: Divide the scene into two spaces. When an apple appears in the other space the snake does, open two wormhole ports to let the snake pass between spaces. When an apple is in the same space as the snake, close the wormhole ports. Alternatively, the two warmholes could be constantly open, allowing the player to teleport the snake between two spaces whenever they want. 
 
 * [ ] **Collector challenge**: The player can collect a series of items. Reward player for completing a collection with points and/or extra life.
 
