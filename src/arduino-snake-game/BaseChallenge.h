@@ -68,5 +68,10 @@ class BaseChallenge: public GridOccupantInterface
         {
             return false;
         }
+
+        virtual unsigned long adjustLengthRequirementForNextLevel(unsigned long proposedLengthRequirement) 
+        {
+            return proposedLengthRequirement;
+        }
 };
 

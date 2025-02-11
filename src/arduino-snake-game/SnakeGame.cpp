@@ -279,7 +279,13 @@ inline void SnakeGame::applyLifeBonus()
     lives++;
 }
 
-inline void SnakeGame::updateLengthLevelRequirement()
+void SnakeGame::setSnakeLengthForNextLevel(unsigned long lengthRequirement)
+{
+    snakeLengthForNextLevel = lengthRequirement;
+    snakeLengthForNextLevel = challengeDispatcher.adjustLengthRequirementForNextLevel(snakeLengthForNextLevel);
+}
+
+void SnakeGame::updateLengthLevelRequirement()
 {
     if (snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH > MAX_SNAKE_LENGTH) {
         return;
@@ -291,7 +297,8 @@ inline void SnakeGame::updateLengthLevelRequirement()
         return;
     }
 
-    snakeLengthForNextLevel += SNAKE_LENGTH_REQUIREMENT_GROWTH;
+    setSnakeLengthForNextLevel(snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH);
+
 }
 
 void SnakeGame::initLevel()
@@ -299,7 +306,7 @@ void SnakeGame::initLevel()
     level = 1;
     challengeDispatcher.updateState(getState());
 
-    snakeLengthForNextLevel = INITIAL_LENGTH_REQUIREMENT;
+    setSnakeLengthForNextLevel(INITIAL_LENGTH_REQUIREMENT);
     lives = INITIAL_LIVES;
 }
 

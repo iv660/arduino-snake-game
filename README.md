@@ -54,6 +54,6 @@ Here are some ideas to improve the classic Snake game:
 
 ## Sketch Profile
 ### 2025-11-02
-Sketch uses 22312 bytes (72%) of program storage space. Maximum is 30720 bytes.
+Sketch uses 22420 bytes (72%) of program storage space. Maximum is 30720 bytes.
 
-Global variables use 915 bytes (44%) of dynamic memory, leaving 1133 bytes for local variables. Maximum is 2048 bytes.
+Global variables use 923 bytes (45%) of dynamic memory, leaving 1125 bytes for local variables. Maximum is 2048 bytes.

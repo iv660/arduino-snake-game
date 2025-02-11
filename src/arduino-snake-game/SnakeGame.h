@@ -66,7 +66,8 @@ private:
     void showLifeLostScreen(int livesBefore, int livesAfter);
     HighScores loadHighScores();
     void storeHighScores(HighScores highScores);
-    inline void updateLengthLevelRequirement();
+    void updateLengthLevelRequirement();
+    void setSnakeLengthForNextLevel(unsigned long lengthRequirement);
 
     // Game lifecycle
     void beforeRoundStart();

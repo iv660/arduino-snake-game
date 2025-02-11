@@ -24,4 +24,6 @@ class HyperspaceChallenge: public BaseChallenge
         bool locationIsOutOfBounds(GridLocation location)  override;
 
         bool occupies(GridLocation location) override;
+
+        unsigned long adjustLengthRequirementForNextLevel(unsigned long proposedLengthRequirement) override;
 };

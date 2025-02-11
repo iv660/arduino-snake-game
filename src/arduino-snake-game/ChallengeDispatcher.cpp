@@ -133,3 +133,8 @@ bool ChallengeDispatcher::occupies(GridLocation location)
 {
     return getActiveChallenge()->occupies(location);
 }
+
+unsigned long ChallengeDispatcher::adjustLengthRequirementForNextLevel(unsigned long proposedLengthRequirement)
+{
+    return getActiveChallenge()->adjustLengthRequirementForNextLevel(proposedLengthRequirement);
+}

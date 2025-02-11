@@ -98,3 +98,8 @@ bool HyperspaceChallenge::occupies(GridLocation location)
 
     return false;
 }
+
+unsigned long HyperspaceChallenge::adjustLengthRequirementForNextLevel(unsigned long proposedLengthRequirement)
+{
+    return 20;
+}

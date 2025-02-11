@@ -47,6 +47,7 @@ class ChallengeDispatcher: public BaseChallenge
         void setPausedState(bool paused) override;
         bool hasFailed() override;
         GridLocation adjustNextLocation(GridLocation currentLocation, GridLocation nextLocation) override;
+        unsigned long ChallengeDispatcher::adjustLengthRequirementForNextLevel(unsigned long proposedLengthRequirement) override;
         bool locationIsOutOfBounds(GridLocation location) override;
         void handleCollisionAt(GridLocation location) override;
 
