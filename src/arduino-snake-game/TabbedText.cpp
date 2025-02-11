@@ -27,7 +27,7 @@ void TabbedText::resetTabs()
 char *TabbedText::toString(unsigned long number)
 {
     static char buffer[10];
-    sprintf(buffer, "%d", number);
+    sprintf(buffer, "%lu", number);
 
     return buffer;
 }
