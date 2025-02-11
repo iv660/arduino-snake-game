@@ -14,26 +14,26 @@ BaseChallenge* ChallengeDispatcher::getActiveChallenge()
 
 BaseChallenge *ChallengeDispatcher::getRandomChallenge()
 {
-    unsigned int overallOdds = EMPTY_CHALLENGE_ODDS;
+    unsigned int totalOdds = EMPTY_CHALLENGE_ODDS;
     if (state.level > TIMEBOMB_CHALLENGE_STARTING_LEVEL) {
-        overallOdds += TIMEBOMB_CHALLENGE_ODDS;
+        totalOdds += TIMEBOMB_CHALLENGE_ODDS;
     }
 
     if (state.level > HYPERSPACE_CHALLENGE_STARTING_LEVEL) {
-        overallOdds += HYPERSPACE_CHALLENGE_ODDS;
+        totalOdds += HYPERSPACE_CHALLENGE_ODDS;
     }
 
-    unsigned int const randomOdds = random(1, overallOdds);
+    unsigned int randomValue = random(1, totalOdds);
 
-    unsigned int currentThreshold = EMPTY_CHALLENGE_ODDS;
-    if (randomOdds <= currentThreshold) {
+    unsigned int threshold = EMPTY_CHALLENGE_ODDS;
+    if (randomValue <= threshold) {
         return &emptyChallenge;
     }
 
-    currentThreshold += TIMEBOMB_CHALLENGE_ODDS;
-    if (randomOdds <= currentThreshold) {
+    threshold += TIMEBOMB_CHALLENGE_ODDS;
+    if (randomValue <= threshold) {
         return &timebombChallenge;
-    } 
+    }
 
     return &hyperspaceChallenge;
 }
