@@ -23,7 +23,7 @@ BaseChallenge *ChallengeDispatcher::getRandomChallenge()
         totalOdds += HYPERSPACE_CHALLENGE_ODDS;
     }
 
-    unsigned int randomValue = random(1, totalOdds);
+    unsigned int randomValue = random(1, totalOdds + 1);
 
     unsigned int threshold = EMPTY_CHALLENGE_ODDS;
     if (randomValue <= threshold) {
