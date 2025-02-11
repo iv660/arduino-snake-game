@@ -25,13 +25,13 @@ BaseChallenge *ChallengeDispatcher::getRandomChallenge()
 
     unsigned int const randomOdds = random(1, overallOdds);
 
-    unsigned int currentTreshold = EMPTY_CHALLENGE_ODDS;
-    if (randomOdds <= currentTreshold) {
+    unsigned int currentThreshold = EMPTY_CHALLENGE_ODDS;
+    if (randomOdds <= currentThreshold) {
         return &emptyChallenge;
     }
 
-    currentTreshold += TIMEBOMB_CHALLENGE_ODDS;
-    if (randomOdds <= currentTreshold) {
+    currentThreshold += TIMEBOMB_CHALLENGE_ODDS;
+    if (randomOdds <= currentThreshold) {
         return &timebombChallenge;
     } 
 
