@@ -1,5 +1,12 @@
 #include "ChallengeDispatcher.h"
 
+#define TIMEBOMB_CHALLENGE_ODDS 7
+#define HYPERSPACE_CHALLENGE_ODDS 1
+#define EMPTY_CHALLENGE_ODDS 2
+
+#define TIMEBOMB_CHALLENGE_STARTING_LEVEL 3
+#define HYPERSPACE_CHALLENGE_STARTING_LEVEL 5
+
 BaseChallenge* ChallengeDispatcher::getActiveChallenge()
 {
     return activeChallenge;
@@ -7,16 +14,16 @@ BaseChallenge* ChallengeDispatcher::getActiveChallenge()
 
 BaseChallenge *ChallengeDispatcher::getRandomChallenge()
 {
-    unsigned int const timebombChallengeOdds = 7;
-    unsigned int const hyperspaceChallengeOdds = 1;
-    unsigned int const emptyChallengeOdds = 2;
+    unsigned int const timebombChallengeOdds = TIMEBOMB_CHALLENGE_ODDS;
+    unsigned int const hyperspaceChallengeOdds = HYPERSPACE_CHALLENGE_ODDS;
+    unsigned int const emptyChallengeOdds = EMPTY_CHALLENGE_ODDS;
 
     unsigned int overallOdds = emptyChallengeOdds;
-    if (state.level > 3) {
+    if (state.level > TIMEBOMB_CHALLENGE_STARTING_LEVEL) {
         overallOdds += timebombChallengeOdds;
     }
 
-    if (state.level > 8) {
+    if (state.level > HYPERSPACE_CHALLENGE_STARTING_LEVEL) {
         overallOdds += hyperspaceChallengeOdds;
     }
 
@@ -39,7 +46,7 @@ void ChallengeDispatcher::initActiveChallenge()
 {
     if (state.level == 3) {
         activeChallenge = &timebombChallenge;
-    } else if (state.level == 8) {
+    } else if (state.level == 7) {
         activeChallenge = &hyperspaceChallenge;
     } else {
         activeChallenge = getRandomChallenge();
