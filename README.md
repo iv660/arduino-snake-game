@@ -52,6 +52,12 @@ Here are some ideas to improve the classic Snake game:
 
 * [ ] **Mobile optimization**: If developing for mobile devices, consider optimizing the game for touch controls and smaller screens.
 
+## Resources
+* [RGB 565 Color Picker](https://trolsoft.ru/ru/articles/rgb565-color-picker)
+* [Free Online AI Logo Designer](https://ailogomaker.io/ru/app)
+* [Overly Simplified File System (OSFS)](https://github.com/charlesbaynham/OSFS/tree/master)
+* [Bitmap Font Generator](https://8bitworkshop.com/bitmapfontgenerator/)
+
 ## Sketch Profile
 ### 2025-11-02
 Sketch uses 22424 bytes (72%) of program storage space. Maximum is 30720 bytes.
