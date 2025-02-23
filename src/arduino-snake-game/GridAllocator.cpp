@@ -3,16 +3,10 @@
 
 bool GridAllocator::locationIsOccupied(GridLocation location)
 {
-    if (snake->occupies(location)) {
-        return true;
-    }
-
-    if (apple->occupies(location)) {
-        return true;
-    }
-
-    if (timebombChallenge->occupies(location)) {
-        return true;
+    for (uint8_t i = 0; i <= occupantsIndex - 1; i++) {
+        if (occupants[i]->occupies(location)) {
+            return true;
+        }
     }
 
     return false;
@@ -32,39 +26,38 @@ GridAllocator *GridAllocator::setGridRows(int rows)
     return this;
 }
 
-GridAllocator *GridAllocator::setSnake(GridOccupantInterface *snake)
+GridAllocator *GridAllocator::addOccupant(GridOccupantInterface *occupant)
 {
-    this->snake = snake;
+    if (occupantsIndex > (MAX_OCCUPANTS_COUNT - 1)) {
+        // Subscript out of bounds
+        // We cannot throw exception, so we just freeze
+        while(true) {}
+    }
 
-    return this;
-}
-
-GridAllocator *GridAllocator::setApple(GridOccupantInterface *apple)
-{
-    this->apple = apple;
-
-    return this;
-}
-
-GridAllocator *GridAllocator::setTimebombChallenge(GridOccupantInterface *timebombChallenge)
-{
-    this->timebombChallenge = timebombChallenge;
-
+    occupants[occupantsIndex] = occupant;
+    occupantsIndex++;
     return this;
 }
 
 GridLocation GridAllocator::getRandomVacantLocation()
 {
+    return getRandomVacantLocationWithin({
+        {0, 0}, 
+        {gridColumns - 1, gridRows - 1}
+    });
+}
+
+GridLocation GridAllocator::getRandomVacantLocationWithin(GridArea area)
+{
     GridLocation newLocation;
 
     do {
-        long newColumn = random(0, gridColumns - 1);
-        long newRow = random(0, gridRows - 1);
+        long newColumn = random(area.topLeft.column, area.bottomRight.column);
+        long newRow = random(area.topLeft.row, area.bottomRight.row);
         
         newLocation.column = newColumn;
         newLocation.row = newRow;
     } while (locationIsOccupied(newLocation));
 
     return newLocation;
-
 }

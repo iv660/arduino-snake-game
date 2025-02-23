@@ -1,7 +1,9 @@
 #ifndef TABBED_TEXT_H
 #define TABBED_TEXT_H
 
-#include "TFT.h"
+#include "ScreenInterface.h"
+
+using XC::Hardware::ScreenInterface;
 
 class TabbedText
 {
@@ -27,7 +29,7 @@ class TabbedText
         TabbedText* text(char* text);
         TabbedText* number(unsigned long number);
         TabbedText* top(unsigned int top);
-        void renderOn(TFT* screen);
+        void renderOn(ScreenInterface* screen);
 };
 
 #endif // TABBED_TEXT_H

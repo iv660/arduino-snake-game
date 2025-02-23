@@ -1,37 +1,50 @@
 #if !defined(SNAKE_GAME_H)
 #define SNAKE_GAME_H
 
+#define VRX_PIN A0
+#define VRY_PIN A1
+#define RANDOM_SEED_PIN A2
+
+#include "Appliance.h"
 #include "Scene.h"
 #include "Apple.h"
 #include "SnakeSegment.h"
 #include "GridLocation.h"
 #include "Snake.h"
 #include "Direction.h"
-#include "TFT.h"
 #include "const.h"
 #include "HighScores.h"
 #include "Storage.h"
-#include "ToggleButton.h"
 #include "TimebombChallenge.h"
 #include "SnakeGameState.h"
 #include "GridAllocator.h"
+#include "ChallengeDispatcher.h"
 
 class SnakeGame
 {
 private:
-    static const long INITIAL_LENGTH_REQUIREMENT = 5;
+    // Constants
+    static const long INITIAL_LENGTH_REQUIREMENT = 15;
     static const unsigned long SNAKE_LENGTH_REQUIREMENT_GROWTH = 5;
+    static const unsigned long MAX_SNAKE_LENGTH = 45;
     static const int INITIAL_LIVES = 3;
     static const int MAX_LIVES = 5;
+    static const unsigned int FREE_MEMORY_REQUIREMENT = 150;
+
+    // Dependencies
+    XC::Hardware::Appliance appliance;
 
     Scene scene;
     Apple apple;
     Snake snake;
-    TimebombChallenge timebombChallenge;
-    TFT screen = TFT(cs, dc, rst);
+
+
+    ChallengeDispatcher challengeDispatcher;
+
     HighScores highScores;
     Storage storage;
 
+    // Game state
     Direction direction = Direction::NONE;
     const unsigned long bonus = 100;
     unsigned long snakeLengthForNextLevel = INITIAL_LENGTH_REQUIREMENT;
@@ -40,46 +53,65 @@ private:
     int lives = INITIAL_LIVES;
     char lifeIcon = (char) 0x2b; // (char) 0x3;
     bool paused = false;
-    ToggleButton pauseButton = ToggleButton(PIN3);
     long cycleStartTime = 0;
 
+    // Common accessors
     SnakeGameState getState();
     GridAllocator getGridAllocator();
 
-    void showStartupScreen();
-    void shuffle();
+    // Startup
     void initLevel();
     void initDirectionControl();
-    void placeNewSnake();
-    void resetSnake();
-    void drawSnake(SnakeSegment *snakeSegment);
-    void drawApple(Apple *apple);
-    void stretchHead();
-    void retractTail();
-    Apple getNewApple();
-    GridLocation getNextLocation(SnakeSegment *snakeSegment);
-    GridLocation getAppleLocation();
-    GridLocation getNewAppleLocation();
+    void showStartupScreen();
+    void showLifeLostScreen(int livesBefore, int livesAfter);
+    HighScores loadHighScores();
+    void storeHighScores(HighScores highScores);
+    void updateLengthLevelRequirement();
+    void setSnakeLengthForNextLevel(unsigned long lengthRequirement);
+
+    // Game lifecycle
+    void beforeRoundStart();
+    GridLocation afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation);
+    void afterUpdateDirection(Direction newDirection);
+    
+    // Direction
+    Direction getDirection();
+    void updateDirection();
+    void waitForDirection();
+    
+    // Game objects
     SnakeSegment *getTail();
     SnakeSegment *getHead();
+    Apple getNewApple();
+    GridLocation getAppleLocation();
+    GridLocation getNewAppleLocation();
+
+    // Game actions
+    void unpause();
+    void shuffle();
+    void drawSnake(SnakeSegment *snakeSegment);
+    void drawApple(Apple *apple);
+    void placeNewSnake();
+    void resetSnake();
+    void moveSnakeToStartingPoint();
+    void stretchHead();
+    void retractTail();
     void removeTail();
-    Direction getDirection();
+    inline void applyLifeBonus();
+    
+    // Location & collisions
+    GridLocation getNextLocation(SnakeSegment *snakeSegment);
     bool locationIsOutOfBounds(GridLocation location);
-    void updateDirection();
+    bool challengeLocationIsOutOfBounds(GridLocation location);
     bool locationIsOccupied(GridLocation location);
     bool hitsSnake(GridLocation location);
     bool hitsApple(GridLocation location);
-    void showLifeLostScreen(int livesBefore, int livesAfter);
-    void moveSnakeToStartingPoint();
-    void waitForDirection();
-    void storeHighScores(HighScores highScores);
-    inline void applyLifeBonus();
-    inline void updateLengthLevelRequirement();
-    HighScores loadHighScores();
-    void unpause();
+
+    // System information
+    bool memoryIsLow();
 
 public:
-    SnakeGame();
+    void setAppliance(XC::Hardware::Appliance appliance);
 
     void updatePausedState();
     bool isPaused();

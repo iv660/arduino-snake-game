@@ -4,20 +4,20 @@
 void StartupScreenLayout::initScreen()
 {
     screen->begin();
-    screen->background(22, 97, 28);
+    screen->background(70, 160, 80);
 }
 
 void StartupScreenLayout::renderTitle()
 {
     screen->stroke(255, 255, 255);
-    screen->setTextSize(2);
+    screen->textSize(2);
     screen->text("SNAKE GAME", 20, 40);
 }
 
 void StartupScreenLayout::renderStartupInstructions()
 {
     screen->stroke(255, 255, 255);
-    screen->setTextSize(1);
+    screen->textSize(1);
     screen->text("Push joystick to start", 15, 60);
 }
 

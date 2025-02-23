@@ -1,7 +1,9 @@
 #if !defined(CENTERED_TEXT_H)
 #define CENTERED_TEXT_H
 
-#include "TFT.h"
+#include "ScreenInterface.h"
+
+using XC::Hardware::ScreenInterface;
 
 class CenteredText {
     private:
@@ -17,7 +19,7 @@ class CenteredText {
         CenteredText(char* text);
         CenteredText* size(unsigned int textSize);
         CenteredText* top(unsigned int top);
-        void renderOn(TFT* screen);
+        void renderOn(ScreenInterface* screen);
 };
 
 
