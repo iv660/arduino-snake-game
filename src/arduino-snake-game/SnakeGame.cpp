@@ -4,10 +4,8 @@
 #include "GameOverScreenLayout.h"
 #include "HighScore.h"
 #include "LevelInfoScreenLayout.h"
-
-#define VRX_PIN A0
-#define VRY_PIN A1
-#define RANDOM_SEED_PIN A2
+#include "Movement.h"
+#include "freeMemory.h"
 
 SnakeGameState SnakeGame::getState()
 {
@@ -24,9 +22,9 @@ GridAllocator SnakeGame::getGridAllocator()
 
     allocator.setGridColumns(scene.getColumns())
         ->setGridRows(scene.getRows())
-        ->setSnake(&snake)
-        ->setApple(&apple)
-        ->setTimebombChallenge(&timebombChallenge);
+        ->addOccupant(&snake)
+        ->addOccupant(&apple)
+        ->addOccupant(&challengeDispatcher);
 
     return allocator;
 }
@@ -35,7 +33,7 @@ void SnakeGame::showStartupScreen()
 {
     scene.clear();
     
-    StartupScreenLayout().setScreen(&screen)->render();
+    StartupScreenLayout().setScreen(appliance.screen)->render();
 
     while (direction == Direction::NONE) {
         updateDirection();
@@ -84,7 +82,7 @@ void SnakeGame::drawApple(Apple *apple)
     apple->setColumn(location.column);
     apple->setRow(location.row);
 
-    scene.draw(apple);
+    scene.render(apple);
 }
 
 void SnakeGame::stretchHead()
@@ -114,36 +112,9 @@ Apple SnakeGame::getNewApple()
 
 GridLocation SnakeGame::getNextLocation(SnakeSegment *snakeSegment)
 {
-    GridLocation nextLocation;
+    GridLocation nextLocation = Movement().calculateNextLocation(snakeSegment->getLocation(), getDirection());
 
-    switch (getDirection()) {
-        case Direction::RIGHT:
-            nextLocation.column = snakeSegment->getColumn() + 1;
-            nextLocation.row = snakeSegment->getRow();
-            break;
-
-        case Direction::LEFT:   
-            nextLocation.column = snakeSegment->getColumn() - 1;
-            nextLocation.row = snakeSegment->getRow();
-            break;
-
-        case Direction::UP:
-            nextLocation.column = snakeSegment->getColumn();
-            nextLocation.row = snakeSegment->getRow() - 1;
-            break;
-
-        case Direction::DOWN:
-            nextLocation.column = snakeSegment->getColumn();
-            nextLocation.row = snakeSegment->getRow() + 1;
-            break;
-
-        default:
-            nextLocation.column = snakeSegment->getColumn();
-            nextLocation.row = snakeSegment->getRow();
-            break;
-    }
-
-    return nextLocation;
+    return afterGettingNextLocation(snakeSegment->getLocation(), nextLocation);
 }
 
 GridLocation SnakeGame::getAppleLocation()
@@ -176,6 +147,21 @@ void SnakeGame::removeTail()
     snake.removeTail();
 }
 
+void SnakeGame::beforeRoundStart()
+{
+    challengeDispatcher.beforeRoundStart();
+}
+
+GridLocation SnakeGame::afterGettingNextLocation(GridLocation currentLocation, GridLocation nextLocation)
+{
+    return challengeDispatcher.adjustNextLocation(currentLocation, nextLocation);
+}
+
+void SnakeGame::afterUpdateDirection(Direction newDirection)
+{
+    challengeDispatcher.setDirection(newDirection);
+}
+
 Direction SnakeGame::getDirection()
 {
     return direction;
@@ -199,7 +185,16 @@ bool SnakeGame::locationIsOutOfBounds(GridLocation location)
         return true;
     }
 
+    if (challengeLocationIsOutOfBounds(location)) {
+        return true;
+    }
+
     return false;
+}
+
+bool SnakeGame::challengeLocationIsOutOfBounds(GridLocation location)
+{
+    return challengeDispatcher.locationIsOutOfBounds(location);
 }
 
 bool SnakeGame::locationIsOccupied(GridLocation location)
@@ -221,6 +216,15 @@ bool SnakeGame::hitsApple(GridLocation location)
         && getAppleLocation().row == location.row) {
         return true;
     }   
+
+    return false;
+}
+
+bool SnakeGame::memoryIsLow()
+{
+    if (freeMemory() < FREE_MEMORY_REQUIREMENT) {
+        return true;
+    }
 
     return false;
 }
@@ -248,9 +252,10 @@ void SnakeGame::showLifeLostScreen(int livesBefore, int livesAfter)
 void SnakeGame::moveSnakeToStartingPoint()
 {
     snake.clearLocations();
-    getHead()->setColumn(0);
+    getHead()->setColumn(1);
     getHead()->setRow(5);
     getHead()->show();
+    scene.draw(getHead());
 }
 
 void SnakeGame::waitForDirection()
@@ -274,21 +279,34 @@ inline void SnakeGame::applyLifeBonus()
     lives++;
 }
 
-inline void SnakeGame::updateLengthLevelRequirement()
+void SnakeGame::setSnakeLengthForNextLevel(unsigned long lengthRequirement)
 {
-    unsigned long maxLength = scene.getRows() * scene.getColumns() / 2;
+    snakeLengthForNextLevel = lengthRequirement;
+    snakeLengthForNextLevel = challengeDispatcher.adjustLengthRequirementForNextLevel(snakeLengthForNextLevel);
+}
 
-    if (snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH > maxLength) {
+void SnakeGame::updateLengthLevelRequirement()
+{
+    if (snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH > MAX_SNAKE_LENGTH) {
         return;
     }
 
-    snakeLengthForNextLevel += SNAKE_LENGTH_REQUIREMENT_GROWTH;
+    unsigned long maxLengthToFitOnScreen = scene.getRows() * scene.getColumns() / 2;
+
+    if (snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH > maxLengthToFitOnScreen) {
+        return;
+    }
+
+    setSnakeLengthForNextLevel(snakeLengthForNextLevel + SNAKE_LENGTH_REQUIREMENT_GROWTH);
+
 }
 
 void SnakeGame::initLevel()
 {
     level = 1;
-    snakeLengthForNextLevel = INITIAL_LENGTH_REQUIREMENT;
+    challengeDispatcher.updateState(getState());
+
+    setSnakeLengthForNextLevel(INITIAL_LENGTH_REQUIREMENT);
     lives = INITIAL_LIVES;
 }
 
@@ -300,12 +318,13 @@ HighScores SnakeGame::loadHighScores()
 void SnakeGame::unpause()
 {
     paused = false;
-    pauseButton.reset();
+    appliance.pauseButton->reset();
 }
 
-SnakeGame::SnakeGame()
+void SnakeGame::setAppliance(XC::Hardware::Appliance appliance)
 {
-    scene.setScreen(&screen);
+    this->appliance = appliance;
+    scene.setScreen(this->appliance.screen);
 }
 
 bool SnakeGame::isPaused()
@@ -334,10 +353,13 @@ SnakeGame *SnakeGame::loseLife()
 SnakeGame *SnakeGame::startRound()
 {
     scene.clear();
+    
     unpause();
     moveSnakeToStartingPoint();
+    
+    beforeRoundStart();
     placeNewApple();
-    timebombChallenge.startRound();
+    challengeDispatcher.startRound();
 
     return this;
 }
@@ -362,25 +384,29 @@ bool SnakeGame::hitsSnake(GridLocation location)
 
 void SnakeGame::updateDirection()
 {
-    long xValue = analogRead(VRX_PIN);
-    long yValue = analogRead(VRY_PIN);
-
-    if (xValue > 1000) {
-        direction = Direction::RIGHT;
-    } else if (xValue < 23) {
-        direction = Direction::LEFT;
-    } else if (yValue > 1000) {
-        direction = Direction::DOWN;
-    } else if (yValue < 23) {
-        direction = Direction::UP;
+    switch (appliance.directionSwitch->getDirection()) {
+        case XC::Hardware::DirectionSwitchInterface::Direction::LEFT:
+            direction = Direction::LEFT;
+            break;
+        case XC::Hardware::DirectionSwitchInterface::Direction::RIGHT:
+            direction = Direction::RIGHT;
+            break;
+        case XC::Hardware::DirectionSwitchInterface::Direction::UP:
+            direction = Direction::UP;
+            break;
+        case XC::Hardware::DirectionSwitchInterface::Direction::DOWN:
+            direction = Direction::DOWN;
+            break; 
     }
+
+    afterUpdateDirection(direction);
 }
 
 void SnakeGame::updatePausedState()
 {
-    pauseButton.tick();
-    paused = pauseButton.isOn();
-    timebombChallenge.setPausedState(paused);
+    appliance.pauseButton->tick();
+    paused = appliance.pauseButton->isOn();
+    challengeDispatcher.setPausedState(paused);
 }
 
 bool SnakeGame::isOver()
@@ -394,7 +420,7 @@ bool SnakeGame::isOver()
         return true;
     }
 
-    if (timebombChallenge.hasFailed()) {
+    if (challengeDispatcher.hasFailed()) {
         return true;
     }
 
@@ -419,11 +445,12 @@ SnakeGame *SnakeGame::startUp()
     shuffle();
     initLevel();
     initDirectionControl();
+
     showStartupScreen();
     resetSnake();
     highScores = loadHighScores();
 
-    timebombChallenge.setScene(&scene)
+    challengeDispatcher.setScene(&scene)
         ->setGridAllocator(getGridAllocator());
 
     return this;
@@ -483,7 +510,7 @@ SnakeGame *SnakeGame::increaseScore()
 SnakeGame *SnakeGame::showLevelInfo()
 {
     LevelInfoScreenLayout()
-        .setScreen(&screen)
+        .setScreen(appliance.screen)
         ->setLevel(level)
         ->render();
     return this;
@@ -491,6 +518,11 @@ SnakeGame *SnakeGame::showLevelInfo()
 
 bool SnakeGame::reachedLevelUp()
 {
+    if (memoryIsLow()) {
+        // Force level up to avoid running out of memory
+        return true;
+    }
+
     if (snake.getLength() >= snakeLengthForNextLevel) {
         return true;
     }
@@ -501,10 +533,13 @@ bool SnakeGame::reachedLevelUp()
 SnakeGame *SnakeGame::levelUp()
 {
     level++;
+    challengeDispatcher.updateState(getState());
+
     resetSnake();
     direction = Direction::RIGHT;
     updateLengthLevelRequirement();
     applyLifeBonus();
+
 
     return this;
 }
@@ -516,7 +551,7 @@ void SnakeGame::endCycle()
         updatePausedState();
     }
 
-    timebombChallenge.endCycle();
+    challengeDispatcher.endCycle();
 }
 
 SnakeGame *SnakeGame::startCycle()
@@ -524,8 +559,8 @@ SnakeGame *SnakeGame::startCycle()
     cycleStartTime = millis();
     
     SnakeGameState state = getState();
-    timebombChallenge.startCycle(state);
-    timebombChallenge.handleCollisionAt(getNextLocation(getHead()));
+    challengeDispatcher.startCycle(state);
+    challengeDispatcher.handleCollisionAt(getNextLocation(getHead()));
 
     return this;
 }
@@ -534,7 +569,7 @@ void SnakeGame::end()
 {
     scene.clear();
 
-    GameOverScreenLayout().setScreen(&screen)
+    GameOverScreenLayout().setScreen(appliance.screen)
         ->setHighScores(highScores)
         ->setScore(score)
         ->render();

@@ -1,4 +1,7 @@
+#include <stdio.h>
 #include "TabbedText.h"
+
+using XC::Hardware::ScreenInterface;
 
 bool TabbedText::shouldResetTabs()
 {
@@ -24,7 +27,7 @@ void TabbedText::resetTabs()
 char *TabbedText::toString(unsigned long number)
 {
     static char buffer[10];
-    sprintf(buffer, "%d", number);
+    sprintf(buffer, "%lu", number);
 
     return buffer;
 }
@@ -78,7 +81,7 @@ TabbedText *TabbedText::top(unsigned int top)
     return this;
 }
 
-void TabbedText::renderOn(TFT *screen)
+void TabbedText::renderOn(ScreenInterface *screen)
 {
     screen->textSize(textSize);
 
